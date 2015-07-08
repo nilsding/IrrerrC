@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="connect">data/icons/connect.svg</file>
+        <file alias="status">data/icons/status.svg</file>
+        <file alias="channel">data/icons/channel.svg</file>
+        <file alias="chanlist">data/icons/chanlist.svg</file>
+        <file alias="query">data/icons/query.svg</file>
+    </qresource>
+</RCC>
