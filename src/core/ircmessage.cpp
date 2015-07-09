@@ -1,14 +1,23 @@
 #include "ircmessage.h"
 
 IrcMessage::IrcMessage(QString prefix, QString command, QString params, QObject *parent)
-    : QObject(parent), _prefix(prefix), _command(command), _params(params)
+    : QObject(parent), _prefix(prefix), _command(command), _trailing("")
 {
+    setParams(params);
+}
 
+void IrcMessage::setParams(QString params) {
+    auto i = params.lastIndexOf(':');
+    if (i != -1) {
+        _trailing = params.mid(i + 1);
+    }
+
+    _params = params.split(' ', QString::SkipEmptyParts);
 }
 
 QString IrcMessage::target()
 {
-    QString target = _params.mid(0, _params.indexOf(' '));
+    QString target = _params.first();
     if (_command.contains("JOIN") ||
         _command.contains("PART") ||
         _command.contains("PRIVMSG")) {

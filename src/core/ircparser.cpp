@@ -52,7 +52,7 @@ IrcMessage *IrcParser::parseLine(QString s)
     if (s[0] == ':') {
         s.remove(0, 1);
     }
-    // TODO: make params a QList and add trailing to IrcMessage
+
     msg->setParams(s);
 
     qDebug() << msg->prefix() << msg->command() << msg->params();
@@ -60,7 +60,7 @@ IrcMessage *IrcParser::parseLine(QString s)
     if (this->parent() != 0) {
         if (!msg->command().compare("PING", Qt::CaseInsensitive)) {
             qDebug() << "sending pong";
-            ((IrcConnection *) this->parent())->raw(new IrcMessage("", "PONG", msg->params()), true);
+            ((IrcConnection *) this->parent())->raw(new IrcMessage("", "PONG", msg->params()->first()), true);
         }
     }
 

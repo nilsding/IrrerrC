@@ -19,7 +19,19 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
     s += " <";
     s += msg->prefix();
     s += "> ";
-    s += msg->params();
+    switch (_windowType) {
+        case NWindowChannel:
+        case NWindowQuery: {
+            s += msg->trailing();
+            break;
+        }
+        default: {
+            for (QString ss : *msg->params()) {
+                s += ss;
+                s += " ";
+            }
+        }
+    }
     _qteBuffer->append(s);
 }
 

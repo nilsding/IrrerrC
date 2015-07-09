@@ -2,6 +2,7 @@
 #define IRCMESSAGE_H
 
 #include <QObject>
+#include <QStringList>
 
 class IrcMessage : public QObject
 {
@@ -9,7 +10,8 @@ class IrcMessage : public QObject
 
     Q_PROPERTY(QString prefix READ prefix WRITE setPrefix)
     Q_PROPERTY(QString command READ command WRITE setCommand)
-    Q_PROPERTY(QString params READ params WRITE setParams)
+    Q_PROPERTY(QStringList const *params READ params)
+    Q_PROPERTY(QString trailing READ trailing WRITE setTrailing)
 
 public:
     explicit IrcMessage(QString prefix = "", QString command = "", QString params = "", QObject *parent = 0);
@@ -18,8 +20,10 @@ public:
     void setPrefix(QString prefix) { _prefix = prefix; }
     QString command() { return _command; }
     void setCommand(QString command) { _command = command; }
-    QString params() { return _params; }
-    void setParams(QString params) { _params = params; }
+    QStringList const *params() { return &_params; }
+    void setParams(QString params);
+    QString trailing() { return _trailing; }
+    void setTrailing(QString trailing) { _trailing = trailing; }
 
     QString target();
 
@@ -30,7 +34,8 @@ public slots:
 private:
     QString _prefix;
     QString _command;
-    QString _params;
+    QStringList _params;
+    QString _trailing;
 
 };
 
