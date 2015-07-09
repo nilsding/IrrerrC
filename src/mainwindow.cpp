@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_ui->qmWindow, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));
     connect(_mapper, SIGNAL(mapped(QWidget *)), this, SLOT(selectActiveSubWindow(QWidget *)));
     connect(_conn, SIGNAL(newMessageReceived(IrcMessage *)), this, SLOT(onNewMessageReceived(IrcMessage *)));
+    updateWindowMenu();
 }
 
 MainWindow::~MainWindow()
@@ -40,6 +41,7 @@ StatusWindow *MainWindow::createMdiChild(StatusWindow::NWindowType winType)
 void MainWindow::updateWindowMenu()
 {
     _ui->qmWindow->clear();
+    _ui->qtbWindows->clear();
 
     QList<QMdiSubWindow *> windows = _ui->centralWidget->subWindowList();
 
@@ -57,6 +59,18 @@ void MainWindow::updateWindowMenu()
         action->setChecked(win == activeMdiChild());
         connect(action, SIGNAL(triggered()), _mapper, SLOT(map()));
         _mapper->setMapping(action, windows.at(i));
+
+        QToolButton *btn = new QToolButton(_ui->qtbWindows);
+        btn->setText(text.mid(text.indexOf(' ') + 1));
+        btn->setIcon(win->windowIcon());
+        btn->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum);
+        btn->setFixedWidth(96);
+        btn->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        btn->setCheckable(true);
+        btn->setChecked(win == activeMdiChild());
+        connect(btn, SIGNAL(clicked()), _mapper, SLOT(map()));
+        _mapper->setMapping(btn, windows.at(i));
+        _ui->qtbWindows->addWidget(btn);
     }
 }
 
@@ -66,6 +80,7 @@ void MainWindow::selectActiveSubWindow(QWidget *w)
         return;
     }
     _ui->centralWidget->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(w));
+    updateWindowMenu();
 }
 
 void MainWindow::on_qaConnect_triggered()
@@ -98,6 +113,7 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         win->show();
     }
     win->receiveMessage(msg);
+    updateWindowMenu();
 }
 
 StatusWindow *MainWindow::activeMdiChild()

@@ -5,6 +5,7 @@
 #include <QMdiArea>
 #include <QMdiSubWindow>
 #include <QSignalMapper>
+#include <QToolButton>
 
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"
