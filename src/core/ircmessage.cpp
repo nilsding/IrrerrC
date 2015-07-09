@@ -7,7 +7,7 @@ IrcMessage::IrcMessage(QString prefix, QString command, QString params, QObject 
 }
 
 void IrcMessage::setParams(QString params) {
-    auto i = params.lastIndexOf(':');
+    auto i = params.indexOf(':');
     if (i != -1) {
         _trailing = params.mid(i + 1);
     }
