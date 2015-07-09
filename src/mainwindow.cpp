@@ -47,9 +47,9 @@ void MainWindow::updateWindowMenu()
         StatusWindow *win = qobject_cast<StatusWindow *>(windows.at(i)->widget());
         QString text;
         if (i < 9) {
-            text = tr("&%1 %2").arg(i + 1).arg(win->windowTitle());
+            text = tr("&%1 %2").arg(i + 1).arg(win->targetName().isEmpty() ? win->windowTitle() : win->targetName());
         } else {
-           text = tr("%1 %2").arg(i + 1).arg(win->windowTitle());
+           text = tr("%1 %2").arg(i + 1).arg(win->targetName().isEmpty() ? win->windowTitle() : win->targetName());
         }
 
         QAction *action  = _ui->qmWindow->addAction(text);
