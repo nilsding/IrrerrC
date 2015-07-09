@@ -43,6 +43,7 @@ private:
     QSignalMapper *_mapper;
 
     StatusWindow *activeMdiChild();
+    void handleNumericResponseCode(IrcMessage *);
 };
 
 #endif // MAINWINDOW_H

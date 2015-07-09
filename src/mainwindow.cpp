@@ -83,6 +83,7 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
     QString target = msg->target();
     if (target == "") {
         qobject_cast<StatusWindow *>(_ui->centralWidget->subWindowList().at(0)->widget())->receiveMessage(msg);
+        handleNumericResponseCode(msg);
         return;
     }
 
@@ -116,4 +117,25 @@ StatusWindow *MainWindow::findMdiChild(QString windowTitle, Qt::CaseSensitivity 
         }
     }
     return 0;
+}
+
+void MainWindow::handleNumericResponseCode(IrcMessage *msg)
+{
+    bool ok = false;
+    int command = msg->command().toInt(&ok);
+    if (!ok) {
+        return;
+    }
+    switch (command) {
+        case 331: { // RPL_NOTOPIC
+            StatusWindow *win = findMdiChild(msg->params()->at(1));
+            win->setTargetDescription("");
+            break;
+        }
+        case 332: { // RPL_TOPIC
+            StatusWindow *win = findMdiChild(msg->params()->at(1));
+            win->setTargetDescription(msg->trailing());
+            break;
+        }
+    }
 }
