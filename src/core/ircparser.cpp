@@ -55,11 +55,10 @@ IrcMessage *IrcParser::parseLine(QString s)
 
     msg->setParams(s);
 
-    qDebug() << msg->prefix() << msg->command() << msg->params();
+    qDebug() << msg->prefix() << msg->command() << msg->params()->join(" ");
 
     if (this->parent() != 0) {
         if (!msg->command().compare("PING", Qt::CaseInsensitive)) {
-            qDebug() << "sending pong";
             ((IrcConnection *) this->parent())->raw(new IrcMessage("", "PONG", msg->params()->first()), true);
         }
     }

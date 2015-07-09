@@ -41,20 +41,16 @@ public:
     void raw(IrcMessage *msg, bool del = false)
     {
         _sock->write(msg->command().toStdString().c_str());
-        qDebug() << msg->command();
         for (QString param : *msg->params()) {
             _sock->write(" ");
             _sock->write(param.toStdString().c_str());
-            qDebug() << param;
         }
         if (!msg->trailing().isEmpty()) {
             _sock->write(" :");
             _sock->write(msg->trailing().toStdString().c_str());
-            qDebug() << " :" << msg->trailing();
         }
         _sock->write("\r\n");
         _sock->flush();
-        qDebug() << "---";
 
         if (del) {
             delete msg;
