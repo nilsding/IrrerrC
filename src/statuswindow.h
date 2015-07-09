@@ -13,6 +13,8 @@
 class StatusWindow : public QSplitter
 {
     Q_OBJECT
+    Q_PROPERTY(QString targetName READ targetName WRITE setTargetName)
+    Q_PROPERTY(QString targetDescription READ targetDescription WRITE setTargetDescription)
     Q_ENUMS(NWindowType)
 
 public:
@@ -28,6 +30,19 @@ public:
 
     void receiveMessage(IrcMessage *);
 
+    QString targetName() { return _targetName; }
+    void setTargetName(QString targetName) { _targetName = targetName;
+                                             setWindowTitle(_targetDescription.isEmpty()
+                                                            ? _targetName
+                                                            : QString("%1 - %2").arg(_targetName)
+                                                              .arg(_targetDescription)); }
+    QString targetDescription() { return _targetDescription; }
+    void setTargetDescription(QString targetDescription) { _targetDescription = targetDescription;
+                                                           setWindowTitle(_targetDescription.isEmpty()
+                                                                          ? _targetName
+                                                                          : QString("%1 - %2").arg(_targetName)
+                                                                            .arg(_targetDescription)); }
+
 signals:
     void textEntered(QString);
 
@@ -41,6 +56,9 @@ private:
     NWindowType _windowType;
     QLineEdit *_qleInput;
     QTextEdit *_qteBuffer;
+
+    QString _targetName;
+    QString _targetDescription;
 };
 
 #endif // STATUSWINDOW_H

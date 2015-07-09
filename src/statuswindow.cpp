@@ -38,7 +38,14 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
 void StatusWindow::onTextEntered()
 {
     QString input = _qleInput->text();
-    // IrcCommand *cmd =
+    if (_windowType == NWindowChannel || _windowType == NWindowQuery) {
+        if (input.startsWith('/')) {
+            // TODO: handle aliases
+            input = input.mid(1);
+        } else {
+            input = QString("PRIVMSG %1 :%2").arg(_targetName).arg(input);
+        }
+    }
     emit textEntered(input);
     _qleInput->clear();
 }

@@ -93,7 +93,7 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         } else {
             win = createMdiChild(StatusWindow::NWindowQuery);
         }
-        win->setWindowTitle(target);
+        win->setTargetName(target);
         win->show();
     }
     win->receiveMessage(msg);
