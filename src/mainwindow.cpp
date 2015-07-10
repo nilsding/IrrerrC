@@ -9,11 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _mapper(new QSignalMapper(this))
 {
     _ui->setupUi(this);
-    _id->setNickname("qnilsding");
-    _id->setRealname("nilsding (Qt testing)");
-    _id->setInvisible(true);
-    _id->setUsername("nIRC");
-    _net->setName("rrerr.net test dings");
+
+    loadSettings();
     _conn->setIdentity(_id);
 
     StatusWindow *status = createMdiChild();
@@ -27,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    storeSettings();
     delete _ui;
 }
 
@@ -154,4 +152,43 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             break;
         }
     }
+}
+
+void MainWindow::on_centralWidget_subWindowActivated(QMdiSubWindow *_win)
+{
+    updateWindowMenu();
+}
+
+void MainWindow::loadSettings()
+{
+    _SETTINGS.beginGroup("MainWindow");
+        resize(_SETTINGS.value("size", QSize(640, 450)).toSize());
+        move(_SETTINGS.value("pos", QPoint(200, 200)).toPoint());
+    _SETTINGS.endGroup();
+
+    _SETTINGS.beginGroup("Identity");
+        _id->setNickname(_SETTINGS.value("nickname", "Lamer").toString());
+        _id->setRealname(_SETTINGS.value("realname", "Unknown lamer").toString());
+        _id->setWallops(_SETTINGS.value("wallops", false).toBool());
+        _id->setInvisible(_SETTINGS.value("invisible", true).toBool());
+        _id->setUsername(_SETTINGS.value("username", "Lamer").toString());
+    _SETTINGS.endGroup();
+
+    _net->setName("rrerr.net test dings");
+}
+
+void MainWindow::storeSettings()
+{
+    _SETTINGS.beginGroup("MainWindow");
+        _SETTINGS.setValue("size", size());
+        _SETTINGS.setValue("pos", pos());
+    _SETTINGS.endGroup();
+
+    _SETTINGS.beginGroup("Identity");
+        _SETTINGS.setValue("nickname", _id->nickname());
+        _SETTINGS.setValue("realname", _id->realname());
+        _SETTINGS.setValue("wallops", _id->hasWallops());
+        _SETTINGS.setValue("invisible", _id->isInvisible());
+        _SETTINGS.setValue("username", _id->username());
+    _SETTINGS.endGroup();
 }

@@ -10,6 +10,7 @@
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"
 #include "statuswindow.h"
+#include "nsettings.h"
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,8 @@ private slots:
     void onWindowTextEntered(QString);
     void onNewMessageReceived(IrcMessage *);
 
+    void on_centralWidget_subWindowActivated(QMdiSubWindow *arg1);
+
 private:
     Ui::MainWindow *_ui;
 
@@ -45,6 +48,8 @@ private:
 
     StatusWindow *activeMdiChild();
     void handleNumericResponseCode(IrcMessage *);
+    void loadSettings();
+    void storeSettings();
 };
 
 #endif // MAINWINDOW_H
