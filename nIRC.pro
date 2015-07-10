@@ -27,7 +27,8 @@ HEADERS  += src/mainwindow.h \
     src/core/ircnetwork.h \
     src/core/ircidentity.h \
     src/core/ircparser.h \
-    src/core/ircmessage.h
+    src/core/ircmessage.h \
+    src/nsettings.h
 
 FORMS    += src/ui/mainwindow.ui
 
