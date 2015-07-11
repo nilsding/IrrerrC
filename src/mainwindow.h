@@ -10,7 +10,7 @@
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"
 #include "statuswindow.h"
-#include "nsettings.h"
+#include "settings/nsettings.h"
 
 namespace Ui {
 class MainWindow;
