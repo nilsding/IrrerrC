@@ -4,10 +4,12 @@ StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
     createLayout();
+    loadSettings();
 }
 
 StatusWindow::~StatusWindow()
 {
+    storeSettings();
     _qteBuffer->deleteLater();
     _qleInput->deleteLater();
 }
@@ -105,4 +107,20 @@ void StatusWindow::createLayout()
             break;
         }
     }
+}
+
+void StatusWindow::loadSettings()
+{
+    _SETTINGS.beginGroup("StatusWindow");
+        auto ff = _SETTINGS.value("fontFamily", "monospace").toString();
+        _qleInput->setFont(QFont(ff));
+        _qteBuffer->setFontFamily(ff);
+    _SETTINGS.endGroup();
+}
+
+void StatusWindow::storeSettings()
+{
+    _SETTINGS.beginGroup("StatusWindow");
+        _SETTINGS.setValue("fontFamily", _qteBuffer->fontFamily());
+    _SETTINGS.endGroup();
 }

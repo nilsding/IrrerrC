@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 
 #include "core/ircmessage.h"
+#include "nsettings.h"
 
 class StatusWindow : public QSplitter
 {
@@ -59,6 +60,9 @@ private:
 
     QString _targetName;
     QString _targetDescription;
+
+    void loadSettings();
+    void storeSettings();
 };
 
 #endif // STATUSWINDOW_H
