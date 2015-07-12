@@ -20,7 +20,8 @@ SOURCES += src/main.cpp \
     src/core/ircidentity.cpp \
     src/core/ircparser.cpp \
     src/core/ircmessage.cpp \
-    src/settings/settingsdialog.cpp
+    src/settings/settingsdialog.cpp \
+    src/settings/identitysettingswidget.cpp
 
 HEADERS  += src/mainwindow.h \
     src/statuswindow.h \
@@ -30,10 +31,12 @@ HEADERS  += src/mainwindow.h \
     src/core/ircparser.h \
     src/core/ircmessage.h \
     src/settings/nsettings.h \
-    src/settings/settingsdialog.h
+    src/settings/settingsdialog.h \
+    src/settings/identitysettingswidget.h
 
 FORMS    += src/ui/mainwindow.ui \
-    src/ui/settings/settingsdialog.ui
+    src/ui/settings/settingsdialog.ui \
+    src/ui/settings/identitysettingswidget.ui
 
 # C++11! \o/
 QMAKE_CXXFLAGS += -std=c++11

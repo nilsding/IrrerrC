@@ -1,6 +1,8 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 
+#include "identitysettingswidget.h"
+
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
     _ui(new Ui::SettingsDialog)
@@ -8,6 +10,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     _ui->setupUi(this);
 
     QList<QWidget *> settingsWidgets;
+    settingsWidgets.append(new IdentitySettingsWidget);
 
     _ui->qlvSettingsCategories->setModel(new CategoryListModel(settingsWidgets));
     _ui->qlvSettingsCategories->setCurrentIndex(_ui->qlvSettingsCategories->model()->index(0, 0));
@@ -35,8 +38,6 @@ void SettingsDialog::on_qdbbButtons_clicked(QAbstractButton *button)
         emit accepted();
     }
 }
-
-#include <QDebug>
 
 void SettingsDialog::on_qlvSettingsCategories_activated(const QModelIndex &index)
 {
