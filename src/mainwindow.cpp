@@ -192,3 +192,12 @@ void MainWindow::storeSettings()
         _SETTINGS.setValue("username", _id->username());
     _SETTINGS.endGroup();
 }
+
+void MainWindow::on_qaSettings_triggered()
+{
+    storeSettings();
+    SettingsDialog *dlg = new SettingsDialog(this);
+    dlg->setModal(true);
+    dlg->show();
+    connect(dlg, SIGNAL(accepted()), this, SLOT(loadSettings()));
+}
