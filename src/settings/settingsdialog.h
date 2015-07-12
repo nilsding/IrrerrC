@@ -3,6 +3,43 @@
 
 #include <QDialog>
 #include <QAbstractButton>
+#include <QAbstractListModel>
+
+class CategoryListModel : public QAbstractListModel
+{
+    Q_OBJECT
+
+public:
+    CategoryListModel(QList<QWidget *> data) : _data(data) { }
+
+    int rowCount(const QModelIndex &parent) const {
+        return _data.size();
+    }
+
+    QVariant data(const QModelIndex &index, int role) const {
+        if (index.row() < 0 || index.row() > _data.size()) {
+            return QVariant(QVariant::Invalid);
+        }
+
+        auto retobj = _data.at(index.row());
+        switch (role) {
+            case Qt::DisplayRole: {
+                return retobj->windowTitle();
+            }
+            case Qt::DecorationRole: {
+                return retobj->windowIcon();
+            }
+            case Qt::UserRole: {
+                return QVariant::fromValue(retobj);
+            }
+        }
+
+        return QVariant(QVariant::Invalid);
+    }
+
+private:
+    QList<QWidget *> _data;
+};
 
 namespace Ui {
 class SettingsDialog;
@@ -18,6 +55,8 @@ public:
 
 private slots:
     void on_qdbbButtons_clicked(QAbstractButton *button);
+
+    void on_qlvSettingsCategories_activated(const QModelIndex &index);
 
 private:
     Ui::SettingsDialog *_ui;
