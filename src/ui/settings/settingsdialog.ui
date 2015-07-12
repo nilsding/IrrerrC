@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Settings</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../../nirc.qrc">
+    <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,2">
@@ -61,7 +65,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../nirc.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>qdbbButtons</sender>

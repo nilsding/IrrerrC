@@ -101,6 +101,10 @@
    </property>
   </action>
   <action name="qaSettings">
+   <property name="icon">
+    <iconset resource="../../nirc.qrc">
+     <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
+   </property>
    <property name="text">
     <string>&amp;Settings</string>
    </property>
