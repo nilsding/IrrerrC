@@ -39,7 +39,7 @@ FORMS    += src/ui/mainwindow.ui \
     src/ui/settings/identitysettingswidget.ui
 
 # C++11! \o/
-QMAKE_CXXFLAGS += -std=c++11
+CONFIG += c++11
 
 RESOURCES += \
     nirc.qrc
