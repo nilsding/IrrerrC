@@ -12,6 +12,10 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     QList<QWidget *> settingsWidgets;
     settingsWidgets.append(new IdentitySettingsWidget);
 
+    for (auto w : settingsWidgets) {
+        connect(this, SIGNAL(accepted()), w, SLOT(storeSettings()));
+    }
+
     _ui->qlvSettingsCategories->setModel(new CategoryListModel(settingsWidgets));
     _ui->qlvSettingsCategories->setCurrentIndex(_ui->qlvSettingsCategories->model()->index(0, 0));
     on_qlvSettingsCategories_activated(_ui->qlvSettingsCategories->model()->index(0, 0));
