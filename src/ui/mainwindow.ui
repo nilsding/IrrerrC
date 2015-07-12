@@ -30,6 +30,9 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="qaConnect"/>
+    <addaction name="qaSettings"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="qmWindow">
     <property name="tearOffEnabled">
