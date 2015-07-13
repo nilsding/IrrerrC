@@ -40,14 +40,14 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="QCheckBox" name="qcbInvisible">
        <property name="text">
         <string>&amp;Invisible mode (+i)</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
+     <item row="5" column="1">
       <widget class="QCheckBox" name="qcbWallops">
        <property name="text">
         <string>&amp;Wallops (+w)</string>
@@ -60,10 +60,28 @@
      <item row="2" column="1">
       <widget class="QLineEdit" name="qleRealname"/>
      </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="qlQuitMessage">
+       <property name="text">
+        <string>Quit message:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="qleQuitMessage"/>
+     </item>
     </layout>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>qleNickname</tabstop>
+  <tabstop>qleUsername</tabstop>
+  <tabstop>qleRealname</tabstop>
+  <tabstop>qleQuitMessage</tabstop>
+  <tabstop>qcbInvisible</tabstop>
+  <tabstop>qcbWallops</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
