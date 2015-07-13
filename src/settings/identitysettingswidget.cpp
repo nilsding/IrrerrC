@@ -22,6 +22,7 @@ void IdentitySettingsWidget::loadSettings()
         _ui->qcbWallops->setChecked(_SETTINGS.value("wallops", false).toBool());
         _ui->qcbInvisible->setChecked(_SETTINGS.value("invisible", true).toBool());
         _ui->qleUsername->setText(_SETTINGS.value("username", "Lamer").toString());
+        _ui->qleQuitMessage->setText(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
     _SETTINGS.endGroup();
 }
 
@@ -33,5 +34,6 @@ void IdentitySettingsWidget::storeSettings()
         _SETTINGS.setValue("wallops", _ui->qcbWallops->isChecked());
         _SETTINGS.setValue("invisible", _ui->qcbInvisible->isChecked());
         _SETTINGS.setValue("username", _ui->qleUsername->text());
+        _SETTINGS.setValue("quitmessage", _ui->qleQuitMessage->text());
     _SETTINGS.endGroup();
 }

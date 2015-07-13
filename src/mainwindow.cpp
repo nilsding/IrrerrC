@@ -172,6 +172,7 @@ void MainWindow::loadSettings()
         _id->setWallops(_SETTINGS.value("wallops", false).toBool());
         _id->setInvisible(_SETTINGS.value("invisible", true).toBool());
         _id->setUsername(_SETTINGS.value("username", "Lamer").toString());
+        _id->setQuitMessage(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
     _SETTINGS.endGroup();
 
     _net->setName("rrerr.net test dings");
