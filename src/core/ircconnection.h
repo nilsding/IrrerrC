@@ -28,8 +28,12 @@ public:
     void connectToHost(IrcNetwork *network, int server = -1);
     void connectToHost(QString hostName, quint16 port, bool _useTls = false);
 
+    void disconnect(bool force = false);
+
     IrcIdentity *identity() { return _identity; }
     void setIdentity(IrcIdentity *identity) { if (_identity != 0) { delete _identity; } _identity = identity; }
+
+    bool isConnected() { return _sock->state() > QAbstractSocket::ConnectingState; }
 
     void raw(QString s)
     {
@@ -59,6 +63,7 @@ public:
 
 signals:
     void newMessageReceived(IrcMessage *);
+    void connectionStateChanged(QAbstractSocket::SocketState);
 
 public slots:
 

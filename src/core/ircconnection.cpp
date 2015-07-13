@@ -4,6 +4,9 @@ IrcConnection::IrcConnection(QObject *parent) :
     QObject(parent), _sock(new QTcpSocket()), _identity(0), _parser(new IrcParser(this))
 {
     connect(_sock, SIGNAL(readyRead()), this, SLOT(readyRead()));
+    connect(_sock, &QTcpSocket::stateChanged, this, [=](QAbstractSocket::SocketState s) {
+        emit(connectionStateChanged(s));
+    });
 }
 
 IrcConnection::~IrcConnection()
@@ -55,7 +58,7 @@ void IrcConnection::connectToHost(QString hostName, quint16 port, bool _useTls) 
         return;
     }
 
-    if (_sock->state() > QAbstractSocket::ConnectingState) {  // don't connect if we're already connected to the server
+    if (isConnected()) {  // don't connect if we're already connected to the server
         return;
     }
 
@@ -74,6 +77,16 @@ void IrcConnection::connectToHost(QString hostName, quint16 port, bool _useTls) 
                  .append(" * :")
                  .append(_identity->realname())
                  .append("\r\n").toStdString().c_str());
+}
+
+void IrcConnection::disconnect(bool force)
+{
+    if (!isConnected()) return;
+    _sock->write(QString("QUIT :").append(_identity->quitMessage()).append("\r\n").toStdString().c_str());
+    if (force) {
+        _sock->flush();
+        _sock->close();
+    }
 }
 
 //!
