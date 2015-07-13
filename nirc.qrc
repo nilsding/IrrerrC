@@ -6,5 +6,6 @@
         <file alias="chanlist">data/icons/chanlist.svg</file>
         <file alias="query">data/icons/query.svg</file>
         <file alias="settings">data/icons/settings.svg</file>
+        <file alias="disconnect">data/icons/disconnect.svg</file>
     </qresource>
 </RCC>
