@@ -47,7 +47,7 @@ private:
 
     IrcConnection *_conn;
     IrcIdentity *_id;
-    IrcNetwork *_net;
+    QList<IrcNetwork *> _networks;
 
     QSignalMapper *_mapper;
 

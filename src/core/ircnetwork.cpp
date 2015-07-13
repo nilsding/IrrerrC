@@ -1,7 +1,7 @@
 #include "ircnetwork.h"
 
 IrcNetwork::IrcNetwork(QObject *parent) : QObject(parent),
-    _name("Unknown network"), _servers(new QStringList("irc.rrerr.net:6667"))
+    _name("Unknown network"), _servers(new QStringList("irc.rrerr.net:6667")), _active(false)
 {
 
 }

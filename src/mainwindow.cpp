@@ -5,7 +5,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    _ui(new Ui::MainWindow), _conn(new IrcConnection), _id(new IrcIdentity), _net(new IrcNetwork),
+    _ui(new Ui::MainWindow), _conn(new IrcConnection), _id(new IrcIdentity),
     _mapper(new QSignalMapper(this))
 {
     _ui->setupUi(this);
@@ -97,7 +97,11 @@ void MainWindow::on_qaConnect_triggered()
         _conn->disconnect();
         return;
     }
-    _conn->connectToHost(_net);
+    for (IrcNetwork *net : _networks) {
+        if (net->isActive()) {
+            return _conn->connectToHost(net);
+        }
+    }
 }
 
 void MainWindow::onWindowTextEntered(QString s)
@@ -189,7 +193,21 @@ void MainWindow::loadSettings()
         _id->setQuitMessage(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
     _SETTINGS.endGroup();
 
-    _net->setName("rrerr.net test dings");
+    int size = _SETTINGS.beginReadArray("Networks");
+        for (int i = 0; i < size; i++) {
+            _SETTINGS.setArrayIndex(i);
+            IrcNetwork *network = new IrcNetwork;
+            network->setName(_SETTINGS.value("name").toString());
+            network->setServers(_SETTINGS.value("servers").toStringList());
+            network->setActive(_SETTINGS.value("active").toBool());
+        }
+    _SETTINGS.endArray();
+    if (_networks.empty()) {
+        auto net = new IrcNetwork;
+        net->setName("rrerr.net test dings");
+        net->setActive(true);
+        _networks.append(net);
+    }
 }
 
 void MainWindow::storeSettings()
@@ -206,6 +224,15 @@ void MainWindow::storeSettings()
         _SETTINGS.setValue("invisible", _id->isInvisible());
         _SETTINGS.setValue("username", _id->username());
     _SETTINGS.endGroup();
+
+    _SETTINGS.beginWriteArray("Networks");
+        for (int i = 0; i < _networks.size(); ++i) {
+            _SETTINGS.setArrayIndex(i);
+            _SETTINGS.setValue("name", _networks.at(i)->name());
+            _SETTINGS.setValue("servers", *_networks.at(i)->servers());
+            _SETTINGS.setValue("active", _networks.at(i)->isActive());
+        }
+    _SETTINGS.endArray();
 }
 
 void MainWindow::on_qaSettings_triggered()
