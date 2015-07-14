@@ -200,6 +200,7 @@ void MainWindow::loadSettings()
             network->setName(_SETTINGS.value("name").toString());
             network->setServers(_SETTINGS.value("servers").toStringList());
             network->setActive(_SETTINGS.value("active").toBool());
+            _networks.append(net);
         }
     _SETTINGS.endArray();
     if (_networks.empty()) {
@@ -208,6 +209,7 @@ void MainWindow::loadSettings()
         net->setActive(true);
         _networks.append(net);
     }
+    storeSettings();
 }
 
 void MainWindow::storeSettings()
