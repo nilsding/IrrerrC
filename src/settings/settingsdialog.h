@@ -60,6 +60,8 @@ private slots:
 
 private:
     Ui::SettingsDialog *_ui;
+
+    QList<QWidget *> _settingsWidgets;
 };
 
 #endif // SETTINGSDIALOG_H

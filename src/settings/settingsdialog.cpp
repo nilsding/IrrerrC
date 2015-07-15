@@ -10,21 +10,23 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 {
     _ui->setupUi(this);
 
-    QList<QWidget *> settingsWidgets;
-    settingsWidgets.append(new IdentitySettingsWidget);
-    settingsWidgets.append(new NetworkSettingsWidget);
+    _settingsWidgets.append(new IdentitySettingsWidget);
+    _settingsWidgets.append(new NetworkSettingsWidget);
 
-    for (auto w : settingsWidgets) {
+    for (auto w : _settingsWidgets) {
         connect(this, SIGNAL(accepted()), w, SLOT(storeSettings()));
     }
 
-    _ui->qlvSettingsCategories->setModel(new CategoryListModel(settingsWidgets));
+    _ui->qlvSettingsCategories->setModel(new CategoryListModel(_settingsWidgets));
     _ui->qlvSettingsCategories->setCurrentIndex(_ui->qlvSettingsCategories->model()->index(0, 0));
     on_qlvSettingsCategories_activated(_ui->qlvSettingsCategories->model()->index(0, 0));
 }
 
 SettingsDialog::~SettingsDialog()
 {
+    for (auto w : _settingsWidgets) {
+        w->deleteLater();
+    }
     delete _ui;
 }
 
