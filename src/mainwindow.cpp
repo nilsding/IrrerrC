@@ -193,6 +193,7 @@ void MainWindow::loadSettings()
         _id->setQuitMessage(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
     _SETTINGS.endGroup();
 
+    _networks.clear();
     int size = _SETTINGS.beginReadArray("Networks");
         for (int i = 0; i < size; i++) {
             _SETTINGS.setArrayIndex(i);
@@ -200,7 +201,7 @@ void MainWindow::loadSettings()
             network->setName(_SETTINGS.value("name").toString());
             network->setServers(_SETTINGS.value("servers").toStringList());
             network->setActive(_SETTINGS.value("active").toBool());
-            _networks.append(net);
+            _networks.append(network);
         }
     _SETTINGS.endArray();
     if (_networks.empty()) {
@@ -208,8 +209,8 @@ void MainWindow::loadSettings()
         net->setName("rrerr.net test dings");
         net->setActive(true);
         _networks.append(net);
+        storeSettings();
     }
-    storeSettings();
 }
 
 void MainWindow::storeSettings()

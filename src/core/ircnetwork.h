@@ -25,6 +25,10 @@ public:
     QStringList *servers() { return _servers; }
     void setServers(QStringList *servers) { if (_servers != 0) { delete _servers; } _servers = servers; }
     void setServers(QStringList servers) {
+        if (!_servers) {
+            return;
+        }
+        _servers->clear();
         for (auto server : servers) {
             _servers->append(server);
         }
