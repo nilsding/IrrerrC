@@ -11,4 +11,10 @@ A Qt5 IRC client.
 
 ## TODO list
 
-- [ ] Write a TODO list
+- [x] Write a TODO list
+- [ ] make network settings work
+- [ ] format messages (colours, bold etc.)
+- [ ] Ruby scripting
+- [ ] Aliases
+- [ ] Channel listing
+- [ ] Userlist in channel view
