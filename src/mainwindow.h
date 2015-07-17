@@ -6,6 +6,7 @@
 #include <QMdiSubWindow>
 #include <QSignalMapper>
 #include <QToolButton>
+#include <QMessageBox>
 
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"
@@ -41,6 +42,10 @@ private slots:
     void loadSettings();
 
     void on_qaSettings_triggered();
+
+    void on_qaAboutQt_triggered();
+
+    void on_qaAbout_triggered();
 
 private:
     Ui::MainWindow *_ui;

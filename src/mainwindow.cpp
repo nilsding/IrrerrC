@@ -246,3 +246,13 @@ void MainWindow::on_qaSettings_triggered()
     dlg->show();
     connect(dlg, SIGNAL(accepted()), this, SLOT(loadSettings()));
 }
+
+void MainWindow::on_qaAboutQt_triggered()
+{
+    QMessageBox::aboutQt(this, tr("About Qt"));
+}
+
+void MainWindow::on_qaAbout_triggered()
+{
+    QMessageBox::about(this, tr("About nIRC"), tr("<h3>nIRC</h3>&copy; 2015 nilsding"));
+}

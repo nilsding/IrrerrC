@@ -49,6 +49,8 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="qaAboutQt"/>
+    <addaction name="qaAbout"/>
    </widget>
    <addaction name="qmFile"/>
    <addaction name="qmWindow"/>
@@ -113,6 +115,16 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+,</string>
+   </property>
+  </action>
+  <action name="qaAboutQt">
+   <property name="text">
+    <string>About &amp;Qt</string>
+   </property>
+  </action>
+  <action name="qaAbout">
+   <property name="text">
+    <string>&amp;About nIRC</string>
    </property>
   </action>
  </widget>
