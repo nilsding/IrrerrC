@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QStringListModel>
+#include <QMessageBox>
+#include <QInputDialog>
 #include "nsettings.h"
 #include "../core/ircnetwork.h"
 
@@ -25,9 +27,17 @@ public slots:
 private slots:
     void on_qcbNetwork_currentIndexChanged(int index);
 
+    void on_qpbAddServer_clicked();
+
+    void on_qpbEditServer_clicked();
+
+    void on_qpbDeleteServer_clicked();
+
 private:
     Ui::NetworkSettingsWidget *_ui;
     QList<IrcNetwork *> _networks;
+
+    bool is_server_entry_selected();
 };
 
 #endif // NETWORKSETTINGSWIDGET_H
