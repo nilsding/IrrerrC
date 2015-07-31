@@ -33,6 +33,12 @@ private slots:
 
     void on_qpbDeleteServer_clicked();
 
+    void on_qpbNewNetwork_clicked();
+
+    void on_qpbRenameNetwork_clicked();
+
+    void on_qpbDeleteNetwork_clicked();
+
 private:
     Ui::NetworkSettingsWidget *_ui;
     QList<IrcNetwork *> _networks;

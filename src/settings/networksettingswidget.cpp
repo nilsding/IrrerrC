@@ -61,7 +61,7 @@ void NetworkSettingsWidget::on_qpbAddServer_clicked()
     QString text = QInputDialog::getText(this, tr("Add server to network"), tr("Server address:"), QLineEdit::Normal,
                                          "irc.rrerr.net:6667", &ok);
 
-    if (ok && !text.isEmpty()) {
+    if (ok && !text.trimmed().isEmpty()) {
         // TODO: check if network address is in a valid format
         auto i = _ui->qcbNetwork->currentIndex();
         _networks.at(i)->servers()->append(text);
@@ -81,10 +81,14 @@ void NetworkSettingsWidget::on_qpbEditServer_clicked()
     QString text = QInputDialog::getText(this, tr("Edit server address"), tr("Server address:"), QLineEdit::Normal,
                                          selected_server, &ok);
 
-    if (ok && !text.isEmpty()) {
+    if (ok && !text.trimmed().isEmpty()) {
         // TODO: check if network address is in a valid format
-        _networks.at(i)->servers()->replace(_ui->qlvServers->selectionModel()->selectedIndexes().first().row(), text);
+        auto selected_index = _ui->qlvServers->selectionModel()->selectedIndexes().first();
+        _networks.at(i)->servers()->replace(selected_index.row(), text.trimmed());
         _ui->qlvServers->setModel(new QStringListModel(*_networks.at(i)->servers()));
+
+        // reselect the last selected index for convenience
+        _ui->qlvServers->selectionModel()->select(selected_index, QItemSelectionModel::Select);
     }
 }
 
@@ -110,6 +114,78 @@ void NetworkSettingsWidget::on_qpbDeleteServer_clicked()
     _ui->qlvServers->selectionModel()->select(selected_index, QItemSelectionModel::Select);
 }
 
+void NetworkSettingsWidget::on_qpbNewNetwork_clicked()
+{
+    bool ok = false;
+    QString text = QInputDialog::getText(this, tr("New network"), tr("Network name:"), QLineEdit::Normal,
+                                         "LamerNet", &ok);
+
+    if (ok && !text.trimmed().isEmpty()) {
+        for (int i = 0; i < _networks.size(); ++i) {
+            if (!_networks.at(i)->name().compare(text.trimmed(), Qt::CaseInsensitive)) {
+                _ui->qcbNetwork->setCurrentIndex(i);
+                return;
+            }
+        }
+
+        auto net = new IrcNetwork;
+        net->setName(text);
+        _networks.append(net);
+
+        _ui->qcbNetwork->clear();
+        for (auto network : _networks) {
+            _ui->qcbNetwork->addItem(network->name());
+        }
+        _ui->qcbNetwork->setCurrentIndex(_networks.size() - 1);
+    }
+}
+
+void NetworkSettingsWidget::on_qpbRenameNetwork_clicked()
+{
+    bool ok = false;
+    QString text = QInputDialog::getText(this, tr("Rename network"), tr("Network name:"), QLineEdit::Normal,
+                                         _ui->qcbNetwork->currentText(), &ok);
+
+    if (ok && !text.trimmed().isEmpty()) {
+        for (int i = 0; i < _networks.size(); ++i) {
+            if (!_networks.at(i)->name().compare(text.trimmed(), Qt::CaseInsensitive)) {
+                QMessageBox mbox;
+                mbox.setText(tr("A network with the same name already exists."));
+                mbox.exec();
+                return;
+            }
+        }
+
+        int i = _ui->qcbNetwork->currentIndex();
+        _networks.at(i)->setName(text.trimmed());
+
+        _ui->qcbNetwork->clear();
+        for (auto network : _networks) {
+            _ui->qcbNetwork->addItem(network->name());
+        }
+        _ui->qcbNetwork->setCurrentIndex(i);
+    }
+}
+
+void NetworkSettingsWidget::on_qpbDeleteNetwork_clicked()
+{
+    if (_networks.length() == 1) {
+        QMessageBox mbox;
+        mbox.setText(tr("You can't delete the last network."));
+        mbox.exec();
+        return;
+    }
+
+    int i = _ui->qcbNetwork->currentIndex();
+    _networks.removeAt(i);
+
+    _ui->qcbNetwork->clear();
+    for (auto network : _networks) {
+        _ui->qcbNetwork->addItem(network->name());
+    }
+    _ui->qcbNetwork->setCurrentIndex(i > 1 ? i - 1 : 0);
+}
+
 bool NetworkSettingsWidget::is_server_entry_selected()
 {
     if (_ui->qlvServers->selectionModel()->selectedIndexes().empty()) {
@@ -120,3 +196,4 @@ bool NetworkSettingsWidget::is_server_entry_selected()
     }
     return true;
 }
+
