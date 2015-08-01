@@ -53,6 +53,7 @@ void NetworkSettingsWidget::on_qcbNetwork_currentIndexChanged(int index)
 {
     if (index == -1) return;
     _ui->qlvServers->setModel(new QStringListModel(*_networks.at(index)->servers()));
+    _ui->qrbActive->setChecked(_networks.at(index)->isActive());
 }
 
 void NetworkSettingsWidget::on_qpbAddServer_clicked()
@@ -177,6 +178,14 @@ void NetworkSettingsWidget::on_qpbDeleteNetwork_clicked()
     }
 
     int i = _ui->qcbNetwork->currentIndex();
+
+    if (_networks.at(i)->isActive()) {
+        QMessageBox mbox;
+        mbox.setText(tr("You can't delete the active network."));
+        mbox.exec();
+        return;
+    }
+
     _networks.removeAt(i);
 
     _ui->qcbNetwork->clear();
@@ -197,3 +206,15 @@ bool NetworkSettingsWidget::is_server_entry_selected()
     return true;
 }
 
+void NetworkSettingsWidget::on_qrbActive_clicked()
+{
+    for (auto network : _networks) {
+        if (network->isActive()) {
+            network->setActive(false);
+            break;
+        }
+    }
+
+    _networks.at(_ui->qcbNetwork->currentIndex())->setActive(true);
+    _ui->qrbActive->setChecked(true);
+}

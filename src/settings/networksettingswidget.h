@@ -39,6 +39,8 @@ private slots:
 
     void on_qpbDeleteNetwork_clicked();
 
+    void on_qrbActive_clicked();
+
 private:
     Ui::NetworkSettingsWidget *_ui;
     QList<IrcNetwork *> _networks;
