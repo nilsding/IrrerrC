@@ -161,11 +161,17 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
     switch (command) {
         case 331: { // RPL_NOTOPIC
             StatusWindow *win = findMdiChild(msg->params()->at(1));
+            if (!win) {
+                break;
+            }
             win->setTargetDescription("");
             break;
         }
         case 332: { // RPL_TOPIC
             StatusWindow *win = findMdiChild(msg->params()->at(1));
+            if (!win) {
+                break;
+            }
             win->setTargetDescription(msg->trailing());
             break;
         }
@@ -176,11 +182,17 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             // * -- private channel
             // trailing: user1 user2 @user3 user4 +user5 user6 ...
             StatusWindow *win = findMdiChild(msg->params()->at(2));
+            if (!win) {
+                break;
+            }
             win->onNamesReply(msg->trailing().split(" "));
             break;
         }
         case 366: { // RPL_ENDOFNAMES
             StatusWindow *win = findMdiChild(msg->params()->at(1));
+            if (!win) {
+                break;
+            }
             win->onEndOfNamesReply();
             break;
         }
