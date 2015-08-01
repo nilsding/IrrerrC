@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>290</width>
+    <width>350</width>
     <height>300</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>290</width>
+    <width>350</width>
     <height>300</height>
    </size>
   </property>
@@ -25,7 +25,10 @@
      <item>
       <widget class="QLabel" name="qlNetwork">
        <property name="text">
-        <string>Network:</string>
+        <string>Networ&amp;k:</string>
+       </property>
+       <property name="buddy">
+        <cstring>qcbNetwork</cstring>
        </property>
       </widget>
      </item>
@@ -44,6 +47,13 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
+      <widget class="QRadioButton" name="qrbActive">
+       <property name="text">
+        <string>Acti&amp;ve</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -59,36 +69,23 @@
      <item>
       <widget class="QPushButton" name="qpbNewNetwork">
        <property name="text">
-        <string>New</string>
+        <string>&amp;New</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="qpbRenameNetwork">
        <property name="text">
-        <string>Rename</string>
+        <string>&amp;Rename</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="qpbDeleteNetwork">
        <property name="text">
-        <string>Delete</string>
+        <string>&amp;Delete</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -102,7 +99,10 @@
    <item>
     <widget class="QLabel" name="qlServers">
      <property name="text">
-      <string>Servers:</string>
+      <string>&amp;Servers:</string>
+     </property>
+     <property name="buddy">
+      <cstring>qlvServers</cstring>
      </property>
     </widget>
    </item>
@@ -120,21 +120,21 @@
        <item>
         <widget class="QPushButton" name="qpbAddServer">
          <property name="text">
-          <string>Add</string>
+          <string>A&amp;dd</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="qpbEditServer">
          <property name="text">
-          <string>Edit</string>
+          <string>&amp;Edit</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="qpbDeleteServer">
          <property name="text">
-          <string>Delete</string>
+          <string>&amp;Delete</string>
          </property>
         </widget>
        </item>
@@ -157,6 +157,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>qcbNetwork</tabstop>
+  <tabstop>qrbActive</tabstop>
+  <tabstop>qpbNewNetwork</tabstop>
+  <tabstop>qpbRenameNetwork</tabstop>
+  <tabstop>qpbDeleteNetwork</tabstop>
+  <tabstop>qlvServers</tabstop>
+  <tabstop>qpbAddServer</tabstop>
+  <tabstop>qpbEditServer</tabstop>
+  <tabstop>qpbDeleteServer</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

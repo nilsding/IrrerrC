@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>470</width>
+    <width>550</width>
     <height>380</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>470</width>
+    <width>550</width>
     <height>380</height>
    </size>
   </property>
@@ -49,7 +49,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="qwCurrentWidget" native="true"/>
+      <widget class="QWidget" name="qwCurrentWidget" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>350</width>
+         <height>300</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -76,8 +83,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>254</x>
+     <y>373</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -92,8 +99,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>322</x>
+     <y>373</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
