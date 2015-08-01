@@ -19,7 +19,10 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
     _ui->qlvSettingsCategories->setModel(new CategoryListModel(_settingsWidgets));
     _ui->qlvSettingsCategories->setCurrentIndex(_ui->qlvSettingsCategories->model()->index(0, 0));
-    on_qlvSettingsCategories_activated(_ui->qlvSettingsCategories->model()->index(0, 0));
+
+    for (int i = _settingsWidgets.length() - 1; i >= 0; i--) {
+        on_qlvSettingsCategories_activated(_ui->qlvSettingsCategories->model()->index(i, 0));
+    }
 }
 
 SettingsDialog::~SettingsDialog()
