@@ -17,4 +17,4 @@ A Qt5 IRC client.
 - [ ] Ruby scripting
 - [ ] Aliases
 - [ ] Channel listing
-- [ ] Userlist in channel view
+- [x] Userlist in channel view
