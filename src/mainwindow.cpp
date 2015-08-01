@@ -169,6 +169,21 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             win->setTargetDescription(msg->trailing());
             break;
         }
+        case 353: { // RPL_NAMREPLY
+            // params: [=*@] #channel
+            // = -- public channel
+            // @ -- secret channel
+            // * -- private channel
+            // trailing: user1 user2 @user3 user4 +user5 user6 ...
+            StatusWindow *win = findMdiChild(msg->params()->at(2));
+            win->onNamesReply(msg->trailing().split(" "));
+            break;
+        }
+        case 366: { // RPL_ENDOFNAMES
+            StatusWindow *win = findMdiChild(msg->params()->at(1));
+            win->onEndOfNamesReply();
+            break;
+        }
     }
 }
 

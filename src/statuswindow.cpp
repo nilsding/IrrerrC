@@ -3,6 +3,7 @@
 StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(parent), _windowType(windowType)
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
+    createUserList();
     createLayout();
     loadSettings();
 }
@@ -57,6 +58,25 @@ void StatusWindow::onTextEdited(QString s)
 
 }
 
+void StatusWindow::onUserActivated(QModelIndex i)
+{
+    // TODO: open a query window
+    qDebug() << _userList.at(i.row());
+}
+
+void StatusWindow::onNamesReply(const QStringList &lst)
+{
+    _tmpUserList.append(lst);
+}
+
+void StatusWindow::onEndOfNamesReply()
+{
+    _userList.clear();
+    _userList.append(_tmpUserList);
+    _tmpUserList.clear();
+    _qlvUsers->setModel(new QStringListModel(_userList));
+}
+
 void StatusWindow::createLayout()
 {
     // create a read-only QTextEdit for the buffer
@@ -73,6 +93,7 @@ void StatusWindow::createLayout()
     QSplitter *splitter = new QSplitter(this);
     splitter->setHandleWidth(1);
     splitter->addWidget(_qteBuffer);
+    splitter->addWidget(_qlvUsers);
     splitter->setStretchFactor(0, 5);
     splitter->setStretchFactor(1, 1);
 
@@ -89,6 +110,7 @@ void StatusWindow::createLayout()
         case NWindowStatus: {
             setWindowTitle(tr("Status"));
             setWindowIcon(QIcon(":/icons/status"));
+            _qlvUsers->setVisible(false);
             break;
         }
         case NWindowChannel: {
@@ -99,14 +121,24 @@ void StatusWindow::createLayout()
         case NWindowList: {
             setWindowTitle(tr("Channel list"));
             setWindowIcon(QIcon(":/icons/chanlist"));
+            _qleInput->setVisible(false);
+            _qlvUsers->setVisible(false);
             break;
         }
         case NWindowQuery: {
             setWindowTitle(tr("Query"));
             setWindowIcon(QIcon(":/icons/query"));
+            _qlvUsers->setVisible(false);
             break;
         }
     }
+}
+
+void StatusWindow::createUserList()
+{
+    _qlvUsers = new QListView(this);
+    _qlvUsers->setFocusPolicy(Qt::NoFocus);
+    connect(_qlvUsers, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onUserActivated(QModelIndex)));
 }
 
 void StatusWindow::loadSettings()

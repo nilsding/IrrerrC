@@ -2,11 +2,14 @@
 #define STATUSWINDOW_H
 
 #include <QIcon>
+#include <QDebug>
 #include <QSplitter>
 #include <QLineEdit>
 #include <QTextEdit>
 #include <QDateTime>
+#include <QListView>
 #include <QVBoxLayout>
+#include <QStringListModel>
 
 #include "core/ircmessage.h"
 #include "settings/nsettings.h"
@@ -50,9 +53,14 @@ signals:
 public slots:
     void onTextEntered();
     void onTextEdited(QString);
+    void onUserActivated(QModelIndex);
+
+    void onNamesReply(const QStringList &);
+    void onEndOfNamesReply();
 
 private:
     void createLayout();
+    void createUserList();
 
     NWindowType _windowType;
     QLineEdit *_qleInput;
@@ -60,6 +68,10 @@ private:
 
     QString _targetName;
     QString _targetDescription;
+
+    QList<QString> _userList;       //!< this is the full user list
+    QList<QString> _tmpUserList;    //!< used when NAMES replies are received
+    QListView *_qlvUsers;
 
     void loadSettings();
     void storeSettings();
