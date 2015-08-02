@@ -28,6 +28,12 @@ MainWindow::MainWindow(QWidget *parent) :
             _ui->qaConnect->setIcon(QIcon(":/icons/connect"));
         }
     });
+    connect(status, &StatusWindow::statusWindowClosing, this, [=]() {
+        if (_conn->isConnected()) {
+            _conn->disconnect();
+        }
+        qApp->quit();
+    });
 
     updateWindowMenu();
 }

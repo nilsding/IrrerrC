@@ -14,8 +14,35 @@ StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(
 StatusWindow::~StatusWindow()
 {
     storeSettings();
-    _qteBuffer->deleteLater();
+    switch (_windowType) {
+        case NWindowList: {
+            _qtvChannels->deleteLater();
+            break;
+        }
+        case NWindowChannel: {
+            // TODO: handle default part message for the identity
+            emit textEntered(QString("PART %1 :").arg(_targetName));
+        }
+        default: {
+            _qteBuffer->deleteLater();
+        }
+    }
     _qleInput->deleteLater();
+    _qlvUsers->deleteLater();
+}
+
+void StatusWindow::closeEvent(QCloseEvent *ev)
+{
+    if (_windowType != NWindowStatus) {
+        ev->accept();
+        return;
+    }
+
+    auto ret = QMessageBox::question(this, tr("Really quit?"), tr("Closing this window will quit nIRC."));
+    if (ret == QMessageBox::Yes) {
+        emit statusWindowClosing();
+    }
+    ev->ignore();
 }
 
 void StatusWindow::receiveMessage(IrcMessage *msg)
@@ -187,6 +214,8 @@ void StatusWindow::loadSettings()
 void StatusWindow::storeSettings()
 {
     _SETTINGS.beginGroup("StatusWindow");
-        _SETTINGS.setValue("fontFamily", _qteBuffer->fontFamily());
+        if (_windowType != NWindowList) {
+            _SETTINGS.setValue("fontFamily", _qteBuffer->fontFamily());
+        }
     _SETTINGS.endGroup();
 }

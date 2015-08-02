@@ -7,6 +7,7 @@
 #include <QSignalMapper>
 #include <QToolButton>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"

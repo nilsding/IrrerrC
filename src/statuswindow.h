@@ -10,6 +10,8 @@
 #include <QListView>
 #include <QTreeView>
 #include <QVBoxLayout>
+#include <QCloseEvent>
+#include <QMessageBox>
 #include <QStringListModel>
 
 #include "core/irctypes.h"
@@ -100,6 +102,7 @@ public:
     ~StatusWindow();
 
     void receiveMessage(IrcMessage *);
+    void closeEvent(QCloseEvent *);
 
     QString targetName() { return _targetName; }
     void setTargetName(QString targetName) { _targetName = targetName;
@@ -118,6 +121,7 @@ public:
 
 signals:
     void textEntered(QString);
+    void statusWindowClosing();
 
 public slots:
     void onTextEntered();
