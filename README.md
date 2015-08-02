@@ -32,6 +32,6 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 - [ ] format messages (colours, bold etc.)
 - [ ] Ruby scripting
 - [ ] Aliases
-- [ ] Channel listing
+- [x] Channel listing
 - [x] Userlist in channel view
 - [ ] Rename the client before open-sourcing the repo
