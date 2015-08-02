@@ -168,7 +168,9 @@ void StatusWindow::createUserList()
 void StatusWindow::createChannelList()
 {
     _qtvChannels = new QTreeView(this);
-    connect(_qtvChannels, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onChannelClicked(QModelIndex)));
+    connect(_qtvChannels, &QTreeView::doubleClicked, this, [=](const QModelIndex &index) {
+        emit textEntered(QString("JOIN %1").arg(_channelList.at(index.row()).channelName()));
+    });
 }
 
 void StatusWindow::loadSettings()
