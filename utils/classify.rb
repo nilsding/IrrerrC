@@ -27,7 +27,7 @@ class <%= struct_name %> : public QObject
 
 public:
 <% members.each do |m| %>
-    <%= m[0] %> <%= m[1] %>() { return _<%= m[1] %>; }
+    <%= m[0] %> <%= m[1] %>() const { return _<%= m[1] %>; }
     void set<%= m[1].upcasefirst %>(<%= m[0] %> <%= m[1] %>) { _<%= m[1] %> = <%= m[1] %>; }<% end %>
 
 private:
