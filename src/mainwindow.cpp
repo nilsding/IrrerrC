@@ -151,6 +151,22 @@ StatusWindow *MainWindow::findMdiChild(QString windowTitle, Qt::CaseSensitivity 
     return 0;
 }
 
+//!
+//! \brief MainWindow::findMdiChild returns the first MDI child of NWindowType `type`.
+//! \param type the window type.
+//! \return a pointer to the window if a window with this type exists, otherwise 0.
+//!
+StatusWindow *MainWindow::findMdiChild(StatusWindow::NWindowType type)
+{
+    QList<QMdiSubWindow *> windows = _ui->centralWidget->subWindowList();
+    for (QMdiSubWindow *win : windows) {
+        if (qobject_cast<StatusWindow *>(win->widget())->type() == type) {
+            return qobject_cast<StatusWindow *>(win->widget());
+        }
+    }
+    return 0;
+}
+
 void MainWindow::handleNumericResponseCode(IrcMessage *msg)
 {
     bool ok = false;
@@ -194,6 +210,34 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
                 break;
             }
             win->onEndOfNamesReply();
+            break;
+        }
+        case RPL_LIST: {
+            // params: #channel user_count
+            // trailing: topic
+            int user_count = msg->params()->at(2).toInt(&ok);
+            if (!ok) {
+                break;
+            }
+
+            StatusWindow *win = findMdiChild(StatusWindow::NWindowList);
+            if (!win) {
+                win = createMdiChild(StatusWindow::NWindowList);
+                win->show();
+            }
+
+            // channel, user count, topic
+            win->onListReply(msg->params()->at(1), user_count, msg->trailing());
+            break;
+        }
+        case RPL_LISTEND: {
+            // trailing: "End of LIST" (or something like that)
+            StatusWindow *win = findMdiChild(StatusWindow::NWindowList);
+            if (!win) {
+                break;
+            }
+
+            win->onEndOfListReply();
             break;
         }
     }

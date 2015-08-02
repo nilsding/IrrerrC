@@ -4,6 +4,9 @@ StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
     createUserList();
+    if (_windowType == NWindowList) {
+        createChannelList();
+    }
     createLayout();
     loadSettings();
 }
@@ -77,22 +80,43 @@ void StatusWindow::onEndOfNamesReply()
     _qlvUsers->setModel(new QStringListModel(_userList));
 }
 
+void StatusWindow::onListReply(QString channel, int userCount, QString topic)
+{
+    _tmpChannelList.append(IrcTypes::ListEntry(channel, userCount, topic));
+}
+
+void StatusWindow::onEndOfListReply()
+{
+    _channelList.clear();
+    _channelList.append(_tmpChannelList);
+    _tmpChannelList.clear();
+    _qtvChannels->setModel(new ChannelListModel(&_channelList));
+}
+
 void StatusWindow::createLayout()
 {
-    // create a read-only QTextEdit for the buffer
-    _qteBuffer = new QTextEdit(this);
-    _qteBuffer->setReadOnly(true);
+    if (_windowType != NWindowList) {
+        // create a read-only QTextEdit for the buffer
+        _qteBuffer = new QTextEdit(this);
+        _qteBuffer->setReadOnly(true);
+    }
 
     // create a QLineEdit object for input
     _qleInput = new QLineEdit(this);
-    _qteBuffer->setFocusProxy(_qleInput);
+    if (_windowType != NWindowList) {
+        _qteBuffer->setFocusProxy(_qleInput);
+    }
     connect(_qleInput, SIGNAL(returnPressed()), this, SLOT(onTextEntered()));
     connect(_qleInput, SIGNAL(textEdited(QString)), this, SLOT(onTextEdited(QString)));
 
     // setting up the splitter widget
     QSplitter *splitter = new QSplitter(this);
     splitter->setHandleWidth(1);
-    splitter->addWidget(_qteBuffer);
+    if (_windowType == NWindowList) {
+        splitter->addWidget(_qtvChannels);
+    } else {
+        splitter->addWidget(_qteBuffer);
+    }
     splitter->addWidget(_qlvUsers);
     splitter->setStretchFactor(0, 5);
     splitter->setStretchFactor(1, 1);
@@ -141,12 +165,20 @@ void StatusWindow::createUserList()
     connect(_qlvUsers, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onUserActivated(QModelIndex)));
 }
 
+void StatusWindow::createChannelList()
+{
+    _qtvChannels = new QTreeView(this);
+    connect(_qtvChannels, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onChannelClicked(QModelIndex)));
+}
+
 void StatusWindow::loadSettings()
 {
     _SETTINGS.beginGroup("StatusWindow");
         auto ff = _SETTINGS.value("fontFamily", "monospace").toString();
         _qleInput->setFont(QFont(ff));
-        _qteBuffer->setFontFamily(ff);
+        if (_windowType != NWindowList) {
+            _qteBuffer->setFontFamily(ff);
+        }
     _SETTINGS.endGroup();
 }
 

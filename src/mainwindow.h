@@ -28,6 +28,7 @@ public:
     ~MainWindow();
 
     StatusWindow *findMdiChild(QString windowTitle, Qt::CaseSensitivity cs = Qt::CaseSensitive);
+    StatusWindow *findMdiChild(StatusWindow::NWindowType type);
 
 private slots:
     StatusWindow *createMdiChild(StatusWindow::NWindowType winType = StatusWindow::NWindowStatus);
