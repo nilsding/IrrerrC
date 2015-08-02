@@ -10,6 +10,7 @@
 
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"
+#include "core/irccodes.h"
 #include "statuswindow.h"
 #include "settings/nsettings.h"
 #include "settings/settingsdialog.h"

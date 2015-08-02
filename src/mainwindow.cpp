@@ -159,7 +159,7 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
         return;
     }
     switch (command) {
-        case 331: { // RPL_NOTOPIC
+        case RPL_NOTOPIC: {
             StatusWindow *win = findMdiChild(msg->params()->at(1));
             if (!win) {
                 break;
@@ -167,7 +167,7 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             win->setTargetDescription("");
             break;
         }
-        case 332: { // RPL_TOPIC
+        case RPL_TOPIC: {
             StatusWindow *win = findMdiChild(msg->params()->at(1));
             if (!win) {
                 break;
@@ -175,7 +175,7 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             win->setTargetDescription(msg->trailing());
             break;
         }
-        case 353: { // RPL_NAMREPLY
+        case RPL_NAMREPLY: {
             // params: [=*@] #channel
             // = -- public channel
             // @ -- secret channel
@@ -188,7 +188,7 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             win->onNamesReply(msg->trailing().split(" "));
             break;
         }
-        case 366: { // RPL_ENDOFNAMES
+        case RPL_ENDOFNAMES: {
             StatusWindow *win = findMdiChild(msg->params()->at(1));
             if (!win) {
                 break;
