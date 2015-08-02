@@ -34,3 +34,4 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 - [ ] Aliases
 - [ ] Channel listing
 - [x] Userlist in channel view
+- [ ] Rename the client before open-sourcing the repo
