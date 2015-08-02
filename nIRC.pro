@@ -32,6 +32,7 @@ HEADERS  += src/mainwindow.h \
     src/core/ircparser.h \
     src/core/ircmessage.h \
     src/core/irccodes.h \
+    src/core/irctypes.h \
     src/settings/nsettings.h \
     src/settings/settingsdialog.h \
     src/settings/identitysettingswidget.h \
