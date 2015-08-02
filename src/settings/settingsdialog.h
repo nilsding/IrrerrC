@@ -56,7 +56,7 @@ public:
 private slots:
     void on_qdbbButtons_clicked(QAbstractButton *button);
 
-    void on_qlvSettingsCategories_activated(const QModelIndex &index);
+    void on_qlvSettingsCategories_clicked(const QModelIndex &index);
 
 private:
     Ui::SettingsDialog *_ui;
