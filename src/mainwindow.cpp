@@ -333,3 +333,15 @@ void MainWindow::on_qaAbout_triggered()
 {
     QMessageBox::about(this, tr("About nIRC"), tr("<h3>nIRC</h3>&copy; 2015 nilsding"));
 }
+
+void MainWindow::on_qaChannelList_triggered()
+{
+    StatusWindow *win = findMdiChild(StatusWindow::NWindowList);
+    if (!win) {
+        win = createMdiChild(StatusWindow::NWindowList);
+        win->show();
+    }
+    if (_conn->isConnected()) {
+        _conn->raw("LIST");
+    }
+}

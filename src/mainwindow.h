@@ -50,6 +50,8 @@ private slots:
 
     void on_qaAbout_triggered();
 
+    void on_qaChannelList_triggered();
+
 private:
     Ui::MainWindow *_ui;
 

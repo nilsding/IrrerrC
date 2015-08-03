@@ -32,7 +32,6 @@
     </property>
     <addaction name="qaConnect"/>
     <addaction name="qaSettings"/>
-    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="qmWindow">
     <property name="tearOffEnabled">
@@ -74,6 +73,8 @@
    </attribute>
    <addaction name="qaConnect"/>
    <addaction name="qaSettings"/>
+   <addaction name="separator"/>
+   <addaction name="qaChannelList"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="qtbWindows">
@@ -125,6 +126,15 @@
   <action name="qaAbout">
    <property name="text">
     <string>&amp;About nIRC</string>
+   </property>
+  </action>
+  <action name="qaChannelList">
+   <property name="icon">
+    <iconset resource="../../nirc.qrc">
+     <normaloff>:/icons/chanlist</normaloff>:/icons/chanlist</iconset>
+   </property>
+   <property name="text">
+    <string>Channel list</string>
    </property>
   </action>
  </widget>
