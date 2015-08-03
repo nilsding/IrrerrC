@@ -9,6 +9,7 @@
 #include <QDateTime>
 #include <QListView>
 #include <QTreeView>
+#include <QHeaderView>
 #include <QVBoxLayout>
 #include <QCloseEvent>
 #include <QMessageBox>

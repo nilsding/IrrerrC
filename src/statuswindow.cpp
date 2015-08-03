@@ -117,7 +117,10 @@ void StatusWindow::onEndOfListReply()
     _channelList.clear();
     _channelList.append(_tmpChannelList);
     _tmpChannelList.clear();
-    _qtvChannels->setModel(new ChannelListModel(&_channelList));
+    auto model = new ChannelListModel(&_channelList);
+    auto oldModel = _qtvChannels->model();
+    _qtvChannels->setModel(model);
+    oldModel->deleteLater();
 }
 
 void StatusWindow::createLayout()
@@ -195,6 +198,8 @@ void StatusWindow::createUserList()
 void StatusWindow::createChannelList()
 {
     _qtvChannels = new QTreeView(this);
+    _qtvChannels->setModel(new ChannelListModel(new QList<IrcTypes::ListEntry>()));
+    _qtvChannels->setHeaderHidden(false);
     connect(_qtvChannels, &QTreeView::doubleClicked, this, [=](const QModelIndex &index) {
         emit textEntered(QString("JOIN %1").arg(_channelList.at(index.row()).channelName()));
     });
