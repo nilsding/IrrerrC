@@ -83,7 +83,7 @@ void StatusWindow::onTextEntered()
     _qleInput->clear();
 }
 
-void StatusWindow::onTextEdited(QString s)
+void StatusWindow::onTextEdited(QString /*s*/)
 {
 
 }

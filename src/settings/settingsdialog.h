@@ -12,7 +12,7 @@ class CategoryListModel : public QAbstractListModel
 public:
     CategoryListModel(QList<QWidget *> data) : _data(data) { }
 
-    int rowCount(const QModelIndex &parent) const {
+    int rowCount(const QModelIndex &/*parent*/) const {
         return _data.size();
     }
 

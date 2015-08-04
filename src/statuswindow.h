@@ -27,7 +27,7 @@ class ChannelListModel : public QAbstractListModel
 public:
     ChannelListModel(QList<IrcTypes::ListEntry> *data) : _data(data) { }
 
-    int rowCount(const QModelIndex &parent) const {
+    int rowCount(const QModelIndex &/*parent*/) const {
         return _data->size();
     }
 
@@ -59,7 +59,7 @@ public:
         return QVariant(QVariant::Invalid);
     }
 
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const {
+    QVariant headerData(int section, Qt::Orientation orientation, int /*role*/) const {
         if (orientation == Qt::Vertical) {
             return QVariant(QVariant::Invalid);
         }

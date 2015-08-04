@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_ui->qmWindow, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));
     connect(_mapper, SIGNAL(mapped(QWidget *)), this, SLOT(selectActiveSubWindow(QWidget *)));
     connect(_conn, SIGNAL(newMessageReceived(IrcMessage *)), this, SLOT(onNewMessageReceived(IrcMessage *)));
-    connect(_conn, &IrcConnection::connectionStateChanged, this, [=](QAbstractSocket::SocketState state) {
+    connect(_conn, &IrcConnection::connectionStateChanged, this, [=](QAbstractSocket::SocketState /*state*/) {
         if (_conn->isConnected()) {
             _ui->qaConnect->setText(tr("&Disconnect"));
             _ui->qaConnect->setIcon(QIcon(":/icons/disconnect"));
@@ -249,7 +249,7 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
     }
 }
 
-void MainWindow::on_centralWidget_subWindowActivated(QMdiSubWindow *_win)
+void MainWindow::on_centralWidget_subWindowActivated(QMdiSubWindow */*win*/)
 {
     updateWindowMenu();
 }
