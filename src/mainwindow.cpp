@@ -345,3 +345,16 @@ void MainWindow::on_qaChannelList_triggered()
         _conn->raw("LIST");
     }
 }
+
+void MainWindow::on_qaQuit_triggered()
+{
+    if (_conn->isConnected()) {
+        auto ret = QMessageBox::question(this, tr("Really quit?"),
+                                         tr("You are connected to an IRC network.  Are you sure you want to quit nIRC?"));
+        if (ret != QMessageBox::Yes) {
+            return;
+        }
+        _conn->disconnect();
+    }
+    qApp->quit();
+}

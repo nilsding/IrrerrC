@@ -52,6 +52,8 @@ private slots:
 
     void on_qaChannelList_triggered();
 
+    void on_qaQuit_triggered();
+
 private:
     Ui::MainWindow *_ui;
 

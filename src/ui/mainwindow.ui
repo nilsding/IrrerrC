@@ -32,6 +32,8 @@
     </property>
     <addaction name="qaConnect"/>
     <addaction name="qaSettings"/>
+    <addaction name="separator"/>
+    <addaction name="qaQuit"/>
    </widget>
    <widget class="QMenu" name="qmWindow">
     <property name="tearOffEnabled">
@@ -135,6 +137,17 @@
    </property>
    <property name="text">
     <string>Channel list</string>
+   </property>
+  </action>
+  <action name="qaQuit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>
