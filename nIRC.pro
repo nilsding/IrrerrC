@@ -49,4 +49,5 @@ CONFIG += c++11
 RESOURCES += \
     nirc.qrc
 
-TRANSLATIONS = lang/de.ts
+TRANSLATIONS = lang/nIRC_de.ts
+
