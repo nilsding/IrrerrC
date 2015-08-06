@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _mapper(new QSignalMapper(this))
 {
     _ui->setupUi(this);
+    setWindowTitle(APP_NAME);
 
     loadSettings();
     _conn->setIdentity(_id);
@@ -331,7 +332,7 @@ void MainWindow::on_qaAboutQt_triggered()
 
 void MainWindow::on_qaAbout_triggered()
 {
-    QMessageBox::about(this, tr("About nIRC"), tr("<h3>nIRC</h3>&copy; 2015 nilsding"));
+    QMessageBox::about(this, tr("About %1").arg(APP_NAME), tr("<h3>%1</h3>&copy; 2015 nilsding").arg(APP_NAME));
 }
 
 void MainWindow::on_qaChannelList_triggered()
@@ -350,7 +351,8 @@ void MainWindow::on_qaQuit_triggered()
 {
     if (_conn->isConnected()) {
         auto ret = QMessageBox::question(this, tr("Really quit?"),
-                                         tr("You are connected to an IRC network.  Are you sure you want to quit nIRC?"));
+                                         tr("You are connected to an IRC network.  Are you sure you want to quit %1?")
+                                           .arg(APP_NAME));
         if (ret != QMessageBox::Yes) {
             return;
         }

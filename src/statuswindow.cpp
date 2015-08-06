@@ -38,7 +38,7 @@ void StatusWindow::closeEvent(QCloseEvent *ev)
         return;
     }
 
-    auto ret = QMessageBox::question(this, tr("Really quit?"), tr("Closing this window will quit nIRC."));
+    auto ret = QMessageBox::question(this, tr("Really quit?"), tr("Closing this window will quit %1.").arg(APP_NAME));
     if (ret == QMessageBox::Yes) {
         emit statusWindowClosing();
     }
