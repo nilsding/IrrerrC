@@ -47,6 +47,10 @@ void StatusWindow::closeEvent(QCloseEvent *ev)
 
 void StatusWindow::receiveMessage(IrcMessage *msg)
 {
+    if (_windowType == NWindowList) {
+        return;
+    }
+
     QString s = "";
     s += QDateTime::currentDateTime().toString("[HH:mm:ss]");
     s += " <";
@@ -63,6 +67,7 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
                 s += ss;
                 s += " ";
             }
+            s += msg->trailing();
         }
     }
     _qteBuffer->append(s);

@@ -10,6 +10,7 @@ void IrcMessage::setParams(QString params) {
     auto i = params.indexOf(':');
     if (i != -1) {
         _trailing = params.mid(i + 1);
+        params = params.left(i - 1);
     }
 
     _params = params.split(' ', QString::SkipEmptyParts);

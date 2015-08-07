@@ -55,7 +55,7 @@ IrcMessage *IrcParser::parseLine(QString s)
 
     msg->setParams(s);
 
-    qDebug() << msg->prefix() << msg->command() << msg->params()->join(" ");
+    qDebug() << msg->prefix() << msg->command() << msg->params()->join(" ") << msg->trailing();
 
     if (this->parent() != 0) {
         if (!msg->command().compare("PING", Qt::CaseInsensitive)) {
