@@ -38,3 +38,7 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 - [ ] Logging
 - [ ] favourite channels?
 - [ ] Document all methods.  (except for the getters and setters, maybe.)
+- [ ] language switcher?
+- [ ] fix queries
+- [ ] store toolbar positions
+- [ ] store subwindow position + size
