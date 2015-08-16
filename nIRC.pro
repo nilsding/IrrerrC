@@ -22,7 +22,8 @@ SOURCES += src/main.cpp \
     src/core/ircmessage.cpp \
     src/settings/settingsdialog.cpp \
     src/settings/identitysettingswidget.cpp \
-    src/settings/networksettingswidget.cpp
+    src/settings/networksettingswidget.cpp \
+    src/settings/appearancesettingswidget.cpp
 
 HEADERS  += src/mainwindow.h \
     src/statuswindow.h \
@@ -36,12 +37,14 @@ HEADERS  += src/mainwindow.h \
     src/settings/nsettings.h \
     src/settings/settingsdialog.h \
     src/settings/identitysettingswidget.h \
-    src/settings/networksettingswidget.h
+    src/settings/networksettingswidget.h \
+    src/settings/appearancesettingswidget.h
 
 FORMS    += src/ui/mainwindow.ui \
     src/ui/settings/settingsdialog.ui \
     src/ui/settings/identitysettingswidget.ui \
-    src/ui/settings/networksettingswidget.ui
+    src/ui/settings/networksettingswidget.ui \
+    src/ui/settings/appearancesettingswidget.ui
 
 # C++11! \o/
 CONFIG += c++11
@@ -56,7 +59,7 @@ VERSION = 0.0.1
 QMAKE_TARGET_PRODUCT = nIRC
 QMAKE_TARGET_DESCRIPTION = An IRC client.
 QMAKE_TARGET_COMPANY = nilsding
-QMAKE_TARGET_COPYRIGHT = © 2015 nilsding
+QMAKE_TARGET_COPYRIGHT = ?? 2015 nilsding
 
 DEFINES += APP_VERSION=\\\"$$join(VERSION, "\\ ")\\\" \
            APP_NAME=\\\"$$join(QMAKE_TARGET_PRODUCT, "\\ ")\\\" \

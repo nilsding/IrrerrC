@@ -3,6 +3,7 @@
 
 #include "identitysettingswidget.h"
 #include "networksettingswidget.h"
+#include "appearancesettingswidget.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -12,6 +13,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
     _settingsWidgets.append(new IdentitySettingsWidget);
     _settingsWidgets.append(new NetworkSettingsWidget);
+    _settingsWidgets.append(new AppearanceSettingsWidget);
 
     for (auto w : _settingsWidgets) {
         connect(this, SIGNAL(accepted()), w, SLOT(storeSettings()));
