@@ -24,9 +24,6 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     _ui->qlvSettingsCategories->setModel(new CategoryListModel(_settingsWidgets));
     _ui->qlvSettingsCategories->setCurrentIndex(_ui->qlvSettingsCategories->model()->index(0, 0));
 
-    // I have no idea why, but the next line seems to fix a bug.
-    on_qlvSettingsCategories_clicked(_ui->qlvSettingsCategories->model()->index(0, 0));
-
     for (int i = _settingsWidgets.length() - 1; i >= 0; i--) {
         on_qlvSettingsCategories_clicked(_ui->qlvSettingsCategories->model()->index(i, 0));
     }
@@ -59,9 +56,9 @@ void SettingsDialog::on_qdbbButtons_clicked(QAbstractButton *button)
 
 void SettingsDialog::on_qlvSettingsCategories_clicked(const QModelIndex &index)
 {
-    _ui->horizontalLayout->removeWidget(_ui->qwCurrentWidget);
     _ui->qwCurrentWidget->hide();
+    _ui->horizontalLayout->removeWidget(_ui->qwCurrentWidget);
     _ui->qwCurrentWidget = _ui->qlvSettingsCategories->model()->data(index, Qt::UserRole).value<QWidget *>();
-    _ui->qwCurrentWidget->setVisible(true);
     _ui->horizontalLayout->addWidget(_ui->qwCurrentWidget);
+    _ui->qwCurrentWidget->setVisible(true);
 }
