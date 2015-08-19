@@ -52,7 +52,7 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
     }
 
     QString s = "";
-    s += QDateTime::currentDateTime().toString("[HH:mm:ss]");
+    s += QDateTime::currentDateTime().toString(_SETTINGS.value("StatusWindow/timestampFormat", "[HH:mm:ss]").toString());
     s += " <";
     s += msg->prefix();
     s += "> ";
