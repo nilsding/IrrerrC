@@ -42,3 +42,7 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 - [ ] fix queries
 - [ ] store toolbar positions
 - [ ] store subwindow position + size
+- [ ] set charset for network
+- [ ] highlight notifications
+- [ ] theming support
+
