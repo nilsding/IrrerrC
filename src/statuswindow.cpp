@@ -82,6 +82,10 @@ void StatusWindow::onTextEntered()
             input = input.mid(1);
         } else {
             input = QString("PRIVMSG %1 :%2").arg(_targetName).arg(input);
+            IrcMessage *m = 0;
+            if ((m = (new IrcParser)->parseLine(input))) {  // TODO: add own nickname to privmsg thing
+                receiveMessage(m);
+            }
         }
     }
     emit textEntered(input);

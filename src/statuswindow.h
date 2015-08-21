@@ -16,6 +16,7 @@
 #include <QStringListModel>
 
 #include "core/irctypes.h"
+#include "core/ircparser.h"
 #include "core/ircmessage.h"
 #include "settings/nsettings.h"
 
