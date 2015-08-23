@@ -18,6 +18,7 @@
 #include "core/irctypes.h"
 #include "core/ircparser.h"
 #include "core/ircmessage.h"
+#include "core/ircidentity.h"
 #include "settings/nsettings.h"
 
 
@@ -120,6 +121,7 @@ public:
                                                                             .arg(_targetDescription)); }
 
     NWindowType type() { return _windowType; }
+    void setCurrentIdentity(IrcIdentity *identity) { _currentIdentity = identity; }
 
 signals:
     void textEntered(QString);
@@ -155,6 +157,8 @@ private:
     QList<IrcTypes::ListEntry> _channelList;
     QList<IrcTypes::ListEntry> _tmpChannelList;
     QTreeView *_qtvChannels;
+
+    IrcIdentity *_currentIdentity;
 
     void loadSettings();
     void storeSettings();

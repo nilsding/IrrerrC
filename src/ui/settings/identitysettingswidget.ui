@@ -48,24 +48,10 @@
      <item row="2" column="0">
       <widget class="QLabel" name="qlRealname">
        <property name="text">
-        <string>&amp;Real name:</string>
+        <string>Real &amp;name:</string>
        </property>
        <property name="buddy">
         <cstring>qleRealname</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QCheckBox" name="qcbInvisible">
-       <property name="text">
-        <string>&amp;Invisible mode (+i)</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QCheckBox" name="qcbWallops">
-       <property name="text">
-        <string>&amp;Wallops (+w)</string>
        </property>
       </widget>
      </item>
@@ -88,6 +74,33 @@
      <item row="3" column="1">
       <widget class="QLineEdit" name="qleQuitMessage"/>
      </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="qlPartMessage">
+       <property name="text">
+        <string>&amp;Part message:</string>
+       </property>
+       <property name="buddy">
+        <cstring>qlePartMessage</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QCheckBox" name="qcbInvisible">
+       <property name="text">
+        <string>&amp;Invisible mode (+i)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QCheckBox" name="qcbWallops">
+       <property name="text">
+        <string>&amp;Wallops (+w)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="qlePartMessage"/>
+     </item>
     </layout>
    </item>
   </layout>
@@ -97,6 +110,7 @@
   <tabstop>qleUsername</tabstop>
   <tabstop>qleRealname</tabstop>
   <tabstop>qleQuitMessage</tabstop>
+  <tabstop>qlePartMessage</tabstop>
   <tabstop>qcbInvisible</tabstop>
   <tabstop>qcbWallops</tabstop>
  </tabstops>

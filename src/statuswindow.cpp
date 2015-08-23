@@ -1,6 +1,7 @@
 #include "statuswindow.h"
 
-StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(parent), _windowType(windowType)
+StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(parent), _windowType(windowType),
+    _currentIdentity(0)
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
     createUserList();
@@ -20,8 +21,9 @@ StatusWindow::~StatusWindow()
             break;
         }
         case NWindowChannel: {
-            // TODO: handle default part message for the identity
-            emit textEntered(QString("PART %1 :").arg(_targetName));
+            emit textEntered(QString("PART %1 :%2").arg(_targetName).arg(_currentIdentity
+                                                                         ? _currentIdentity->partMessage()
+                                                                         : ""));
         }
         default: {
             _qteBuffer->deleteLater();

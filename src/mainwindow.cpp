@@ -132,6 +132,7 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         } else {
             win = createMdiChild(StatusWindow::NWindowQuery);
         }
+        win->setCurrentIdentity(_id);
         win->setTargetName(target);
         win->show();
     }
@@ -269,6 +270,7 @@ void MainWindow::loadSettings()
         _id->setInvisible(_SETTINGS.value("invisible", true).toBool());
         _id->setUsername(_SETTINGS.value("username", "Lamer").toString());
         _id->setQuitMessage(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
+        _id->setPartMessage(_SETTINGS.value("partmessage", "I can't think of a proper part message.").toString());
     _SETTINGS.endGroup();
 
     _networks.clear();
@@ -304,6 +306,8 @@ void MainWindow::storeSettings()
         _SETTINGS.setValue("wallops", _id->hasWallops());
         _SETTINGS.setValue("invisible", _id->isInvisible());
         _SETTINGS.setValue("username", _id->username());
+        _SETTINGS.value("quitmessage", _id->quitMessage());
+        _SETTINGS.value("partmessage", _id->partMessage());
     _SETTINGS.endGroup();
 
     _SETTINGS.beginWriteArray("Networks");

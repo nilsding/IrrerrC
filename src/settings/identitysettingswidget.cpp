@@ -23,6 +23,7 @@ void IdentitySettingsWidget::loadSettings()
         _ui->qcbInvisible->setChecked(_SETTINGS.value("invisible", true).toBool());
         _ui->qleUsername->setText(_SETTINGS.value("username", "Lamer").toString());
         _ui->qleQuitMessage->setText(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
+        _ui->qlePartMessage->setText(_SETTINGS.value("partmessage", "I can't think of a proper part message.").toString());
     _SETTINGS.endGroup();
 }
 
@@ -35,5 +36,6 @@ void IdentitySettingsWidget::storeSettings()
         _SETTINGS.setValue("invisible", _ui->qcbInvisible->isChecked());
         _SETTINGS.setValue("username", _ui->qleUsername->text());
         _SETTINGS.setValue("quitmessage", _ui->qleQuitMessage->text());
+        _SETTINGS.setValue("partmessage", _ui->qlePartMessage->text());
     _SETTINGS.endGroup();
 }
