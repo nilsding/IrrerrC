@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,7 +25,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="qlStatusWindowFont">
           <property name="text">
-           <string>Status window:</string>
+           <string>Status &amp;window:</string>
           </property>
           <property name="buddy">
            <cstring>qfcbStatusWindowFont</cstring>
@@ -60,6 +60,82 @@
         </item>
         <item row="0" column="1">
          <widget class="QLineEdit" name="qleTimestampFormat"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="qgbBackgroundImages">
+     <property name="title">
+      <string>Background images</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <layout class="QFormLayout" name="formLayout_3">
+        <item row="0" column="0">
+         <widget class="QLabel" name="qlMainToolbarBackground">
+          <property name="text">
+           <string>Main toolbar:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
+          <item>
+           <widget class="QLineEdit" name="qleMainToolbarBackground"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="qpbMainToolbarBackgroundFileChooser">
+            <property name="text">
+             <string notr="true">…</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="qlWindowToolbarBackground">
+          <property name="text">
+           <string>Window toolbar:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0">
+          <item>
+           <widget class="QLineEdit" name="qleWindowToolbarBackground"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="qpbWindowToolbarBackgroundFileChooser">
+            <property name="text">
+             <string notr="true">…</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="qlMainWindowBackground">
+          <property name="text">
+           <string>Main window:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,0">
+          <item>
+           <widget class="QLineEdit" name="qleMainWindowBackground"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="qleMainWindowBackgroundFileChooser">
+            <property name="text">
+             <string notr="true">…</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>

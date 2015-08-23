@@ -265,6 +265,13 @@ void MainWindow::loadSettings()
     _SETTINGS.beginGroup("MainWindow");
         resize(_SETTINGS.value("size", QSize(640, 450)).toSize());
         move(_SETTINGS.value("pos", QPoint(200, 200)).toPoint());
+
+        auto i = _SETTINGS.value("backgroundImage", "").toString();
+        _ui->centralWidget->setBackground(i.isEmpty() ? _ui->centralWidget->palette().dark() : QBrush(QImage(i)));
+        _ui->qtbMain->setStyleSheet(QString(
+            "background-image: url(") + _SETTINGS.value("MainToolbar/backgroundImage", "").toString() + ");");
+        _ui->qtbWindows->setStyleSheet(QString(
+            "background-image: url(") + _SETTINGS.value("WindowToolbar/backgroundImage", "").toString() + ");");
     _SETTINGS.endGroup();
 
     _SETTINGS.beginGroup("Identity");
