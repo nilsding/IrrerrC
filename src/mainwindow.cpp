@@ -127,6 +127,10 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
 
     StatusWindow *win = findMdiChild(target);
     if (!win) {
+        if (msg->command().toUpper() == "PART" && msg->prefix().left(msg->prefix().indexOf('!')) == _id->nickname()) {
+            // ignore own PART if window does not exist (anymore)
+            return;
+        }
         if (target.startsWith('#') || target.startsWith('&')) {
             win = createMdiChild(StatusWindow::NWindowChannel);
         } else {
