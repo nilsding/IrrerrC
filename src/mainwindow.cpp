@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _mapper(new QSignalMapper(this))
 {
     _ui->setupUi(this);
+    setUnifiedTitleAndToolBarOnMac(true);
     setWindowTitle(APP_NAME);
 
     loadSettings();
