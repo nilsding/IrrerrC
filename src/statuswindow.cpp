@@ -1,7 +1,7 @@
 #include "statuswindow.h"
 
 StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(parent), _windowType(windowType),
-    _currentIdentity(0)
+    _currentIdentity(0), _formatter(new IrcTextFormatter)
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
     createUserList();
@@ -31,6 +31,7 @@ StatusWindow::~StatusWindow()
     }
     _qleInput->deleteLater();
     _qlvUsers->deleteLater();
+    _formatter->deleteLater();
 }
 
 void StatusWindow::closeEvent(QCloseEvent *ev)
@@ -54,14 +55,16 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
     }
 
     QString s = "";
-    s += QDateTime::currentDateTime().toString(_SETTINGS.value("StatusWindow/timestampFormat", "[HH:mm:ss]").toString());
-    s += " <";
+    s += QDateTime::currentDateTime().toString(_SETTINGS.value("StatusWindow/timestampFormat", "[HH:mm:ss]").toString().replace('<', "&gt;"));
+    s += " &lt;";
     s += msg->prefix();
-    s += "> ";
+    s += "&gt; ";
+
+    QString formattedTrailing = _formatter->parse(msg->trailing());
     switch (_windowType) {
         case NWindowChannel:
         case NWindowQuery: {
-            s += msg->trailing();
+            s += formattedTrailing;
             break;
         }
         default: {
@@ -69,10 +72,10 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
                 s += ss;
                 s += " ";
             }
-            s += msg->trailing();
+            s += formattedTrailing;
         }
     }
-    _qteBuffer->append(s);
+    _qteBuffer->insertHtml(s + "<br />");
 }
 
 void StatusWindow::onTextEntered()
@@ -143,6 +146,7 @@ void StatusWindow::createLayout()
         // create a read-only QTextEdit for the buffer
         _qteBuffer = new QTextEdit(this);
         _qteBuffer->setReadOnly(true);
+
     }
 
     // create a QLineEdit object for input
@@ -226,6 +230,7 @@ void StatusWindow::loadSettings()
         _qleInput->setFont(QFont(ff));
         if (_windowType != NWindowList) {
             _qteBuffer->setFontFamily(ff);
+            _qteBuffer->setStyleSheet(QString("font-family: \"%0\";").arg(ff));
         }
     _SETTINGS.endGroup();
 }

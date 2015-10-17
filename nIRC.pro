@@ -23,7 +23,8 @@ SOURCES += src/main.cpp \
     src/settings/settingsdialog.cpp \
     src/settings/identitysettingswidget.cpp \
     src/settings/networksettingswidget.cpp \
-    src/settings/appearancesettingswidget.cpp
+    src/settings/appearancesettingswidget.cpp \
+    src/util/irctextformatter.cpp
 
 HEADERS  += src/mainwindow.h \
     src/statuswindow.h \
@@ -38,7 +39,8 @@ HEADERS  += src/mainwindow.h \
     src/settings/settingsdialog.h \
     src/settings/identitysettingswidget.h \
     src/settings/networksettingswidget.h \
-    src/settings/appearancesettingswidget.h
+    src/settings/appearancesettingswidget.h \
+    src/util/irctextformatter.h
 
 FORMS    += src/ui/mainwindow.ui \
     src/ui/settings/settingsdialog.ui \

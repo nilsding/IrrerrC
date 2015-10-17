@@ -20,6 +20,7 @@
 #include "core/ircmessage.h"
 #include "core/ircidentity.h"
 #include "settings/nsettings.h"
+#include "util/irctextformatter.h"
 
 
 class ChannelListModel : public QAbstractListModel
@@ -145,6 +146,7 @@ private:
     NWindowType _windowType;
     QLineEdit *_qleInput;
     QTextEdit *_qteBuffer;
+    IrcTextFormatter *_formatter;
 
     QString _targetName;
     QString _targetDescription;
