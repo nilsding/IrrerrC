@@ -61,9 +61,17 @@ QMAKE_TARGET_DESCRIPTION = An IRC client.
 QMAKE_TARGET_COMPANY = nilsding
 QMAKE_TARGET_COPYRIGHT = ?? 2015 nilsding
 
+if (!windows) {
 DEFINES += APP_VERSION=\\\"$$join(VERSION, "\\ ")\\\" \
            APP_NAME=\\\"$$join(QMAKE_TARGET_PRODUCT, "\\ ")\\\" \
            APP_DESCRIPTION=\\\"$$join(QMAKE_TARGET_DESCRIPTION, "\\ ")\\\" \
            APP_COMPANY=\\\"$$join(QMAKE_TARGET_COMPANY, "\\ ")\\\" \
            APP_COPYRIGHT=\\\"$$join(QMAKE_TARGET_COPYRIGHT, "\\ ")\\\"
+} else {
+DEFINES += APP_VERSION=\"\\\"$$join(VERSION, " ")\\\"\" \
+           APP_NAME=\"\\\"$$join(QMAKE_TARGET_PRODUCT, " ")\\\"\" \
+           APP_DESCRIPTION=\"\\\"$$join(QMAKE_TARGET_DESCRIPTION, " ")\\\"\" \
+           APP_COMPANY=\"\\\"$$join(QMAKE_TARGET_COMPANY, " ")\\\"\" \
+           APP_COPYRIGHT=\"\\\"$$join(QMAKE_TARGET_COPYRIGHT, " ")\\\"\"
+}
 
