@@ -19,27 +19,20 @@ IrcTextFormatter::~IrcTextFormatter()
 QString IrcTextFormatter::parse(const QString &text) const
 {
     QString str = text;
-    int position, depth;
+    int position;
     char fg, bg, bold, reverse, italic, underline;
     str.replace('<', "&lt;");
 
     // initialize attributes
     fg = bg = bold = reverse = italic = underline = 0;
-    depth = position = 0;
+    position = 0;
 
-    // TODO: fix this, it fails on strings like
-    //   \x02fett\x02 nicht fett \x02fett \x1ffett und unterstrichen \x02nicht mehr fett \x02wieder fett \x0f NIX
     while (position < str.size()) {
         QString s;
+        bool formattingChanged = false;
         switch (str.at(position).unicode()) {
         case IRC_FORMAT_BOLD:
-            if (bold) {
-                depth--;
-                s = "</span>";
-            } else {
-                depth++;
-                s = "<span style=\"font-weight: bold;\">";
-            }
+            formattingChanged = true;
             bold ^= 1;
             break;
 
@@ -48,8 +41,8 @@ QString IrcTextFormatter::parse(const QString &text) const
             break;
 
         case IRC_FORMAT_RESET:
-            if (depth > 0) {
-                s = QString("</span>").repeated(depth);
+            if (bold || reverse || italic || underline) {
+                s = "</span>";
             } else {
                 str.remove(position--, 1);
             }
@@ -61,26 +54,22 @@ QString IrcTextFormatter::parse(const QString &text) const
             break;
 
         case IRC_FORMAT_ITALIC:
-            if (italic) {
-                depth--;
-                s = "</span>";
-            } else {
-                depth++;
-                s = "<span style=\"font-style: italic;\">";
-            }
+            formattingChanged = true;
             italic ^= 1;
             break;
 
         case IRC_FORMAT_UNDERLINE:
-            if (underline) {
-                depth--;
-                s = "</span>";
-            } else {
-                depth++;
-                s = "<span style=\"text-decoration: underline;\">";
-            }
+            formattingChanged = true;
             underline ^= 1;
             break;
+        }
+
+        if (formattingChanged) {
+            s = "</span><span style=\"";
+            if (bold)      s.append("font-weight: bold;");
+            if (italic)    s.append("font-style: italic;");
+            if (underline) s.append("text-decoration: underline;");
+            s.append("\">");
         }
 
         if (!s.isEmpty()) {
@@ -91,5 +80,5 @@ QString IrcTextFormatter::parse(const QString &text) const
         }
     }
 
-    return str;
+    return "<span>" + str;
 }
