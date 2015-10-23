@@ -107,8 +107,7 @@ void StatusWindow::onTextEdited(QString /*s*/)
 
 void StatusWindow::onUserActivated(QModelIndex i)
 {
-    // TODO: open a query window
-    qDebug() << _userList.at(i.row());
+    emit userActivated(_userList.at(i.row()));
 }
 
 void StatusWindow::onNamesReply(const QStringList &lst)

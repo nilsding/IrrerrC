@@ -134,6 +134,7 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         }
         if (target.startsWith('#') || target.startsWith('&')) {
             win = createMdiChild(StatusWindow::NWindowChannel);
+            connect(win, SIGNAL(userActivated(QString)), this, SLOT(onUserActivated(QString)));
         } else {
             win = createMdiChild(StatusWindow::NWindowQuery);
         }
@@ -142,6 +143,18 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         win->show();
     }
     win->receiveMessage(msg);
+    updateWindowMenu();
+}
+
+void MainWindow::onUserActivated(QString user)
+{
+    StatusWindow *win = findMdiChild(user);
+    if (!win) {
+        win = createMdiChild(StatusWindow::NWindowQuery);
+        win->setCurrentIdentity(_id);
+        win->setTargetName(user);
+    }
+    win->show();
     updateWindowMenu();
 }
 

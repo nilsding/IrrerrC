@@ -39,6 +39,7 @@ private slots:
     void on_qaConnect_triggered();
     void onWindowTextEntered(QString);
     void onNewMessageReceived(IrcMessage *);
+    void onUserActivated(QString);
 
     void on_centralWidget_subWindowActivated(QMdiSubWindow *arg1);
 

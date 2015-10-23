@@ -127,6 +127,7 @@ public:
 signals:
     void textEntered(QString);
     void statusWindowClosing();
+    void userActivated(QString);
 
 public slots:
     void onTextEntered();
