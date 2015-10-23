@@ -29,9 +29,10 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 
 - [x] Write a TODO list
 - [x] make network settings work
-- [ ] format messages (colours, bold etc.)
-- [ ] Ruby scripting
+- [x] format messages (colours, bold etc.)
+- [ ] Scripting (Ruby? ChaiScript? Lisp? Tcl?)
 - [ ] Aliases
+- [ ] Customizable popup menus (similar to KVIrc/mIRC)
 - [x] Channel listing
 - [x] Userlist in channel view
 - [ ] Rename the client before open-sourcing the repo
@@ -39,10 +40,18 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 - [ ] favourite channels?
 - [ ] Document all methods.  (except for the getters and setters, maybe.)
 - [ ] language switcher?
-- [ ] fix queries
+- [x] fix queries
 - [ ] store toolbar positions
 - [ ] store subwindow position + size
 - [ ] set charset for network
 - [ ] highlight notifications
 - [x] theming support
+- [ ] reverse video formatting (0x16)
+- [ ] colour schemes
+- [ ] CTCP
+- [ ] DCC
+- [ ] sort user list correctly
+- [ ] Lagometer
+- [ ] Connection timer
+- [ ] A scripted MP3 player!  (Because we totally need that!)
 
