@@ -2,6 +2,8 @@
 #define IRCTEXTFORMATTER_H
 
 #include <QObject>
+#include <QPair>
+#include <QRegExp>
 
 #define IRC_FORMAT_BOLD      0x02
 #define IRC_FORMAT_COLOR     0x03
@@ -17,11 +19,15 @@ public:
     explicit IrcTextFormatter(QObject *parent = 0);
     ~IrcTextFormatter();
 
+    QPair<int, int> parseColor(const QString &text, int *len) const;
     QString parse(const QString &text) const;
 
 signals:
 
 public slots:
+
+private:
+    QString ircColorToHex(int code) const;
 };
 
 #endif // IRCTEXTFORMATTER_H
