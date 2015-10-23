@@ -90,7 +90,7 @@ void StatusWindow::onTextEntered()
             IrcMessage *m = 0;
             if ((m = (new IrcParser)->parseLine(input))) {
                 if (_currentIdentity) {
-                    m->setPrefix(_currentIdentity->username());
+                    m->setPrefix(_currentIdentity->nickname());
                 }
                 receiveMessage(m);
             }
