@@ -57,7 +57,7 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
     QString s = "";
     s += QDateTime::currentDateTime().toString(_SETTINGS.value("StatusWindow/timestampFormat", "[HH:mm:ss]").toString().replace('<', "&gt;"));
     s += " &lt;";
-    s += msg->prefix();
+    s += msg->prefix().split("!")[0];
     s += "&gt; ";
 
     QString formattedTrailing = _formatter->parse(msg->trailing());

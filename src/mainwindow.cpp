@@ -126,13 +126,18 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         return;
     }
 
+    bool isChannel = target.startsWith('#') || target.startsWith('&');
+    if (!isChannel) {
+        target = msg->prefix().split("!")[0];
+    }
+
     StatusWindow *win = findMdiChild(target);
     if (!win) {
         if (msg->command().toUpper() == "PART" && msg->prefix().left(msg->prefix().indexOf('!')) == _id->nickname()) {
             // ignore own PART if window does not exist (anymore)
             return;
         }
-        if (target.startsWith('#') || target.startsWith('&')) {
+        if (isChannel) {
             win = createMdiChild(StatusWindow::NWindowChannel);
             connect(win, SIGNAL(userActivated(QString)), this, SLOT(onUserActivated(QString)));
         } else {
