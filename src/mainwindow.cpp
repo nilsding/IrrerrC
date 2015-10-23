@@ -227,7 +227,7 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             if (!win) {
                 break;
             }
-            win->onNamesReply(msg->trailing().split(" "));
+            win->onNamesReply(msg->trailing().split(" ", QString::SplitBehavior::SkipEmptyParts));
             break;
         }
         case RPL_ENDOFNAMES: {

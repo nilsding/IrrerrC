@@ -145,7 +145,6 @@ void StatusWindow::createLayout()
         // create a read-only QTextEdit for the buffer
         _qteBuffer = new QTextEdit(this);
         _qteBuffer->setReadOnly(true);
-
     }
 
     // create a QLineEdit object for input
@@ -209,6 +208,7 @@ void StatusWindow::createUserList()
 {
     _qlvUsers = new QListView(this);
     _qlvUsers->setFocusPolicy(Qt::NoFocus);
+    _qlvUsers->setEditTriggers(QAbstractItemView::NoEditTriggers);
     connect(_qlvUsers, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(onUserActivated(QModelIndex)));
 }
 
