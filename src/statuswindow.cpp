@@ -77,6 +77,7 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
             s += formattedTrailing;
         }
     }
+    _qteBuffer->moveCursor(QTextCursor::End);
     _qteBuffer->insertHtml(s + "<br />");
 }
 
