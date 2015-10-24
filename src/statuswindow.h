@@ -139,6 +139,8 @@ public slots:
     void onListReply(QString, int, QString);
     void onEndOfListReply();
 
+    void loadSettings();
+
 private:
     void createLayout();
     void createUserList();
@@ -163,7 +165,7 @@ private:
 
     IrcIdentity *_currentIdentity;
 
-    void loadSettings();
+private slots:
     void storeSettings();
 };
 

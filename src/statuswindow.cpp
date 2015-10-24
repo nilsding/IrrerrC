@@ -238,7 +238,7 @@ void StatusWindow::storeSettings()
 {
     _SETTINGS.beginGroup("StatusWindow");
         if (_windowType != NWindowList) {
-            _SETTINGS.setValue("fontFamily", _qteBuffer->fontFamily());
+            _SETTINGS.setValue("fontFamily", _qleInput->font().family());
         }
     _SETTINGS.endGroup();
 }

@@ -321,6 +321,11 @@ void MainWindow::loadSettings()
         _networks.append(net);
         storeSettings();
     }
+
+    QList<QMdiSubWindow *> windows = _ui->centralWidget->subWindowList();
+    for (QMdiSubWindow *win : windows) {
+        qobject_cast<StatusWindow *>(win->widget())->loadSettings();
+    }
 }
 
 void MainWindow::storeSettings()

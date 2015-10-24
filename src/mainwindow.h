@@ -31,6 +31,10 @@ public:
     StatusWindow *findMdiChild(QString windowTitle, Qt::CaseSensitivity cs = Qt::CaseSensitive);
     StatusWindow *findMdiChild(StatusWindow::NWindowType type);
 
+public slots:
+
+    void loadSettings();
+
 private slots:
     StatusWindow *createMdiChild(StatusWindow::NWindowType winType = StatusWindow::NWindowStatus);
     void updateWindowMenu();
@@ -42,8 +46,6 @@ private slots:
     void onUserActivated(QString);
 
     void on_centralWidget_subWindowActivated(QMdiSubWindow *arg1);
-
-    void loadSettings();
 
     void on_qaSettings_triggered();
 
