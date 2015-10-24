@@ -59,9 +59,9 @@ TRANSLATIONS = lang/nIRC_de.ts
 # some compile-time defined constants
 VERSION = 0.0.1
 QMAKE_TARGET_PRODUCT = nIRC
-QMAKE_TARGET_DESCRIPTION = An IRC client.
+QMAKE_TARGET_DESCRIPTION = nIRC IRC client
 QMAKE_TARGET_COMPANY = nilsding
-QMAKE_TARGET_COPYRIGHT = ?? 2015 nilsding
+QMAKE_TARGET_COPYRIGHT = (c) 2015 nilsding
 
 if (!windows) {
 DEFINES += APP_VERSION=\\\"$$join(VERSION, "\\ ")\\\" \
