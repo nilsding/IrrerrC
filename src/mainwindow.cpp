@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     _ui->setupUi(this);
     setUnifiedTitleAndToolBarOnMac(true);
-    setWindowTitle(APP_NAME);
+    setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(APP_VERSION));
 
     loadSettings();
     _conn->setIdentity(_id);

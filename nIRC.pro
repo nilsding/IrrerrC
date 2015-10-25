@@ -63,17 +63,20 @@ QMAKE_TARGET_DESCRIPTION = nIRC IRC client
 QMAKE_TARGET_COMPANY = nilsding
 QMAKE_TARGET_COPYRIGHT = (c) 2015 nilsding
 
-if (!windows) {
+!win32 {
 DEFINES += APP_VERSION=\\\"$$join(VERSION, "\\ ")\\\" \
            APP_NAME=\\\"$$join(QMAKE_TARGET_PRODUCT, "\\ ")\\\" \
            APP_DESCRIPTION=\\\"$$join(QMAKE_TARGET_DESCRIPTION, "\\ ")\\\" \
            APP_COMPANY=\\\"$$join(QMAKE_TARGET_COMPANY, "\\ ")\\\" \
-           APP_COPYRIGHT=\\\"$$join(QMAKE_TARGET_COPYRIGHT, "\\ ")\\\"
-} else {
+           APP_COPYRIGHT=\\\"$$join(QMAKE_TARGET_COPYRIGHT, "\\ ")\\\" \
+           DEFAULT_FONT=\\\"monospace\\\"
+}
+win32 {
 DEFINES += APP_VERSION=\"\\\"$$join(VERSION, " ")\\\"\" \
            APP_NAME=\"\\\"$$join(QMAKE_TARGET_PRODUCT, " ")\\\"\" \
            APP_DESCRIPTION=\"\\\"$$join(QMAKE_TARGET_DESCRIPTION, " ")\\\"\" \
            APP_COMPANY=\"\\\"$$join(QMAKE_TARGET_COMPANY, " ")\\\"\" \
-           APP_COPYRIGHT=\"\\\"$$join(QMAKE_TARGET_COPYRIGHT, " ")\\\"\"
+           APP_COPYRIGHT=\"\\\"$$join(QMAKE_TARGET_COPYRIGHT, " ")\\\"\" \
+           DEFAULT_FONT=\\\"Consolas\\\"
 }
 

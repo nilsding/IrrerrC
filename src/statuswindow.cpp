@@ -228,7 +228,7 @@ void StatusWindow::createChannelList()
 void StatusWindow::loadSettings()
 {
     _SETTINGS.beginGroup("StatusWindow");
-        auto ff = _SETTINGS.value("fontFamily", "monospace").toString();
+        auto ff = _SETTINGS.value("fontFamily", DEFAULT_FONT).toString();
         _qleInput->setFont(QFont(ff));
         if (_windowType != NWindowList) {
             _qteBuffer->setFontFamily(ff);

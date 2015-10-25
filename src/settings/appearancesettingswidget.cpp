@@ -17,7 +17,7 @@ AppearanceSettingsWidget::~AppearanceSettingsWidget()
 void AppearanceSettingsWidget::loadSettings()
 {
     _SETTINGS.beginGroup("StatusWindow");
-        auto ff = _SETTINGS.value("fontFamily", "monospace").toString();
+        auto ff = _SETTINGS.value("fontFamily", DEFAULT_FONT).toString();
         _ui->qfcbStatusWindowFont->setCurrentFont(QFont(ff));
         _ui->qleTimestampFormat->setText(_SETTINGS.value("timestampFormat", "[HH:mm:ss]").toString());
     _SETTINGS.endGroup();
