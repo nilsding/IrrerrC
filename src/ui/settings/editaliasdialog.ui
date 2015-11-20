@@ -39,6 +39,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="qrbScript">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Script</string>
             </property>
