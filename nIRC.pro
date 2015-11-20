@@ -25,6 +25,7 @@ SOURCES += src/main.cpp \
     src/settings/networksettingswidget.cpp \
     src/settings/appearancesettingswidget.cpp \
     src/settings/aliasessettingswidget.cpp \
+    src/settings/editaliasdialog.cpp \
     src/util/irctextformatter.cpp \
     src/util/ircalias.cpp
 
@@ -43,6 +44,7 @@ HEADERS  += src/mainwindow.h \
     src/settings/networksettingswidget.h \
     src/settings/appearancesettingswidget.h \
     src/settings/aliasessettingswidget.h \
+    src/settings/editaliasdialog.h \
     src/util/irctextformatter.h \
     src/util/ircalias.h
 
@@ -51,7 +53,8 @@ FORMS    += src/ui/mainwindow.ui \
     src/ui/settings/identitysettingswidget.ui \
     src/ui/settings/networksettingswidget.ui \
     src/ui/settings/appearancesettingswidget.ui \
-    src/ui/settings/aliasessettingswidget.ui
+    src/ui/settings/aliasessettingswidget.ui \
+    src/ui/settings/editaliasdialog.ui
 
 # C++11! \o/
 CONFIG += c++11
