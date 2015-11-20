@@ -27,7 +27,14 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QTreeView" name="qtvAliases"/>
+    <widget class="QTreeView" name="qtvAliases">
+     <property name="rootIsDecorated">
+      <bool>false</bool>
+     </property>
+     <property name="allColumnsShowFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">

@@ -6,6 +6,10 @@ AliasesSettingsWidget::AliasesSettingsWidget(QWidget *parent) :
     _ui(new Ui::AliasesSettingsWidget)
 {
     _ui->setupUi(this);
+    loadSettings();
+    _ui->qtvAliases->header()->setStretchLastSection(true);
+    _ui->qtvAliases->header()->setSectionsMovable(false);
+    _ui->qtvAliases->setModel(new AliasesListModel(&_aliases));
 }
 
 AliasesSettingsWidget::~AliasesSettingsWidget()
@@ -19,7 +23,7 @@ void AliasesSettingsWidget::loadSettings()
         for (int i = 0; i < size; i++) {
             _SETTINGS.setArrayIndex(i);
             IrcAlias *alias = new IrcAlias;
-            alias->setType((IrcAlias::IrcAliasType) _SETTINGS.value("name").toInt());
+            alias->setType(static_cast<IrcAlias::IrcAliasType>(_SETTINGS.value("type").toUInt()));
             alias->setAlias(_SETTINGS.value("alias").toString());
             alias->setAction(_SETTINGS.value("action").toString());
             _aliases.append(alias);
