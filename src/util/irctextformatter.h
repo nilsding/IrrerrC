@@ -19,6 +19,8 @@ public:
     explicit IrcTextFormatter(QObject *parent = 0);
     ~IrcTextFormatter();
 
+    static QString sanitize(QString str);
+
     QPair<int, int> parseColor(const QString &text, int *len) const;
     QString parse(const QString &text) const;
 

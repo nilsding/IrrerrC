@@ -13,6 +13,17 @@ IrcTextFormatter::~IrcTextFormatter()
 }
 
 //!
+//! \brief IrcTextFormatter::sanitize """sanitizes""" a given string `s`.
+//!     What it really does is just replace every '&' character with "&amp;" and every space with "&nbsp;".\
+//! \param str A string
+//! \return Another string
+//!
+QString IrcTextFormatter::sanitize(QString str)
+{
+    return str.replace('&', "&amp;").replace(' ', "&nbsp;");
+}
+
+//!
 //! \brief IrcTextFormatter::parseColor processes `str` for the first color pair match.
 //!     `str` must not include the color format character `0x03`, and it has to start with the color pair.
 //! \param text

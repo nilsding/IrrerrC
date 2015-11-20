@@ -60,9 +60,7 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
     s += msg->prefix().split("!")[0];
     s += "&gt; ";
 
-    // we have to replace the '&' character entities with "&amp;" here because we apparently support HTML now
-    // also, replace every space with "&nbsp;", just because.
-    QString formattedTrailing = _formatter->parse(msg->trailing().replace('&', "&amp;").replace(' ', "&nbsp;"));
+    QString formattedTrailing = _formatter->parse(IrcTextFormatter::sanitize(msg->trailing()));
     switch (_windowType) {
         case NWindowChannel:
         case NWindowQuery: {
