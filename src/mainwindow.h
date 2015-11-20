@@ -68,6 +68,7 @@ private:
 
     StatusWindow *activeMdiChild();
     void handleNumericResponseCode(IrcMessage *);
+    void handleNonNumericResponse(IrcMessage *);
     void storeSettings();
 };
 

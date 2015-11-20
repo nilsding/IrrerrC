@@ -126,6 +126,8 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         return;
     }
 
+    bool isSelf = msg->prefix().left(msg->prefix().indexOf('!')) == _id->nickname();
+
     bool isChannel = target.startsWith('#') || target.startsWith('&');
     if (!isChannel) {
         target = msg->prefix().split("!")[0];
@@ -133,8 +135,8 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
 
     StatusWindow *win = findMdiChild(target);
     if (!win) {
-        if (msg->command().toUpper() == "PART" && msg->prefix().left(msg->prefix().indexOf('!')) == _id->nickname()) {
-            // ignore own PART if window does not exist (anymore)
+        // ignore own PART if window does not exist (anymore)
+        if (msg->command().toUpper() == "PART" && isSelf) {
             return;
         }
         if (isChannel) {
@@ -203,6 +205,7 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
     bool ok = false;
     int command = msg->command().toInt(&ok);
     if (!ok) {
+        handleNonNumericResponse(msg);
         return;
     }
     switch (command) {
@@ -271,6 +274,26 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
             win->onEndOfListReply();
             break;
         }
+    }
+}
+
+void MainWindow::handleNonNumericResponse(IrcMessage *msg)
+{
+    QString sourceNick = msg->prefix().left(msg->prefix().indexOf('!'));
+    QString cmd = msg->command().toUpper();
+    bool isSelf = sourceNick == _id->nickname();
+    // handle nick change
+    if (cmd == "QUIT") {
+        // TODO: cycle through all subwindows (i.e. channels and query windows) and check if there is a user with the
+        // source nick in it, then remove their nick and write a "User quit" message
+        qDebug() << "User quit:" << sourceNick << " -- Reason:" << msg->trailing();
+    } else if (cmd == "NICK") {
+        if (isSelf) {
+            _id->setNickname(msg->params()->first());
+        }
+
+        // TODO: cycle through all subwindows (i.e. channels and query windows) and check if there is a user with the
+        // source nick in it, then change their nick and write a "nick changed" message
     }
 }
 
