@@ -24,7 +24,9 @@ SOURCES += src/main.cpp \
     src/settings/identitysettingswidget.cpp \
     src/settings/networksettingswidget.cpp \
     src/settings/appearancesettingswidget.cpp \
-    src/util/irctextformatter.cpp
+    src/settings/aliasessettingswidget.cpp \
+    src/util/irctextformatter.cpp \
+    src/util/ircalias.cpp
 
 HEADERS  += src/mainwindow.h \
     src/statuswindow.h \
@@ -40,13 +42,16 @@ HEADERS  += src/mainwindow.h \
     src/settings/identitysettingswidget.h \
     src/settings/networksettingswidget.h \
     src/settings/appearancesettingswidget.h \
-    src/util/irctextformatter.h
+    src/settings/aliasessettingswidget.h \
+    src/util/irctextformatter.h \
+    src/util/ircalias.h
 
 FORMS    += src/ui/mainwindow.ui \
     src/ui/settings/settingsdialog.ui \
     src/ui/settings/identitysettingswidget.ui \
     src/ui/settings/networksettingswidget.ui \
-    src/ui/settings/appearancesettingswidget.ui
+    src/ui/settings/appearancesettingswidget.ui \
+    src/ui/settings/aliasessettingswidget.ui
 
 # C++11! \o/
 CONFIG += c++11

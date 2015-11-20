@@ -4,6 +4,7 @@
 #include "identitysettingswidget.h"
 #include "networksettingswidget.h"
 #include "appearancesettingswidget.h"
+#include "aliasessettingswidget.h"
 
 #include <QDebug>
 
@@ -16,6 +17,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     _settingsWidgets.append(new IdentitySettingsWidget);
     _settingsWidgets.append(new NetworkSettingsWidget);
     _settingsWidgets.append(new AppearanceSettingsWidget);
+    _settingsWidgets.append(new AliasesSettingsWidget);
 
     for (auto w : _settingsWidgets) {
         connect(this, SIGNAL(accepted()), w, SLOT(storeSettings()));
