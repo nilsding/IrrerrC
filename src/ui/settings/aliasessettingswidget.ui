@@ -76,6 +76,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>qtvAliases</tabstop>
+  <tabstop>qpbAdd</tabstop>
+  <tabstop>qpbEdit</tabstop>
+  <tabstop>qpbDelete</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -3,8 +3,10 @@
 
 #include <QWidget>
 #include <QIcon>
+#include <QMessageBox>
 #include <QAbstractListModel>
 #include "nsettings.h"
+#include "editaliasdialog.h"
 #include "../util/ircalias.h"
 
 class AliasesListModel : public QAbstractListModel
@@ -93,9 +95,18 @@ public slots:
     void loadSettings();
     void storeSettings();
 
+private slots:
+    void on_qpbAdd_clicked();
+
+    void on_qpbEdit_clicked();
+
+    void on_qpbDelete_clicked();
+
 private:
     Ui::AliasesSettingsWidget *_ui;
     QList<IrcAlias *> _aliases;
+
+    bool is_alias_entry_selected();
 };
 
 #endif // ALIASESSETTINGSWIDGET_H
