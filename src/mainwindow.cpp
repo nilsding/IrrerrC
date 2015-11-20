@@ -286,7 +286,7 @@ void MainWindow::handleNonNumericResponse(IrcMessage *msg)
     if (cmd == "QUIT") {
         // TODO: cycle through all subwindows (i.e. channels and query windows) and check if there is a user with the
         // source nick in it, then remove their nick and write a "User quit" message
-        qDebug() << "User quit:" << sourceNick << " -- Reason:" << msg->trailing();
+        qDebug() << "User quit:" << sourceNick << "-- Reason:" << msg->trailing();
     } else if (cmd == "NICK") {
         if (isSelf) {
             _id->setNickname(msg->params()->first());
