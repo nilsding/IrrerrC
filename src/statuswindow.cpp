@@ -219,7 +219,7 @@ void StatusWindow::createChannelList()
 {
     _qtvChannels = new QTreeView(this);
     _qtvChannels->setModel(new ChannelListModel(new QList<IrcTypes::ListEntry>()));
-    _qtvChannels->setHeaderHidden(false);
+    _qtvChannels->header()->setStretchLastSection(true);
     connect(_qtvChannels, &QTreeView::doubleClicked, this, [=](const QModelIndex &index) {
         emit textEntered(QString("JOIN %1").arg(_channelList.at(index.row()).channelName()));
     });

@@ -62,8 +62,8 @@ public:
         return QVariant(QVariant::Invalid);
     }
 
-    QVariant headerData(int section, Qt::Orientation orientation, int /*role*/) const {
-        if (orientation == Qt::Vertical) {
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const {
+        if (role != Qt::DisplayRole || orientation == Qt::Vertical) {
             return QVariant(QVariant::Invalid);
         }
 
