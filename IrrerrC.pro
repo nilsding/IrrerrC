@@ -62,6 +62,8 @@ CONFIG += c++11
 RESOURCES += \
     irrerrc.qrc
 
+RC_FILE = irrerrc.rc
+
 TRANSLATIONS = lang/IrrerrC_de.ts
 
 # some compile-time defined constants

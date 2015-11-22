@@ -8,4 +8,7 @@
         <file alias="settings">data/icons/settings.svg</file>
         <file alias="disconnect">data/icons/disconnect.svg</file>
     </qresource>
+    <qresource prefix="/icons/app">
+        <file alias="aiman">data/icons/app/IrrerrC.png</file>
+    </qresource>
 </RCC>
