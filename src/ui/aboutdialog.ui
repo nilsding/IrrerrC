@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
+    <width>350</width>
     <height>260</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>300</width>
+    <width>350</width>
     <height>260</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>300</width>
+    <width>350</width>
     <height>260</height>
    </size>
   </property>
@@ -220,7 +220,7 @@
           <string notr="true">image: url(&quot;:/icons/app/aiman&quot;);</string>
          </property>
          <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+          <enum>QFrame::WinPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Sunken</enum>
