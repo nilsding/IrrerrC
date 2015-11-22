@@ -84,8 +84,26 @@ void StatusWindow::onTextEntered()
     QString input = _qleInput->text();
     if (_windowType == NWindowChannel || _windowType == NWindowQuery) {
         if (input.startsWith('/')) {
-            // TODO: handle aliases
             input = input.mid(1);
+            QString command = input.left(input.indexOf(' ')).toUpper();
+            QString rest = "";
+            if (input.indexOf(' ') != -1) {
+                rest = input.mid(input.indexOf(' '));
+            }
+
+            for (IrcAlias *alias : *_aliases) {
+                if (alias->alias().toUpper() == command) {
+                    switch (alias->type()) {
+                    case IrcAlias::AliasScript:
+                        QMessageBox::warning(this, tr("Not implemented"), tr("%1 is not implemented yet!").arg(tr("Scripting")));
+                        _qleInput->clear();
+                        return;
+                    default:
+                        input = alias->action() + rest;
+                    }
+                    break;
+                }
+            }
         } else {
             input = QString("PRIVMSG %1 :%2").arg(_targetName).arg(input);
             IrcMessage *m = 0;

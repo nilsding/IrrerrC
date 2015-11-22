@@ -21,6 +21,7 @@
 #include "core/ircidentity.h"
 #include "settings/nsettings.h"
 #include "util/irctextformatter.h"
+#include "util/ircalias.h"
 
 
 class ChannelListModel : public QAbstractListModel
@@ -124,6 +125,9 @@ public:
     NWindowType type() { return _windowType; }
     void setCurrentIdentity(IrcIdentity *identity) { _currentIdentity = identity; }
 
+    QList<IrcAlias *> *aliases() const { return _aliases; }
+    void setAliases(QList<IrcAlias *> *aliases) { _aliases = aliases; }
+
 signals:
     void textEntered(QString);
     void statusWindowClosing();
@@ -164,6 +168,8 @@ private:
     QTreeView *_qtvChannels;
 
     IrcIdentity *_currentIdentity;
+
+    QList<IrcAlias *> *_aliases;
 
 private slots:
     void storeSettings();

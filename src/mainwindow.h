@@ -15,6 +15,7 @@
 #include "statuswindow.h"
 #include "settings/nsettings.h"
 #include "settings/settingsdialog.h"
+#include "util/ircalias.h"
 
 namespace Ui {
 class MainWindow;
@@ -63,6 +64,7 @@ private:
     IrcConnection *_conn;
     IrcIdentity *_id;
     QList<IrcNetwork *> _networks;
+    QList<IrcAlias *> _aliases;
 
     QSignalMapper *_mapper;
 

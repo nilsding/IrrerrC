@@ -31,7 +31,7 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 - [x] make network settings work
 - [x] format messages (colours, bold etc.)
 - [ ] Scripting (Ruby? ChaiScript? Lisp? Tcl?)
-- [ ] Aliases
+- [x] Aliases
 - [ ] Customizable popup menus (similar to KVIrc/mIRC)
 - [x] Channel listing
 - [x] Userlist in channel view

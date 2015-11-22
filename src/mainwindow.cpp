@@ -49,6 +49,7 @@ MainWindow::~MainWindow()
 StatusWindow *MainWindow::createMdiChild(StatusWindow::NWindowType winType)
 {
     auto win = new StatusWindow(winType);
+    win->setAliases(&_aliases);
     connect(win, SIGNAL(textEntered(QString)), this, SLOT(onWindowTextEntered(QString)));
     _ui->centralWidget->addSubWindow(win);
     return win;
@@ -345,6 +346,18 @@ void MainWindow::loadSettings()
         storeSettings();
     }
 
+    _aliases.clear();
+    size = _SETTINGS.beginReadArray("Aliases");
+        for (int i = 0; i < size; i++) {
+            _SETTINGS.setArrayIndex(i);
+            IrcAlias *alias = new IrcAlias;
+            alias->setType(static_cast<IrcAlias::IrcAliasType>(_SETTINGS.value("type").toUInt()));
+            alias->setAlias(_SETTINGS.value("alias").toString());
+            alias->setAction(_SETTINGS.value("action").toString());
+            _aliases.append(alias);
+        }
+    _SETTINGS.endArray();
+
     QList<QMdiSubWindow *> windows = _ui->centralWidget->subWindowList();
     for (QMdiSubWindow *win : windows) {
         qobject_cast<StatusWindow *>(win->widget())->loadSettings();
@@ -374,6 +387,15 @@ void MainWindow::storeSettings()
             _SETTINGS.setValue("name", _networks.at(i)->name());
             _SETTINGS.setValue("servers", *_networks.at(i)->servers());
             _SETTINGS.setValue("active", _networks.at(i)->isActive());
+        }
+    _SETTINGS.endArray();
+
+    _SETTINGS.beginWriteArray("Aliases");
+        for (int i = 0; i < _aliases.size(); ++i) {
+            _SETTINGS.setArrayIndex(i);
+            _SETTINGS.setValue("type", _aliases.at(i)->type());
+            _SETTINGS.setValue("alias", _aliases.at(i)->alias());
+            _SETTINGS.setValue("action", _aliases.at(i)->action());
         }
     _SETTINGS.endArray();
 }
