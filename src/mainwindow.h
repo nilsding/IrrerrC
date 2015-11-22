@@ -12,10 +12,11 @@
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"
 #include "core/irccodes.h"
-#include "statuswindow.h"
 #include "settings/nsettings.h"
 #include "settings/settingsdialog.h"
 #include "util/ircalias.h"
+#include "aboutdialog.h"
+#include "statuswindow.h"
 
 namespace Ui {
 class MainWindow;

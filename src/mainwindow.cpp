@@ -417,7 +417,9 @@ void MainWindow::on_qaAboutQt_triggered()
 
 void MainWindow::on_qaAbout_triggered()
 {
-    QMessageBox::about(this, tr("About %1").arg(APP_NAME), tr("<h3>%1</h3>&copy; 2015 nilsding").arg(APP_NAME));
+    // QMessageBox::about(this, tr("About %1").arg(APP_NAME), tr("<h3>%1</h3>&copy; 2015 nilsding").arg(APP_NAME));
+    AboutDialog ad;
+    ad.exec();
 }
 
 void MainWindow::on_qaChannelList_triggered()

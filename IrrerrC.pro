@@ -15,6 +15,7 @@ TEMPLATE = app
 SOURCES += src/main.cpp \
     src/mainwindow.cpp \
     src/statuswindow.cpp \
+    src/aboutdialog.cpp \
     src/core/ircconnection.cpp \
     src/core/ircnetwork.cpp \
     src/core/ircidentity.cpp \
@@ -31,6 +32,7 @@ SOURCES += src/main.cpp \
 
 HEADERS  += src/mainwindow.h \
     src/statuswindow.h \
+    src/aboutdialog.h \
     src/core/ircconnection.h \
     src/core/ircnetwork.h \
     src/core/ircidentity.h \
@@ -49,6 +51,7 @@ HEADERS  += src/mainwindow.h \
     src/util/ircalias.h
 
 FORMS    += src/ui/mainwindow.ui \
+    src/ui/aboutdialog.ui \
     src/ui/settings/settingsdialog.ui \
     src/ui/settings/identitysettingswidget.ui \
     src/ui/settings/networksettingswidget.ui \
@@ -73,13 +76,19 @@ QMAKE_TARGET_DESCRIPTION = IrrerrC IRC client
 QMAKE_TARGET_COMPANY = nilsding
 QMAKE_TARGET_COPYRIGHT = 2015 nilsding
 
+COMMIT = (unknown)
+exists ($$PWD/.git) {
+    COMMIT = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
+}
+
 !win32 {
 DEFINES += APP_VERSION=\\\"$$join(VERSION, "\\ ")\\\" \
            APP_NAME=\\\"$$join(QMAKE_TARGET_PRODUCT, "\\ ")\\\" \
            APP_DESCRIPTION=\\\"$$join(QMAKE_TARGET_DESCRIPTION, "\\ ")\\\" \
            APP_COMPANY=\\\"$$join(QMAKE_TARGET_COMPANY, "\\ ")\\\" \
            APP_COPYRIGHT=\\\"\\(c\\)\\ $$join(QMAKE_TARGET_COPYRIGHT, "\\ ")\\\" \
-           DEFAULT_FONT=\\\"monospace\\\"
+           DEFAULT_FONT=\\\"monospace\\\" \
+           COMMIT=\\\"$$join(COMMIT, "\\ ")\\\"
 }
 win32 {
 DEFINES += APP_VERSION=\"\\\"$$join(VERSION, " ")\\\"\" \
@@ -87,6 +96,7 @@ DEFINES += APP_VERSION=\"\\\"$$join(VERSION, " ")\\\"\" \
            APP_DESCRIPTION=\"\\\"$$join(QMAKE_TARGET_DESCRIPTION, " ")\\\"\" \
            APP_COMPANY=\"\\\"$$join(QMAKE_TARGET_COMPANY, " ")\\\"\" \
            APP_COPYRIGHT=\"\\\"(c) $$join(QMAKE_TARGET_COPYRIGHT, " ")\\\"\" \
-           DEFAULT_FONT=\\\"Consolas\\\"
+           DEFAULT_FONT=\\\"Consolas\\\" \
+           COMMIT=\"\\\"$$join(COMMIT, " ")\\\"\"
 }
 
