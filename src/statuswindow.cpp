@@ -146,7 +146,7 @@ void StatusWindow::onEndOfNamesReply()
 
 void StatusWindow::onListReply(QString channel, int userCount, QString topic)
 {
-    _tmpChannelList.append(IrcTypes::ListEntry(channel, userCount, topic));
+    _tmpChannelList.append(IrcTypes::ListEntry(channel, userCount, _formatter->strip(topic)));
 }
 
 void StatusWindow::onEndOfListReply()

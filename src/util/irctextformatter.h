@@ -23,6 +23,7 @@ public:
 
     QPair<int, int> parseColor(const QString &text, int *len) const;
     QString parse(const QString &text) const;
+    QString strip(const QString &text) const;
 
 signals:
 

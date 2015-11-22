@@ -120,7 +120,7 @@ public:
                                                            setWindowTitle(_targetDescription.isEmpty()
                                                                           ? _targetName
                                                                           : QString("%1 - %2").arg(_targetName)
-                                                                            .arg(_targetDescription)); }
+                                                                            .arg(_formatter->strip(_targetDescription))); }
 
     NWindowType type() { return _windowType; }
     void setCurrentIdentity(IrcIdentity *identity) { _currentIdentity = identity; }

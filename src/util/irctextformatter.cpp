@@ -154,6 +154,41 @@ QString IrcTextFormatter::parse(const QString &text) const
     return "<span>" + str;
 }
 
+//!
+//! \brief IrcTextFormatter::strip removes special formatting characters (e.g. bold, colour, ...) from `text`
+//! \param text the text to process
+//! \return text without formatting
+//!
+QString IrcTextFormatter::strip(const QString &text) const
+{
+    QString str = text;
+    int position = 0;
+
+    while (position < str.size()) {
+        int adv = 0;
+        switch (str.at(position).unicode()) {
+        case IRC_FORMAT_COLOR:
+            parseColor(str.mid(1 + position), &adv);
+            // fallthrough intended
+        case IRC_FORMAT_BOLD:
+        case IRC_FORMAT_RESET:
+        case IRC_FORMAT_REVERSE:
+        case IRC_FORMAT_UNDERLINE:
+            adv++;
+            break;
+        }
+
+        if (adv) {
+            str.replace(position, adv, "");
+            position += adv;
+        } else {
+            position++;
+        }
+    }
+
+    return str;
+}
+
 QString IrcTextFormatter::ircColorToHex(int code) const
 {
     // http://www.mirc.com/colors.html
