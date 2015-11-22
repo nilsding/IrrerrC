@@ -28,7 +28,8 @@ SOURCES += src/main.cpp \
     src/settings/aliasessettingswidget.cpp \
     src/settings/editaliasdialog.cpp \
     src/util/irctextformatter.cpp \
-    src/util/ircalias.cpp
+    src/util/ircalias.cpp \
+    src/util/nclickablelabel.cpp
 
 HEADERS  += src/mainwindow.h \
     src/statuswindow.h \
@@ -48,7 +49,8 @@ HEADERS  += src/mainwindow.h \
     src/settings/aliasessettingswidget.h \
     src/settings/editaliasdialog.h \
     src/util/irctextformatter.h \
-    src/util/ircalias.h
+    src/util/ircalias.h \
+    src/util/nclickablelabel.h
 
 FORMS    += src/ui/mainwindow.ui \
     src/ui/aboutdialog.ui \
