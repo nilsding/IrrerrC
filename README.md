@@ -35,7 +35,6 @@ uild an installer, run the `./mknsis.ps1` script after building IrrerrC.
 - [ ] Customizable popup menus (similar to KVIrc/mIRC)
 - [x] Channel listing
 - [x] Userlist in channel view
-- [x] Rename the client before open-sourcing the repo
 - [ ] Logging
 - [ ] favourite channels?
 - [ ] Document all methods.  (except for the getters and setters, maybe.)
@@ -54,4 +53,5 @@ uild an installer, run the `./mknsis.ps1` script after building IrrerrC.
 - [ ] Lagometer
 - [ ] Connection timer
 - [ ] A scripted MP3 player!  (Because we totally need that!)
+- [ ] SSL
 
