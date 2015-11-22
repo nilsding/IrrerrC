@@ -12,7 +12,7 @@ $dirs = @{
 $files = @{
   makensis      = "C:\Program Files (x86)\NSIS\makensis.exe";  # full path to makensis.exe
   installscript = [System.IO.Path]::GetFullPath((Join-Path $dirs['utildir'] ".\installer.nsi"));  # path to the NSIS install script
-  filelist      = [System.IO.Path]::GetFullPath((Join-Path $dirs['builddir'] ".\nIRC_files.nsh"));  # path to the (to be created) file list
+  filelist      = [System.IO.Path]::GetFullPath((Join-Path $dirs['builddir'] ".\IrrerrC_files.nsh"));  # path to the (to be created) file list
 };
 
 if (-not (Test-Path -PathType Container $dirs['outdir'])) {
@@ -68,14 +68,14 @@ $rmdirs | ForEach-Object {
 
 Write-Host -ForegroundColor Green ">>> Writing file list";
 # install macro
-"!macro nIRC_Install_Files" | Out-File -Append -Encoding ascii $files['filelist'];
+"!macro IrrerrC_Install_Files" | Out-File -Append -Encoding ascii $files['filelist'];
 $infiles | ForEach-Object {
   $_ | Out-File -Append -Encoding ascii $files['filelist'];
 }
 "!macroend" | Out-File -Append -Encoding ascii $files['filelist'];
 
 # uninstall macro
-"!macro nIRC_Uninstall_Files" | Out-File -Append -Encoding ascii $files['filelist'];
+"!macro IrrerrC_Uninstall_Files" | Out-File -Append -Encoding ascii $files['filelist'];
 $unfiles | Sort-Object | ForEach-Object {
   $_ | Out-File -Append -Encoding ascii $files['filelist'];
 }
@@ -88,7 +88,7 @@ Set-Location $dirs['outdir'];
 Check-Success -ErrorMessage "Build failed!" "Build successful."
 
 Write-Host -NoNewline "The installer is located at ";
-Write-Host -ForegroundColor Yellow ([System.IO.Path]::GetFullPath((Join-Path $dirs['outdir'] ".\nIRC_Installer.exe")));
-& explorer "/select,$([System.IO.Path]::GetFullPath((Join-Path $dirs['outdir'] ".\nIRC_Installer.exe")))"
+Write-Host -ForegroundColor Yellow ([System.IO.Path]::GetFullPath((Join-Path $dirs['outdir'] ".\IrrerrC_Installer.exe")));
+& explorer "/select,$([System.IO.Path]::GetFullPath((Join-Path $dirs['outdir'] ".\IrrerrC_Installer.exe")))"
 
 Set-Location $dirs['utildir'];

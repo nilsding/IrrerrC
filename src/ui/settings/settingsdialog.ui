@@ -20,7 +20,7 @@
    <string>Settings</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../nirc.qrc">
+   <iconset resource="../../../irrerrc.qrc">
     <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -73,7 +73,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../nirc.qrc"/>
+  <include location="../../../irrerrc.qrc"/>
  </resources>
  <connections>
   <connection>

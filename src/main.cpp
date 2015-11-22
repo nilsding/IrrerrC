@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     a.installTranslator(&qtTranslator);
 
     QTranslator myappTranslator;
-    myappTranslator.load("nIRC_" + QLocale::system().name());
+    myappTranslator.load("IrrerrC_" + QLocale::system().name());
     a.installTranslator(&myappTranslator);
 
     // initialize and show main window

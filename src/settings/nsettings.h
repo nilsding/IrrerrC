@@ -12,7 +12,7 @@ class NSettings : public QObject
 public:
     static QSettings& instance()
     {
-        static QSettings s(QSettings::IniFormat, QSettings::UserScope, "nilsding", "nIRC");
+        static QSettings s(QSettings::IniFormat, QSettings::UserScope, "nilsding", "IrrerrC");
         return s;
     }
 

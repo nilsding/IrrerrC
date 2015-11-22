@@ -1,4 +1,4 @@
-# This script builds and prepares nIRC for Windows hosts using QMake, Visual Studio 2013 and WinDeployQt.
+# This script builds and prepares IrrerrC for Windows hosts using QMake, Visual Studio 2013 and WinDeployQt.
 
 . .\ext\Invoke-Environment.ps1
 . .\ext\functions.ps1
@@ -25,8 +25,8 @@ $flags = @{
                   '--no-webenginewidgets');
 }
 
-$build_bin_path = [System.IO.Path]::GetFullPath((Join-Path $dirs['builddir'] ".\release\nIRC.exe"));
-$output_bin_path = [System.IO.Path]::GetFullPath((Join-Path $dirs['outdir'] ".\nIRC.exe"));
+$build_bin_path = [System.IO.Path]::GetFullPath((Join-Path $dirs['builddir'] ".\release\IrrerrC.exe"));
+$output_bin_path = [System.IO.Path]::GetFullPath((Join-Path $dirs['outdir'] ".\IrrerrC.exe"));
 
 Write-Host -ForegroundColor Green ">>> Applying Qt environment variables";
 Invoke-Environment -output "`"$(Join-Path $dirs['qtdir'] "qtenv2.bat")`"";

@@ -8,7 +8,7 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = nIRC
+TARGET = IrrerrC
 TEMPLATE = app
 
 
@@ -60,14 +60,14 @@ FORMS    += src/ui/mainwindow.ui \
 CONFIG += c++11
 
 RESOURCES += \
-    nirc.qrc
+    irrerrc.qrc
 
-TRANSLATIONS = lang/nIRC_de.ts
+TRANSLATIONS = lang/IrrerrC_de.ts
 
 # some compile-time defined constants
 VERSION = 0.0.1
-QMAKE_TARGET_PRODUCT = nIRC
-QMAKE_TARGET_DESCRIPTION = nIRC IRC client
+QMAKE_TARGET_PRODUCT = IrrerrC 
+QMAKE_TARGET_DESCRIPTION = IrrerrC IRC client
 QMAKE_TARGET_COMPANY = nilsding
 QMAKE_TARGET_COPYRIGHT = 2015 nilsding
 

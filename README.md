@@ -1,15 +1,15 @@
-# nIRC
+# IrrerrC
 
 A Qt5 IRC client.
 
-## Building nIRC
+## Building IrrerrC
 
 ### Unix and Unix-like
 
     $ mkdir build && cd build
     $ qmake-qt5 ..
     $ make -j9
-    $ ./nIRC
+    $ ./IrrerrC
 
 ### Windows
 
@@ -23,7 +23,7 @@ Building on Windows requires:
 After installing the build requirements, start PowerShell, navigate to the
 `./utils/` directory, and start `./build_windows.ps1` (you might want to check
 the directories in the `$dirs` dictionary of that file first).  If you want to
-uild an installer, run the `./mknsis.ps1` script after building nIRC.
+uild an installer, run the `./mknsis.ps1` script after building IrrerrC.
 
 ## TODO list
 
@@ -35,7 +35,7 @@ uild an installer, run the `./mknsis.ps1` script after building nIRC.
 - [ ] Customizable popup menus (similar to KVIrc/mIRC)
 - [x] Channel listing
 - [x] Userlist in channel view
-- [ ] Rename the client before open-sourcing the repo
+- [x] Rename the client before open-sourcing the repo
 - [ ] Logging
 - [ ] favourite channels?
 - [ ] Document all methods.  (except for the getters and setters, maybe.)

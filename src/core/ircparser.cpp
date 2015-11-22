@@ -26,7 +26,7 @@ IrcMessage *IrcParser::parseLine(QString s)
     int res = 0;
 
     //:dragon.nilsding.org 396 qnilsding rrerr-8oj.c39.4bg1jd.IP :is now your displayed host
-    //:qnilsding!nIRC@rrerr-8oj.c39.4bg1jd.IP MODE qnilsding +x
+    //:qnilsding!IrrerrC@rrerr-8oj.c39.4bg1jd.IP MODE qnilsding +x
 
     // prefix
     if (s[0] == ':') {

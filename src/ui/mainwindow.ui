@@ -101,7 +101,7 @@
   </widget>
   <action name="qaConnect">
    <property name="icon">
-    <iconset resource="../../nirc.qrc">
+    <iconset resource="../../irrerrc.qrc">
      <normaloff>:/icons/connect</normaloff>:/icons/connect</iconset>
    </property>
    <property name="text">
@@ -110,7 +110,7 @@
   </action>
   <action name="qaSettings">
    <property name="icon">
-    <iconset resource="../../nirc.qrc">
+    <iconset resource="../../irrerrc.qrc">
      <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
    </property>
    <property name="text">
@@ -132,7 +132,7 @@
   </action>
   <action name="qaChannelList">
    <property name="icon">
-    <iconset resource="../../nirc.qrc">
+    <iconset resource="../../irrerrc.qrc">
      <normaloff>:/icons/chanlist</normaloff>:/icons/chanlist</iconset>
    </property>
    <property name="text">
@@ -155,7 +155,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="../../nirc.qrc"/>
+  <include location="../../irrerrc.qrc"/>
  </resources>
  <connections/>
 </ui>
