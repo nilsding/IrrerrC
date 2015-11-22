@@ -15,6 +15,9 @@ public:
     explicit AboutDialog(QWidget *parent = 0);
     ~AboutDialog();
 
+private slots:
+    void on_nclAppIcon_clicked();
+
 private:
     Ui::AboutDialog *_ui;
 };

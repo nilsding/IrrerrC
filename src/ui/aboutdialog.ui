@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>AboutDialog</class>
  <widget class="QDialog" name="AboutDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -31,7 +34,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QLabel" name="qlAppIcon">
+        <widget class="NClickableLabel" name="nclAppIcon">
          <property name="minimumSize">
           <size>
            <width>32</width>
@@ -217,7 +220,7 @@
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">image: url(&quot;:/icons/app/aiman&quot;);</string>
+          <string notr="true">image: url(&quot;:/images/rms&quot;); /* TODO: change this pic */</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::WinPanel</enum>
@@ -256,6 +259,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>util/nclickablelabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
