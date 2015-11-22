@@ -11,4 +11,7 @@
     <qresource prefix="/icons/app">
         <file alias="aiman">data/icons/app/IrrerrC.png</file>
     </qresource>
+    <qresource prefix="/images">
+        <file alias="rms">data/images/rms.png</file>
+    </qresource>
 </RCC>
