@@ -82,39 +82,41 @@ void StatusWindow::receiveMessage(IrcMessage *msg)
 void StatusWindow::onTextEntered()
 {
     QString input = _qleInput->text();
-    if (_windowType == NWindowChannel || _windowType == NWindowQuery) {
-        if (input.startsWith('/')) {
-            input = input.mid(1);
-            QString command = input.left(input.indexOf(' ')).toUpper();
-            QString rest = "";
-            if (input.indexOf(' ') != -1) {
-                rest = input.mid(input.indexOf(' '));
-            }
 
-            for (IrcAlias *alias : *_aliases) {
-                if (alias->alias().toUpper() == command) {
-                    switch (alias->type()) {
-                    case IrcAlias::AliasScript:
-                        QMessageBox::warning(this, tr("Not implemented"), tr("%1 is not implemented yet!").arg(tr("Scripting")));
-                        _qleInput->clear();
-                        return;
-                    default:
-                        input = alias->action() + rest;
-                    }
-                    break;
+    if (input.startsWith('/')) {
+        input = input.mid(1);
+        QString command = input.left(input.indexOf(' ')).toUpper();
+        QString rest = "";
+        if (input.indexOf(' ') != -1) {
+            rest = input.mid(input.indexOf(' '));
+        }
+
+        for (IrcAlias *alias : *_aliases) {
+            if (alias->alias().toUpper() == command) {
+                switch (alias->type()) {
+                case IrcAlias::AliasScript:
+                    QMessageBox::warning(this, tr("Not implemented"), tr("%1 is not implemented yet!").arg(tr("Scripting")));
+                    _qleInput->clear();
+                    return;
+                default:
+                    input = alias->action() + rest;
                 }
-            }
-        } else {
-            input = QString("PRIVMSG %1 :%2").arg(_targetName).arg(input);
-            IrcMessage *m = 0;
-            if ((m = (new IrcParser)->parseLine(input))) {
-                if (_currentIdentity) {
-                    m->setPrefix(_currentIdentity->nickname());
-                }
-                receiveMessage(m);
+                break;
             }
         }
+    } else if (_windowType == NWindowChannel || _windowType == NWindowQuery) {
+        input = QString("PRIVMSG %1 :%2").arg(_targetName).arg(input);
+
+        // echo back our own message
+        IrcMessage *m = 0;
+        if ((m = (new IrcParser)->parseLine(input))) {
+            if (_currentIdentity) {
+                m->setPrefix(_currentIdentity->nickname());
+            }
+            receiveMessage(m);
+        }
     }
+
     emit textEntered(input);
     _qleInput->clear();
 }
