@@ -323,7 +323,7 @@ void MainWindow::loadSettings()
         _id->setWallops(_SETTINGS.value("wallops", false).toBool());
         _id->setInvisible(_SETTINGS.value("invisible", true).toBool());
         _id->setUsername(_SETTINGS.value("username", "Lamer").toString());
-        _id->setQuitMessage(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
+        _id->setQuitMessage(_SETTINGS.value("quitmessage", "Connection reset by beer").toString());
         _id->setPartMessage(_SETTINGS.value("partmessage", "I can't think of a proper part message.").toString());
     _SETTINGS.endGroup();
 

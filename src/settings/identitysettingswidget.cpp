@@ -22,7 +22,7 @@ void IdentitySettingsWidget::loadSettings()
         _ui->qcbWallops->setChecked(_SETTINGS.value("wallops", false).toBool());
         _ui->qcbInvisible->setChecked(_SETTINGS.value("invisible", true).toBool());
         _ui->qleUsername->setText(_SETTINGS.value("username", "Lamer").toString());
-        _ui->qleQuitMessage->setText(_SETTINGS.value("quitmessage", "That was the wrong button!").toString());
+        _ui->qleQuitMessage->setText(_SETTINGS.value("quitmessage", "Connection reset by beer").toString());
         _ui->qlePartMessage->setText(_SETTINGS.value("partmessage", "I can't think of a proper part message.").toString());
     _SETTINGS.endGroup();
 }
