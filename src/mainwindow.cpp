@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     StatusWindow *status = createMdiChild();
     status->show();
+    status->setWindowState(Qt::WindowMaximized);
 
     connect(_ui->qmWindow, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));
     connect(_mapper, SIGNAL(mapped(QWidget *)), this, SLOT(selectActiveSubWindow(QWidget *)));
