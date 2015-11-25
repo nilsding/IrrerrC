@@ -111,7 +111,23 @@ QString IrcTextFormatter::parse(const QString &text) const
             break;
 
         case IRC_FORMAT_REVERSE:
-            // TODO: reverse video
+            formattingChanged = true;
+            if (fg == -1) {
+                fg = 0;
+                bg = 1;
+                break;
+            }
+
+            #define swibedi std
+            #define swab swap
+            swibedi::swab(fg, bg);
+
+            // I'm sorry for this above.  (actually i'm not)
+
+            if (fg == -1) {
+                fg = 0;
+            }
+
             break;
 
         case IRC_FORMAT_ITALIC:

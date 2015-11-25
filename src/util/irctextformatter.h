@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QPair>
 #include <QRegExp>
+#include <utility>
 
 #define IRC_FORMAT_BOLD      0x02
 #define IRC_FORMAT_COLOR     0x03

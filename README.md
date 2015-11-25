@@ -45,7 +45,7 @@ uild an installer, run the `./mknsis.ps1` script after building IrrerrC.
 - [ ] set charset for network
 - [ ] highlight notifications
 - [x] theming support
-- [ ] reverse video formatting (0x16)
+- [x] reverse video formatting (0x16)
 - [ ] colour schemes
 - [ ] CTCP
 - [ ] DCC
