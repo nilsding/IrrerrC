@@ -27,25 +27,16 @@ uild an installer, run the `./mknsis.ps1` script after building IrrerrC.
 
 ## TODO list
 
-- [x] Write a TODO list
-- [x] make network settings work
-- [x] format messages (colours, bold etc.)
 - [ ] Scripting (Ruby? ChaiScript? Lisp? Tcl?)
-- [x] Aliases
 - [ ] Customizable popup menus (similar to KVIrc/mIRC)
-- [x] Channel listing
-- [x] Userlist in channel view
 - [ ] Logging
 - [ ] favourite channels?
 - [ ] Document all methods.  (except for the getters and setters, maybe.)
 - [ ] language switcher?
-- [x] fix queries
 - [ ] store toolbar positions
 - [ ] store subwindow position + size
 - [ ] set charset for network
 - [ ] highlight notifications
-- [x] theming support
-- [x] reverse video formatting (0x16)
 - [ ] colour schemes
 - [ ] CTCP
 - [ ] DCC
