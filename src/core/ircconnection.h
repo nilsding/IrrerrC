@@ -5,6 +5,7 @@
 #include <QTcpSocket>
 #include <QHostAddress>
 #include <QTimer>
+#include <QStringList>
 
 #include "ircnetwork.h"
 #include "ircidentity.h"
@@ -62,6 +63,12 @@ public:
         }
     }
 
+    QString support(const QString &value) const {
+        return _support.value(value, "__nil__");
+    }
+
+    void addSupportedByServer(const QStringList *params);
+
 signals:
     void newMessageReceived(IrcMessage *);
     void connectionStateChanged(QAbstractSocket::SocketState);
@@ -74,6 +81,7 @@ private:
     QByteArray _recvbuf;    //!< A buffer.
     IrcIdentity *_identity; //!< The to be used identity.
     IrcParser *_parser;
+    QHash<QString, QString> _support; //!< Supported parameters by this server.
 
     void parseLines();
 

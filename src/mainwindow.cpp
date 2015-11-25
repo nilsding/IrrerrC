@@ -220,6 +220,16 @@ void MainWindow::handleNumericResponseCode(IrcMessage *msg)
         return;
     }
     switch (command) {
+        case RPL_BOUNCE: {
+            _conn->addSupportedByServer(msg->params());
+            auto networkName = _conn->support("NETWORK");
+            if (networkName != "__nil__") {
+                StatusWindow *win = findMdiChild(StatusWindow::NWindowStatus);
+                win->setTargetName(networkName);
+                updateWindowMenu();
+            }
+            break;
+        }
         case RPL_NOTOPIC: {
             StatusWindow *win = findMdiChild(msg->params()->at(1));
             if (!win) {

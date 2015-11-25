@@ -69,6 +69,7 @@ void IrcConnection::connectToHost(QString hostName, quint16 port, bool _useTls) 
         return;
     }
 
+    _support.clear();
     _sock->write(QString("NICK ").append(_identity->nickname()).append("\r\n").toStdString().c_str());
     _sock->write(QString("USER ")
                  .append(_identity->username())
@@ -122,4 +123,28 @@ void IrcConnection::parseLines()
     //        qDebug() << content;
         }
     });
+}
+
+void IrcConnection::addSupportedByServer(const QStringList *params)
+{
+    QStringListIterator i(*params);
+    qDebug() << "*params =" << *params;
+
+    while (i.hasNext()) {
+        auto param = i.next();
+        if (param == _identity->nickname()) {
+            continue;
+        }
+        QString key, value = "__true__";
+        bool hasValue = param.indexOf('=') != -1;
+
+        key = param.left(param.indexOf('='));
+        if (hasValue) {
+            value = param.mid(param.indexOf('=') + 1);
+        }
+
+        qDebug() << key << value;
+
+        _support[key] = value;
+    }
 }
