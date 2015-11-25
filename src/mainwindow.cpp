@@ -318,9 +318,11 @@ void MainWindow::loadSettings()
         auto i = _SETTINGS.value("backgroundImage", "").toString();
         _ui->centralWidget->setBackground(i.isEmpty() ? _ui->centralWidget->palette().dark() : QBrush(QImage(i)));
         _ui->qtbMain->setStyleSheet(QString(
-            "background-image: url(") + _SETTINGS.value("MainToolbar/backgroundImage", "").toString() + ");");
+            "QToolBar {"
+                "background-image: url(") + _SETTINGS.value("MainToolbar/backgroundImage", "").toString() + "); }");
         _ui->qtbWindows->setStyleSheet(QString(
-            "background-image: url(") + _SETTINGS.value("WindowToolbar/backgroundImage", "").toString() + ");");
+            "QToolBar {"
+                "background-image: url(") + _SETTINGS.value("WindowToolbar/backgroundImage", "").toString() + "); }");
     _SETTINGS.endGroup();
 
     _SETTINGS.beginGroup("Identity");
