@@ -21,25 +21,32 @@ AboutDialog::~AboutDialog()
 void AboutDialog::on_nclAppIcon_clicked()
 {
     static int count = 0;
+    static bool isUrl = true;
     QString url = "https://github.com/nilsding/IrrerrC";
     switch (++count) {
     case 1:
         url = "http://reddit.com/r/kreiswichs";
         break;
     case 2:
-        url = "http://rrerr.net";
+        isUrl = false;
+        url = "@Revengeday ist der beste!";
         break;
     case 3:
-        url = "http://reddit.com/r/jonajokes";
+        isUrl = true;
+        url = "http://rrerr.net";
         break;
     case 4:
-        url = "http://irc.rrerr.net";
+        url = "http://reddit.com/r/jonajokes";
         break;
     case 5:
+        url = "http://irc.rrerr.net";
+        break;
+    case 6:
         url = "http://bad-dragon.com";
         break;
     default:
         count = 0;
+        isUrl = true;
     }
-    _ui->qlLine05Url->setText("<a href=\"" + url + "\">" + url + "</a>");
+    _ui->qlLine05Url->setText(isUrl ? ("<a href=\"" + url + "\">" + url + "</a>") : url);
 }
