@@ -39,6 +39,11 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     updateWindowMenu();
+
+    // first time starting IrrerrC?
+    if (!NSettings::settingsFileExists()) {
+        on_qaSettings_triggered();
+    }
 }
 
 MainWindow::~MainWindow()
