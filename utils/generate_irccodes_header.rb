@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- ruby -*-
 # This script generates the irccodes.h file.  It gets the codes directly from the RFCs.
 # Requires HTTParty because I like to party hart™ and can't be bothered with Net::HTTP.
 # Install it via 'gem install httparty'
