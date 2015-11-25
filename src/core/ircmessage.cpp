@@ -7,10 +7,12 @@ IrcMessage::IrcMessage(QString prefix, QString command, QString params, QObject 
 }
 
 void IrcMessage::setParams(QString params) {
-    auto i = params.indexOf(':');
+    // some people use a : in their channel name, which would fuck up the channel listing resulting in a crash.
+    // therefore I have to use " :" instead of ' ' here.
+    auto i = params.indexOf(" :");
     if (i != -1) {
-        _trailing = params.mid(i + 1);
-        params = params.left(i - 1);
+        _trailing = params.mid(i + 2);
+        params = params.left(i);
     }
 
     _params = params.split(' ', QString::SkipEmptyParts);
