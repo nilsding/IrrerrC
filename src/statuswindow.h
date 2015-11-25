@@ -14,6 +14,7 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QStringListModel>
+#include <QMutex>
 
 #include "core/irctypes.h"
 #include "core/ircparser.h"
@@ -170,6 +171,8 @@ private:
     IrcIdentity *_currentIdentity;
 
     QList<IrcAlias *> *_aliases;
+
+    QMutex _mutex;
 
 private slots:
     void storeSettings();

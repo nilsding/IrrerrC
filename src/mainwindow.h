@@ -8,6 +8,7 @@
 #include <QToolButton>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QTimer>
 
 #include "core/ircconnection.h"
 #include "core/ircmessage.h"

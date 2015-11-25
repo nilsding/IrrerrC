@@ -109,15 +109,17 @@ void IrcConnection::readyRead()
 //!
 void IrcConnection::parseLines()
 {
-    int index = -1;
+    QTimer::singleShot(0, this, [&]() {
+        int index = -1;
 
-    while ((index = _recvbuf.indexOf("\r\n")) != -1) {
-        auto content = _recvbuf.left(index);
-        _recvbuf = _recvbuf.mid(index + 2);
+        while ((index = _recvbuf.indexOf("\r\n")) != -1) {
+            auto content = _recvbuf.left(index);
+            _recvbuf = _recvbuf.mid(index + 2);
 
-        if (IrcMessage *msg = _parser->parseLine(content)) {
-            emit newMessageReceived(msg);
+            if (IrcMessage *msg = _parser->parseLine(content)) {
+                emit newMessageReceived(msg);
+            }
+    //        qDebug() << content;
         }
-//        qDebug() << content;
-    }
+    });
 }

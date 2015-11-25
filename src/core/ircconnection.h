@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QHostAddress>
+#include <QTimer>
 
 #include "ircnetwork.h"
 #include "ircidentity.h"

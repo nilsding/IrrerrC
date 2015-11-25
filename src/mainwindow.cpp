@@ -128,7 +128,9 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
 {
     QString target = msg->target();
     if (target == "") {
-        qobject_cast<StatusWindow *>(_ui->centralWidget->subWindowList().at(0)->widget())->receiveMessage(msg);
+        QTimer::singleShot(0, this, [=]() {
+            qobject_cast<StatusWindow *>(_ui->centralWidget->subWindowList().at(0)->widget())->receiveMessage(msg);
+        });
         handleNumericResponseCode(msg);
         return;
     }
@@ -156,7 +158,9 @@ void MainWindow::onNewMessageReceived(IrcMessage *msg)
         win->setTargetName(target);
         win->show();
     }
-    win->receiveMessage(msg);
+    QTimer::singleShot(0, this, [=]() {
+        win->receiveMessage(msg);
+    });
     updateWindowMenu();
 }
 

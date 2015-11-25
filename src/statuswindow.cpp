@@ -50,7 +50,7 @@ void StatusWindow::closeEvent(QCloseEvent *ev)
 
 void StatusWindow::receiveMessage(IrcMessage *msg)
 {
-    if (_windowType == NWindowList) {
+    if (_windowType == NWindowList || msg->command() == "322") {
         return;
     }
 
@@ -133,27 +133,35 @@ void StatusWindow::onUserActivated(QModelIndex i)
 
 void StatusWindow::onNamesReply(const QStringList &lst)
 {
+    _mutex.lock();
     _tmpUserList.append(lst);
+    _mutex.unlock();
 }
 
 void StatusWindow::onEndOfNamesReply()
 {
+    _mutex.lock();
     _userList.clear();
     _userList.append(_tmpUserList);
     _tmpUserList.clear();
+    _mutex.unlock();
     _qlvUsers->setModel(new QStringListModel(_userList));
 }
 
 void StatusWindow::onListReply(QString channel, int userCount, QString topic)
 {
+    _mutex.lock();
     _tmpChannelList.append(IrcTypes::ListEntry(channel, userCount, _formatter->strip(topic)));
+    _mutex.unlock();
 }
 
 void StatusWindow::onEndOfListReply()
 {
+    _mutex.lock();
     _channelList.clear();
     _channelList.append(_tmpChannelList);
     _tmpChannelList.clear();
+    _mutex.unlock();
     auto model = new ChannelListModel(&_channelList);
     auto oldModel = _qtvChannels->model();
     _qtvChannels->setModel(model);
