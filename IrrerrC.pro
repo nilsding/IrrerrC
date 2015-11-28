@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = IrrerrC
 TEMPLATE = app
 
+INCLUDEPATH += src/
 
 SOURCES += src/main.cpp \
     src/mainwindow.cpp \
