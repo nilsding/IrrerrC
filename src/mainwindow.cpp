@@ -11,6 +11,19 @@ MainWindow::MainWindow(QWidget *parent) :
     _ui->setupUi(this);
     setUnifiedTitleAndToolBarOnMac(true);
     setWindowTitle(QString("%1 %2").arg(APP_NAME).arg(APP_VERSION));
+    
+#ifdef Q_OS_MAC
+    _ui->centralWidget->setViewMode(QMdiArea::TabbedView);
+    auto childWidgets = _ui->centralWidget->children();
+    // hide tab bar
+    for (auto widget : childWidgets) {
+        if (QString(widget->metaObject()->className()) == "QTabBar") {
+            auto tabbar = dynamic_cast<QTabBar *>(widget);
+            tabbar->setVisible(false);
+            // TODO: remove empty margin on top of the window
+        }
+    }
+#endif
 
     loadSettings();
     _conn->setIdentity(_id);
@@ -55,6 +68,9 @@ MainWindow::~MainWindow()
 StatusWindow *MainWindow::createMdiChild(StatusWindow::NWindowType winType)
 {
     auto win = new StatusWindow(winType);
+#ifdef Q_OS_MAC
+    win->setWindowFlags(Qt::FramelessWindowHint);
+#endif
     win->setAliases(&_aliases);
     connect(win, SIGNAL(textEntered(QString)), this, SLOT(onWindowTextEntered(QString)));
     _ui->centralWidget->addSubWindow(win);
