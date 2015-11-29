@@ -7,6 +7,14 @@ AppearanceSettingsWidget::AppearanceSettingsWidget(QWidget *parent) :
 {
     _ui->setupUi(this);
     loadSettings();
+#ifdef Q_OS_MAC
+    _ui->qlMainToolbarBackground->setVisible(false);
+    _ui->qleMainToolbarBackground->setVisible(false);
+    _ui->qpbMainToolbarBackgroundFileChooser->setVisible(false);
+    _ui->qlWindowToolbarBackground->setVisible(false);
+    _ui->qleWindowToolbarBackground->setVisible(false);
+    _ui->qpbWindowToolbarBackgroundFileChooser->setVisible(false);
+#endif
 }
 
 AppearanceSettingsWidget::~AppearanceSettingsWidget()
@@ -23,8 +31,10 @@ void AppearanceSettingsWidget::loadSettings()
     _SETTINGS.endGroup();
     _SETTINGS.beginGroup("MainWindow");
         _ui->qleMainWindowBackground->setText(_SETTINGS.value("backgroundImage", "").toString());
+#ifndef Q_OS_MAC
         _ui->qleMainToolbarBackground->setText(_SETTINGS.value("MainToolbar/backgroundImage", "").toString());
         _ui->qleWindowToolbarBackground->setText(_SETTINGS.value("WindowToolbar/backgroundImage", "").toString());
+#endif
     _SETTINGS.endGroup();
 }
 
@@ -36,8 +46,10 @@ void AppearanceSettingsWidget::storeSettings()
     _SETTINGS.endGroup();
     _SETTINGS.beginGroup("MainWindow");
         _SETTINGS.setValue("backgroundImage", _ui->qleMainWindowBackground->text());
+#ifdef Q_OS_MAC
         _SETTINGS.setValue("MainToolbar/backgroundImage", _ui->qleMainToolbarBackground->text());
         _SETTINGS.setValue("WindowToolbar/backgroundImage", _ui->qleWindowToolbarBackground->text());
+#endif
     _SETTINGS.endGroup();
 }
 

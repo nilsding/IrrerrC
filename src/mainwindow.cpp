@@ -347,12 +347,14 @@ void MainWindow::loadSettings()
 
         auto i = _SETTINGS.value("backgroundImage", "").toString();
         _ui->centralWidget->setBackground(i.isEmpty() ? _ui->centralWidget->palette().dark() : QBrush(QImage(i)));
+#ifndef Q_OS_MAC
         _ui->qtbMain->setStyleSheet(QString(
             "QToolBar {"
                 "background-image: url(") + _SETTINGS.value("MainToolbar/backgroundImage", "").toString() + "); }");
         _ui->qtbWindows->setStyleSheet(QString(
             "QToolBar {"
                 "background-image: url(") + _SETTINGS.value("WindowToolbar/backgroundImage", "").toString() + "); }");
+#endif
     _SETTINGS.endGroup();
 
     _SETTINGS.beginGroup("Identity");
