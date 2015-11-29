@@ -71,7 +71,7 @@ void AppearanceSettingsWidget::on_qpbWindowToolbarBackgroundFileChooser_clicked(
     }
 }
 
-void AppearanceSettingsWidget::on_qleMainWindowBackgroundFileChooser_clicked()
+void AppearanceSettingsWidget::on_qpbMainWindowBackgroundFileChooser_clicked()
 {
     IMAGE_FILE_DIALOG(dlg);
 

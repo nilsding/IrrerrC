@@ -141,7 +141,7 @@
            <widget class="QLineEdit" name="qleMainWindowBackground"/>
           </item>
           <item>
-           <widget class="QPushButton" name="qleMainWindowBackgroundFileChooser">
+           <widget class="QPushButton" name="qpbMainWindowBackgroundFileChooser">
             <property name="text">
              <string notr="true">…</string>
             </property>

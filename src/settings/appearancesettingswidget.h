@@ -31,7 +31,7 @@ private slots:
 
     void on_qpbWindowToolbarBackgroundFileChooser_clicked();
 
-    void on_qleMainWindowBackgroundFileChooser_clicked();
+    void on_qpbMainWindowBackgroundFileChooser_clicked();
 
 private:
     Ui::AppearanceSettingsWidget *_ui;
