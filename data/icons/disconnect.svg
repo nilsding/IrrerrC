@@ -9,21 +9,17 @@
       <stop offset="0" style="stop-color: #3e300e; stop-opacity: 1" />
       <stop offset="1" style="stop-color: #845e00; stop-opacity: 1" />
     </linearGradient>
-    <linearGradient id="circle-fill-gradient"   x1="168" y1="168" x2="168" y2="216" gradientUnits="userSpaceOnUse">
-      <stop offset="0" style="stop-color: #e20800; stop-opacity: 1" />
-      <stop offset="1" style="stop-color: #bf0303; stop-opacity: 1" />
-    </linearGradient>
-    <linearGradient id="circle-stroke-gradient"   x1="168" y1="168" x2="168" y2="216" gradientUnits="userSpaceOnUse">
-      <stop offset="0" style="stop-color: #bf0303; stop-opacity: 1" />
-      <stop offset="1" style="stop-color: #9C0f0f; stop-opacity: 1" />
-    </linearGradient>
   </defs>
-  <path style="fill: url(#fill-gradient);
-               fill-rule: evenodd;
-               stroke: url(#stroke-gradient); 
-               stroke-width: 15;
-               stroke-linejoin: round;"
-        d="m 16,16 88,192 48,-56 88,88 -80,-192 -56,56 z"/>
-  <circle style="fill: url(#circle-fill-gradient); stroke: url(#circle-stroke-gradient); stroke-width: 8" cx="192" cy="192" r="48" />
-<!--   <path style="fill: none; stroke: #ffffff; stroke-width: 16; stroke-linecap: round;" d="m 160,208 48,-48 m -48,0 48,48" /> -->
+  <polygon style="fill: url(#fill-gradient);
+                  fill-rule: evenodd;
+                  stroke: url(#stroke-gradient); 
+                  stroke-width: 15;
+                  stroke-linejoin: round;"
+           points="240,240 172,176 120,216 96,180 188,108"/>
+  <polygon style="fill: url(#fill-gradient);
+                  fill-rule: evenodd;
+                  stroke: url(#stroke-gradient); 
+                  stroke-width: 15;
+                  stroke-linejoin: round;"
+           points="16,16 80,84 136,44 160,76 64,148 "/>
 </svg>
