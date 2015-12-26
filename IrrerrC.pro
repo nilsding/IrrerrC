@@ -84,6 +84,10 @@ exists ($$PWD/.git) {
     COMMIT = $$system(git --git-dir $$PWD/.git --work-tree $$PWD describe --always --tags)
 }
 
+bsd {
+    LIBS=-L/usr/local/lib
+}
+
 !win32 {
 DEFINES += APP_VERSION=\\\"$$join(VERSION, "\\ ")\\\" \
            APP_NAME=\\\"$$join(QMAKE_TARGET_PRODUCT, "\\ ")\\\" \
