@@ -84,8 +84,8 @@ void IrcConnection::disconnect(bool force)
 {
     if (!isConnected()) return;
     _sock->write(QString("QUIT :").append(_identity->quitMessage()).append("\r\n").toStdString().c_str());
+    _sock->flush();
     if (force) {
-        _sock->flush();
         _sock->close();
     }
 }
