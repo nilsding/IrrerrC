@@ -16,6 +16,7 @@
 #include "settings/nsettings.h"
 #include "settings/settingsdialog.h"
 #include "util/ircalias.h"
+#include "script/scriptlistingdialog.h"
 #include "aboutdialog.h"
 #include "statuswindow.h"
 
@@ -59,6 +60,8 @@ private slots:
     void on_qaChannelList_triggered();
 
     void on_qaQuit_triggered();
+
+    void on_qaScripts_triggered();
 
 private:
     Ui::MainWindow *_ui;

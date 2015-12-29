@@ -22,6 +22,7 @@ SOURCES += src/main.cpp \
     src/core/ircidentity.cpp \
     src/core/ircparser.cpp \
     src/core/ircmessage.cpp \
+    src/script/scriptlistingdialog.cpp \
     src/settings/settingsdialog.cpp \
     src/settings/identitysettingswidget.cpp \
     src/settings/networksettingswidget.cpp \
@@ -42,6 +43,7 @@ HEADERS  += src/mainwindow.h \
     src/core/ircmessage.h \
     src/core/irccodes.h \
     src/core/irctypes.h \
+    src/script/scriptlistingdialog.h \
     src/settings/nsettings.h \
     src/settings/settingsdialog.h \
     src/settings/identitysettingswidget.h \
@@ -55,6 +57,7 @@ HEADERS  += src/mainwindow.h \
 
 FORMS    += src/ui/mainwindow.ui \
     src/ui/aboutdialog.ui \
+    src/ui/script/scriptlistingdialog.ui \
     src/ui/settings/settingsdialog.ui \
     src/ui/settings/identitysettingswidget.ui \
     src/ui/settings/networksettingswidget.ui \

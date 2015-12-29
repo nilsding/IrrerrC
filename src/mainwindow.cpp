@@ -486,3 +486,10 @@ void MainWindow::on_qaQuit_triggered()
     }
     qApp->quit();
 }
+
+void MainWindow::on_qaScripts_triggered()
+{
+    ScriptListingDialog *dlg = new ScriptListingDialog(this);
+    dlg->show();
+    // TODO: connect signals emitted by ScriptListingDialog
+}
