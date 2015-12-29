@@ -20,8 +20,8 @@ $flags = @{
                   '"--no-bluetooth"', '--no-clucene', '--no-concurrent', '--no-declarative', '--no-designer', '--no-designercomponents',
                   '--no-enginio', '--no-qthelp', '--no-multimedia', '--no-multimediawidgets', '--no-multimediaquick', '"--no-nfc"', '--no-opengl',
                   '--no-positioning', '--no-printsupport', '--no-qml', '--no-qmltooling', '--no-quick', '--no-quickparticles',
-                  '--no-quickwidgets', '--no-script', '--no-scripttools', '--no-sensors', '--no-serialport', '--no-sql', '--no-test',
-                  '--no-webkit', '--no-webkitwidgets', '--no-websockets', '--no-xml', '--no-xmlpatterns', '--no-webenginecore', '--no-webengine',
+                  '--no-quickwidgets', '--no-scripttools', '--no-sensors', '--no-serialport', '--no-sql', '--no-test', '--no-webkit',
+                  '--no-webkitwidgets', '--no-websockets', '--no-xml', '--no-xmlpatterns', '--no-webenginecore', '--no-webengine',
                   '--no-webenginewidgets');
 }
 
