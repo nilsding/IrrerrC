@@ -23,7 +23,7 @@ Building on Windows requires:
 After installing the build requirements, start PowerShell, navigate to the
 `./utils/` directory, and start `./build_windows.ps1` (you might want to check
 the directories in the `$dirs` dictionary of that file first).  If you want to
-uild an installer, run the `./mknsis.ps1` script after building IrrerrC.
+build an installer, run the `./mknsis.ps1` script after building IrrerrC.
 
 ## TODO list
 
