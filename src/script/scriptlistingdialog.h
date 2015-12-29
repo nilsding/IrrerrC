@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QUrl>
+#include <QFileSystemModel>
 #include "settings/nsettings.h"
 
 namespace Ui {
@@ -30,6 +31,8 @@ private slots:
 
 private:
     Ui::ScriptListingDialog *_ui;
+
+    QFileSystemModel *_scriptDirModel;
 };
 
 #endif // SCRIPTLISTING_H

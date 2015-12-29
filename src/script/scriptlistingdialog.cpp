@@ -3,10 +3,23 @@
 
 ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
     QDialog(parent),
-    _ui(new Ui::ScriptListingDialog)
+    _ui(new Ui::ScriptListingDialog),
+    _scriptDirModel(new QFileSystemModel)
 {
+    connect(_scriptDirModel, &QFileSystemModel::directoryLoaded, this, [=](const QString &path) {
+        _ui->qlvScriptList->setRootIndex(_scriptDirModel->index(path));
+    });
+
     _ui->setupUi(this);
     _ui->qdbbButtons->addButton(tr("&Edit"), QDialogButtonBox::ActionRole);
+
+    _scriptDirModel->setRootPath(QFileInfo(_SETTINGS.fileName()).absolutePath() + "/scripts");
+    _scriptDirModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
+    QStringList filters;
+    filters << "*.js";
+    _scriptDirModel->setNameFilters(filters);
+    _scriptDirModel->setNameFilterDisables(false);
+    _ui->qlvScriptList->setModel(_scriptDirModel);
 }
 
 ScriptListingDialog::~ScriptListingDialog()
