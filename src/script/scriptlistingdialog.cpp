@@ -13,3 +13,29 @@ ScriptListingDialog::~ScriptListingDialog()
 {
     delete _ui;
 }
+
+void ScriptListingDialog::on_qdbbButtons_clicked(QAbstractButton *button)
+{
+    auto buttons = _ui->qdbbButtons->buttons();
+    QAbstractButton *b = 0;
+    for (auto btn : buttons) {
+        if (btn == button) {
+            b = btn;
+            break;
+        }
+    }
+
+    if (_ui->qdbbButtons->buttonRole(b) == QDialogButtonBox::ActionRole) {
+        // TODO: open default editor for the current script
+    }
+}
+
+void ScriptListingDialog::on_qpbOpenScriptDirectory_clicked()
+{
+    QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(_SETTINGS.fileName()).absolutePath() + "/scripts"));
+}
+
+void ScriptListingDialog::on_qpbGetMoreScripts_clicked()
+{
+    QDesktopServices::openUrl(QUrl("http://irc.rrerr.net/client/scripts"));
+}
