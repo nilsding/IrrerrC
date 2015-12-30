@@ -39,7 +39,10 @@ void ScriptListingDialog::on_qdbbButtons_clicked(QAbstractButton *button)
     }
 
     if (_ui->qdbbButtons->buttonRole(b) == QDialogButtonBox::ActionRole) {
-        // TODO: open default editor for the current script
+        QUrl url;
+        url.setPath(_scriptDirModel->filePath(_ui->qlvScriptList->selectionModel()->selectedIndexes().first()));
+        url.setScheme(QLatin1String("file"));
+        QDesktopServices::openUrl(url);
     }
 }
 
