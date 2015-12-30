@@ -57,33 +57,29 @@
       <number>0</number>
      </property>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0">
-       <item>
-        <widget class="QLabel" name="qlScriptName">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string notr="true">Script name</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="qcbScriptEnabled">
-         <property name="text">
-          <string>&amp;E&amp;nabled</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="qlScriptName">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string notr="true">Script name</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="qlAuthor">
        <property name="text">
         <string notr="true">Author: &lt;b&gt;Someone&lt;/b&gt;</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -117,7 +113,7 @@
           <x>0</x>
           <y>0</y>
           <width>278</width>
-          <height>214</height>
+          <height>218</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
