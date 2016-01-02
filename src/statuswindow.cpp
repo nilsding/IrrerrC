@@ -48,6 +48,15 @@ void StatusWindow::closeEvent(QCloseEvent *ev)
     ev->ignore();
 }
 
+void StatusWindow::setCurrentIdentity(IrcIdentity *identity)
+{
+    _currentIdentity = identity;
+    connect(_currentIdentity, &IrcIdentity::nicknameChanged, this, [&](const QString &nickname) {
+        _qlNickname->setText(nickname);
+    });
+    _qlNickname->setText(_currentIdentity->nickname());
+}
+
 void StatusWindow::receiveMessage(IrcMessage *msg)
 {
     if (_windowType == NWindowList || msg->command() == "322") {
@@ -184,6 +193,8 @@ void StatusWindow::createLayout()
     connect(_qleInput, SIGNAL(returnPressed()), this, SLOT(onTextEntered()));
     connect(_qleInput, SIGNAL(textEdited(QString)), this, SLOT(onTextEdited(QString)));
 
+    _qlNickname = new QLabel();
+
     // setting up the splitter widget
     QSplitter *splitter = new QSplitter(this);
     splitter->setHandleWidth(1);
@@ -196,13 +207,19 @@ void StatusWindow::createLayout()
     splitter->setStretchFactor(0, 5);
     splitter->setStretchFactor(1, 1);
 
-    QWidget *container = new QWidget(this);
-    QVBoxLayout *layout = new QVBoxLayout(container);
+    QWidget *bufferContainer = new QWidget(this);
+    QVBoxLayout *bufferLayout = new QVBoxLayout(bufferContainer);
+    QWidget *inputContainer = new QWidget(this);
+    QHBoxLayout *inputLayout = new QHBoxLayout(inputContainer);
 
-    layout->setSpacing(0);
-    layout->setMargin(0);
-    layout->addWidget(splitter);
-    layout->addWidget(_qleInput);
+    bufferLayout->setSpacing(0);
+    bufferLayout->setMargin(0);
+    bufferLayout->addWidget(splitter, 1);
+    bufferLayout->addWidget(inputContainer);
+    inputLayout->setSpacing(12);
+    inputLayout->setMargin(0);
+    inputLayout->addWidget(_qlNickname);
+    inputLayout->addWidget(_qleInput, 1);
     setHandleWidth(1);
 
     switch (_windowType) {
@@ -220,7 +237,7 @@ void StatusWindow::createLayout()
         case NWindowList: {
             setWindowTitle(tr("Channel list"));
             setWindowIcon(QIcon(":/icons/chanlist"));
-            _qleInput->setVisible(false);
+            inputContainer->setVisible(false);
             _qlvUsers->setVisible(false);
             break;
         }
