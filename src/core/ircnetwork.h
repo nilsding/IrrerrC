@@ -20,10 +20,10 @@ public:
     QString getServer(int index = -1);
 
     QString name() { return _name; }
-    void setName(QString name) { _name = name; }
+    void setName(QString name) { _name = name; emit nameChanged(_name); }
 
     QStringList *servers() { return _servers; }
-    void setServers(QStringList *servers) { if (_servers != 0) { delete _servers; } _servers = servers; }
+    void setServers(QStringList *servers) { if (_servers != 0) { delete _servers; } _servers = servers; emit serversChanged(_servers);}
     void setServers(QStringList servers) {
         if (!_servers) {
             return;
@@ -32,6 +32,7 @@ public:
         for (auto server : servers) {
             _servers->append(server);
         }
+        emit serversChanged(_servers);
     }
 
     bool isActive() { return _active; }
@@ -39,7 +40,7 @@ public:
 
 signals:
     void nameChanged(QString name);
-    void serversChanged(QString name);
+    void serversChanged(QStringList *servers);
 
 public slots:
 
