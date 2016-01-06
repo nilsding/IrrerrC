@@ -9,6 +9,7 @@
 #include <QUrl>
 #include <QFileSystemModel>
 #include "settings/nsettings.h"
+#include "nscript.h"
 
 namespace Ui {
 class ScriptListingDialog;
@@ -29,10 +30,14 @@ private slots:
 
     void on_qpbGetMoreScripts_clicked();
 
+    void on_qlvScriptList_clicked(const QModelIndex &index);
+
 private:
     Ui::ScriptListingDialog *_ui;
 
     QFileSystemModel *_scriptDirModel;
+
+    NScript *_currentScript;
 };
 
 #endif // SCRIPTLISTING_H

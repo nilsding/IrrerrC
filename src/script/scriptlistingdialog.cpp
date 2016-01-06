@@ -4,7 +4,7 @@
 ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
     QDialog(parent),
     _ui(new Ui::ScriptListingDialog),
-    _scriptDirModel(new QFileSystemModel)
+    _scriptDirModel(new QFileSystemModel), _currentScript(0)
 {
     connect(_scriptDirModel, &QFileSystemModel::directoryLoaded, this, [=](const QString &path) {
         _ui->qlvScriptList->setRootIndex(_scriptDirModel->index(path));
@@ -54,4 +54,15 @@ void ScriptListingDialog::on_qpbOpenScriptDirectory_clicked()
 void ScriptListingDialog::on_qpbGetMoreScripts_clicked()
 {
     QDesktopServices::openUrl(QUrl("http://irc.rrerr.net/client/scripts"));
+}
+
+void ScriptListingDialog::on_qlvScriptList_clicked(const QModelIndex &index)
+{
+    if (_currentScript) {
+        _currentScript->deleteLater();
+    }
+    _currentScript = new NScript(_scriptDirModel->filePath(index), this);
+    _ui->qlScriptName->setText(_currentScript->scriptName().toHtmlEscaped());
+    _ui->qlAuthor->setText(tr("Author: <b>%1</b>").arg(_currentScript->author().toHtmlEscaped()));
+    _ui->qlDescription->setText(_currentScript->description());
 }
