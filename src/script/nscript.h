@@ -8,6 +8,7 @@
 #include <QRegexp>
 #include <QJSEngine>
 #include <QJSValue>
+#include <QMessageBox>
 
 class NScript : public QObject
 {
@@ -44,6 +45,7 @@ private:
     QString _scriptContents;
 
     void parseScriptInfo();
+    bool handleErrors(QJSValue *, bool showMessageBox);
 };
 
 #endif // NSCRIPT_H

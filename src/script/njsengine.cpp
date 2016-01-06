@@ -49,11 +49,13 @@ void NJSEngine::reloadScripts()
         qDebug() << "Reloading scripts...";
         unloadScripts();
         _scripts->clear();
+
         _engine->collectGarbage();
         _engine->deleteLater();
         _initialized = false;
         _engine = new QJSEngine;
         NJSEngine::init();
+
         loadScripts();
     });
 }

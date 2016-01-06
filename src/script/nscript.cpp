@@ -1,6 +1,8 @@
 #include "nscript.h"
 #include <QDebug>
 
+#define HANDLE_ERRORS(value, mbox) if (handleErrors(&value, mbox)) { return; }
+
 NScript::NScript(QString filePath, QObject *parent) : QObject(parent), _filePath(filePath)
 {
     QFile file(_filePath);
@@ -62,18 +64,35 @@ void NScript::load(QJSEngine *engine)
 {
     qDebug() << "Loading script" << _scriptName;
     QJSValue initFn = engine->evaluate(_scriptContents, _filePath);
-    if (initFn.isError()) {
-        qDebug() << "Uncaught exception at line"
-                 << initFn.property("lineNumber").toInt()
-                 << ":" << initFn.toString();
-        return;
-    }
+    HANDLE_ERRORS(initFn, true);
     initFn = engine->evaluate("init");
     initFn.call();
+    HANDLE_ERRORS(initFn, true);
 }
 
 void NScript::unload(QJSEngine *engine)
 {
     qDebug() << "Unloading script" << _scriptName;
-    engine->evaluate("deinit", _filePath);
+    QJSValue deinitFn = engine->evaluate(_scriptContents, _filePath);
+    HANDLE_ERRORS(deinitFn, true);
+    deinitFn = engine->evaluate("deinit");
+    deinitFn.call();
+    HANDLE_ERRORS(deinitFn, true);
+}
+
+bool NScript::handleErrors(QJSValue *value, bool showMessageBox)
+{
+    if (value->isError()) {
+        if (showMessageBox) {
+            QMessageBox::critical(0, tr("Scripting error"),
+                                  tr("Uncaught exception in file %1 at line %2:<p>%3")
+                                  .arg(value->property("fileName").toString())
+                                  .arg(value->property("lineNumber").toInt())
+                                  .arg(value->toString()));
+        } else {
+            qDebug() << "Uncaught exception in file" << value->property("fileName").toString() << "at line"
+                     << value->property("lineNumber").toInt() << ":" << value->toString();
+        }
+    }
+    return value->isError();
 }
