@@ -14,10 +14,30 @@ ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
 
     connect(_scriptDirModel, &QFileSystemModel::directoryLoaded, this, [=](const QString &path) {
         _ui->qlvScriptList->setRootIndex(_scriptDirModel->index(path));
+
+        QDir d(path);
+        d.setFilter(QDir::NoDotAndDotDot | QDir::Files);
+
+        if (d.count() < 1) {
+            _ui->qlScriptName->setText("");
+            _ui->qlAuthor->setText("");
+            _ui->qlDescription->setText(tr("You currently don't have any scripts installed."));
+            if (_currentScript) {
+                _currentScript->deleteLater();
+                _currentScript = 0;
+            }
+        } else {
+            if (!_currentScript) {
+                _ui->qlDescription->setText(tr("Select a script from the list on the left."));
+            }
+        }
     });
 
     _ui->setupUi(this);
     _ui->qdbbButtons->addButton(tr("&Edit"), QDialogButtonBox::ActionRole);
+    _ui->qlScriptName->setText("");
+    _ui->qlAuthor->setText("");
+    _ui->qlDescription->setText("");
 
     _scriptDirModel->setRootPath(_scriptDir);
     _scriptDirModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
@@ -30,6 +50,7 @@ ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
 
 ScriptListingDialog::~ScriptListingDialog()
 {
+    _currentScript->deleteLater();
     delete _ui;
 }
 
