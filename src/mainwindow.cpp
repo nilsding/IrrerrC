@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     StatusWindow *status = createMdiChild();
     status->show();
+    status->setCurrentIdentity(_id);
     status->setWindowState(Qt::WindowMaximized);
 
     connect(_ui->qmWindow, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));

@@ -31,26 +31,26 @@ public:
     //! \brief setNickname sets the prefered nickname for this identity
     //! \param nickname the prefered nickname for this identity
     //!
-    void setNickname(QString nickname) { _nickname = nickname; }
+    void setNickname(QString nickname) { _nickname = nickname; emit nicknameChanged(_nickname); }
 
     // tbh fuck docs for getters and setters
     QString username() { return _username; }
-    void setUsername(QString username) { _username = username; }
+    void setUsername(QString username) { _username = username; emit usernameChanged(_username); }
 
     QString realname() { return _realname; }
-    void setRealname(QString realname) { _realname = realname; }
+    void setRealname(QString realname) { _realname = realname; emit realnameChanged(_realname); }
 
     bool isInvisible() { return _invisible; }
-    void setInvisible(bool invisible) { _invisible = invisible; }
+    void setInvisible(bool invisible) { _invisible = invisible; emit invisibleChanged(_invisible); }
 
     bool hasWallops() { return _wallops; }
-    void setWallops(bool wallops) { _wallops = wallops; }
+    void setWallops(bool wallops) { _wallops = wallops; emit wallopsChanged(_wallops); }
 
     QString partMessage() { return _partMessage; }
-    void setPartMessage(QString partMessage) { _partMessage = partMessage; }
+    void setPartMessage(QString partMessage) { _partMessage = partMessage; emit partMessageChanged(_partMessage); }
 
     QString quitMessage() { return _quitMessage; }
-    void setQuitMessage(QString quitMessage) { _quitMessage = quitMessage; }
+    void setQuitMessage(QString quitMessage) { _quitMessage = quitMessage; emit quitMessageChanged(_quitMessage); }
 
 signals:
     void nicknameChanged(QString nickname);

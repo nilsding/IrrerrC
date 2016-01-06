@@ -11,10 +11,12 @@
 #include <QTreeView>
 #include <QHeaderView>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QStringListModel>
 #include <QMutex>
+#include <QLabel>
 
 #include "core/irctypes.h"
 #include "core/ircparser.h"
@@ -124,7 +126,7 @@ public:
                                                                             .arg(_formatter->strip(_targetDescription))); }
 
     NWindowType type() { return _windowType; }
-    void setCurrentIdentity(IrcIdentity *identity) { _currentIdentity = identity; }
+    void setCurrentIdentity(IrcIdentity *identity);
 
     QList<IrcAlias *> *aliases() const { return _aliases; }
     void setAliases(QList<IrcAlias *> *aliases) { _aliases = aliases; }
@@ -154,6 +156,7 @@ private:
     NWindowType _windowType;
     QLineEdit *_qleInput;
     QTextEdit *_qteBuffer;
+    QLabel *_qlNickname;
     IrcTextFormatter *_formatter;
 
     QString _targetName;
