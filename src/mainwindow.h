@@ -16,6 +16,7 @@
 #include "settings/nsettings.h"
 #include "settings/settingsdialog.h"
 #include "util/ircalias.h"
+#include "script/njsengine.h"
 #include "script/scriptlistingdialog.h"
 #include "aboutdialog.h"
 #include "statuswindow.h"
@@ -74,6 +75,9 @@ private:
     QSignalMapper *_mapper;
 
     StatusWindow *activeMdiChild();
+
+    NJSEngine *_engine;
+
     void handleNumericResponseCode(IrcMessage *);
     void handleNonNumericResponse(IrcMessage *);
     void storeSettings();

@@ -6,7 +6,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     _ui(new Ui::MainWindow), _conn(new IrcConnection), _id(new IrcIdentity),
-    _mapper(new QSignalMapper(this))
+    _mapper(new QSignalMapper(this)), _engine(new NJSEngine(this))
 {
     _ui->setupUi(this);
     setUnifiedTitleAndToolBarOnMac(true);
@@ -27,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     loadSettings();
     _conn->setIdentity(_id);
+
+    NJSEngine::init();
+    QTimer::singleShot(0, [&]() {
+        _engine->loadScripts();
+    });
 
     StatusWindow *status = createMdiChild();
     status->show();
