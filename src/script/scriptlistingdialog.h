@@ -38,6 +38,8 @@ private:
     QFileSystemModel *_scriptDirModel;
 
     NScript *_currentScript;
+
+    QString _scriptDir;
 };
 
 #endif // SCRIPTLISTING_H

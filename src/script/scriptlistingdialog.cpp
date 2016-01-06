@@ -6,6 +6,12 @@ ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
     _ui(new Ui::ScriptListingDialog),
     _scriptDirModel(new QFileSystemModel), _currentScript(0)
 {
+    _scriptDir = QFileInfo(_SETTINGS.fileName()).absolutePath() + "/scripts";
+    QDir d(_scriptDir);
+    if (!d.exists()) {
+        d.mkpath(_scriptDir);
+    }
+
     connect(_scriptDirModel, &QFileSystemModel::directoryLoaded, this, [=](const QString &path) {
         _ui->qlvScriptList->setRootIndex(_scriptDirModel->index(path));
     });
@@ -13,7 +19,7 @@ ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
     _ui->setupUi(this);
     _ui->qdbbButtons->addButton(tr("&Edit"), QDialogButtonBox::ActionRole);
 
-    _scriptDirModel->setRootPath(QFileInfo(_SETTINGS.fileName()).absolutePath() + "/scripts");
+    _scriptDirModel->setRootPath(_scriptDir);
     _scriptDirModel->setFilter(QDir::NoDotAndDotDot | QDir::Files);
     QStringList filters;
     filters << "*.js";
@@ -48,7 +54,7 @@ void ScriptListingDialog::on_qdbbButtons_clicked(QAbstractButton *button)
 
 void ScriptListingDialog::on_qpbOpenScriptDirectory_clicked()
 {
-    QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(_SETTINGS.fileName()).absolutePath() + "/scripts"));
+    QDesktopServices::openUrl(QUrl::fromLocalFile(_scriptDir));
 }
 
 void ScriptListingDialog::on_qpbGetMoreScripts_clicked()
