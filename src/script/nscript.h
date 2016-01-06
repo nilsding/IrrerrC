@@ -6,6 +6,8 @@
 #include <QFileInfo>
 #include <QTextStream>
 #include <QRegexp>
+#include <QJSEngine>
+#include <QJSValue>
 
 class NScript : public QObject
 {
@@ -30,6 +32,8 @@ public:
 signals:
 
 public slots:
+    void load(QJSEngine *engine);
+    void unload(QJSEngine *engine);
 
 private:
     QString _filePath;
@@ -37,7 +41,9 @@ private:
     QString _author;
     QString _description;
 
-    void readScriptInfo();
+    QString _scriptContents;
+
+    void parseScriptInfo();
 };
 
 #endif // NSCRIPT_H

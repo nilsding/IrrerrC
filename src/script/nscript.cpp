@@ -3,19 +3,22 @@
 
 NScript::NScript(QString filePath, QObject *parent) : QObject(parent), _filePath(filePath)
 {
-    readScriptInfo();
-    qDebug() << "Read script data:" << _filePath << "-- Script name: " << _scriptName << ", Author:" << _author << ", Description:" << _description;
-}
-
-void NScript::readScriptInfo()
-{
     QFile file(_filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         return;
     }
-
-    QString *currentTag = 0;
     QTextStream in(&file);
+    _scriptContents = in.readAll();
+    file.close();
+
+    parseScriptInfo();
+    qDebug() << "Read script data:" << _filePath << "-- Script name: " << _scriptName << ", Author:" << _author << ", Description:" << _description;
+}
+
+void NScript::parseScriptInfo()
+{
+    QTextStream in(&_scriptContents);
+    QString *currentTag = 0;
     while (!in.atEnd()) {
         QString line = in.readLine();
         if (line.startsWith("//! ")) {
@@ -53,4 +56,24 @@ void NScript::readScriptInfo()
     if (_description.trimmed().isEmpty()) {
         _description = tr("This script does not have a description.");
     }
+}
+
+void NScript::load(QJSEngine *engine)
+{
+    qDebug() << "Loading script" << _scriptName;
+    QJSValue initFn = engine->evaluate(_scriptContents, _filePath);
+    if (initFn.isError()) {
+        qDebug() << "Uncaught exception at line"
+                 << initFn.property("lineNumber").toInt()
+                 << ":" << initFn.toString();
+        return;
+    }
+    initFn = engine->evaluate("init");
+    initFn.call();
+}
+
+void NScript::unload(QJSEngine *engine)
+{
+    qDebug() << "Unloading script" << _scriptName;
+    engine->evaluate("deinit", _filePath);
 }
