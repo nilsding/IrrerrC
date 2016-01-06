@@ -24,6 +24,7 @@ SOURCES += src/main.cpp \
     src/core/ircmessage.cpp \
     src/script/njsengine.cpp \
     src/script/nscript.cpp \
+    src/script/nscriptbindings.cpp \
     src/script/scriptlistingdialog.cpp \
     src/settings/settingsdialog.cpp \
     src/settings/identitysettingswidget.cpp \
@@ -47,6 +48,7 @@ HEADERS  += src/mainwindow.h \
     src/core/irctypes.h \
     src/script/njsengine.h \
     src/script/nscript.h \
+    src/script/nscriptbindings.h \
     src/script/scriptlistingdialog.h \
     src/settings/nsettings.h \
     src/settings/settingsdialog.h \
