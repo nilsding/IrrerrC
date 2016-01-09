@@ -12,7 +12,6 @@ NScript::NScript(QString filePath, QObject *parent) : QObject(parent), _filePath
     file.close();
 
     parseScriptInfo();
-    qDebug() << "Read script data:" << _filePath << "-- Script name: " << _scriptName << ", Author:" << _author << ", Description:" << _description;
 }
 
 void NScript::parseScriptInfo()

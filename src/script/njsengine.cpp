@@ -78,6 +78,5 @@ void NJSEngine::unloadScripts()
 
 void NJSEngine::registerDeinitFunction(QJSValue fn)
 {
-    qDebug() << "Registered deinit function:" << fn.toString();
     _deinitFunctions->append(fn);
 }
