@@ -9,6 +9,7 @@
 #include <QJSEngine>
 #include <QJSValue>
 #include <QMessageBox>
+#include "nscriptutils.h"
 
 class NScript : public QObject
 {
@@ -34,7 +35,6 @@ signals:
 
 public slots:
     void load(QJSEngine *engine);
-    void unload(QJSEngine *engine);
 
 private:
     QString _filePath;
@@ -45,7 +45,6 @@ private:
     QString _scriptContents;
 
     void parseScriptInfo();
-    bool handleErrors(QJSValue *, bool showMessageBox);
 };
 
 #endif // NSCRIPT_H
