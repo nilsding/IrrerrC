@@ -64,6 +64,12 @@ private slots:
 
     void on_qaScripts_triggered();
 
+    void on_qaLoadScripts_triggered();
+
+    void on_qaReloadScripts_triggered();
+
+    void on_qaUnloadScripts_triggered();
+
 private:
     Ui::MainWindow *_ui;
 
@@ -74,9 +80,9 @@ private:
 
     QSignalMapper *_mapper;
 
-    StatusWindow *activeMdiChild();
+    bool _debug;
 
-    NJSEngine *_engine;
+    StatusWindow *activeMdiChild();
 
     void handleNumericResponseCode(IrcMessage *);
     void handleNonNumericResponse(IrcMessage *);

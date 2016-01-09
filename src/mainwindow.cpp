@@ -6,7 +6,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     _ui(new Ui::MainWindow), _conn(new IrcConnection), _id(new IrcIdentity),
-    _mapper(new QSignalMapper(this)), _engine(new NJSEngine(this))
+    _mapper(new QSignalMapper(this))
 {
     _ui->setupUi(this);
     setUnifiedTitleAndToolBarOnMac(true);
@@ -29,8 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _conn->setIdentity(_id);
 
     NJSEngine::init();
-    QTimer::singleShot(0, [&]() {
-        _engine->loadScripts();
+    QTimer::singleShot(0, 0, [&]() {
+        _NSCRIPT_ENGINE_INSTANCE->loadScripts();
     });
 
     StatusWindow *status = createMdiChild();
@@ -408,6 +408,11 @@ void MainWindow::loadSettings()
     for (QMdiSubWindow *win : windows) {
         qobject_cast<StatusWindow *>(win->widget())->loadSettings();
     }
+
+    _SETTINGS.beginGroup("Developer");
+        _debug = _SETTINGS.value("debugMenusEnabled", false).toBool();
+        _ui->qmDebug->setVisible(_debug);
+    _SETTINGS.endGroup();
 }
 
 void MainWindow::storeSettings()
@@ -444,6 +449,10 @@ void MainWindow::storeSettings()
             _SETTINGS.setValue("action", _aliases.at(i)->action());
         }
     _SETTINGS.endArray();
+
+    _SETTINGS.beginGroup("Developer");
+        _SETTINGS.setValue("debugMenusEnabled", _debug);
+    _SETTINGS.endGroup();
 }
 
 void MainWindow::on_qaSettings_triggered()
@@ -498,4 +507,19 @@ void MainWindow::on_qaScripts_triggered()
     ScriptListingDialog *dlg = new ScriptListingDialog(this);
     dlg->show();
     // TODO: connect signals emitted by ScriptListingDialog
+}
+
+void MainWindow::on_qaLoadScripts_triggered()
+{
+    _NSCRIPT_ENGINE_INSTANCE->loadScripts();
+}
+
+void MainWindow::on_qaReloadScripts_triggered()
+{
+    _NSCRIPT_ENGINE_INSTANCE->reloadScripts();
+}
+
+void MainWindow::on_qaUnloadScripts_triggered()
+{
+    _NSCRIPT_ENGINE_INSTANCE->unloadScripts();
 }

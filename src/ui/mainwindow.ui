@@ -14,7 +14,7 @@
    <string notr="true"/>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../../irrerrc.qrc">
     <normaloff>:/icons/app/aiman</normaloff>:/icons/app/aiman</iconset>
   </property>
   <widget class="QMdiArea" name="centralWidget"/>
@@ -63,8 +63,17 @@
     </property>
     <addaction name="qaScripts"/>
    </widget>
+   <widget class="QMenu" name="qmDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="qaLoadScripts"/>
+    <addaction name="qaReloadScripts"/>
+    <addaction name="qaUnloadScripts"/>
+   </widget>
    <addaction name="qmFile"/>
    <addaction name="qmTools"/>
+   <addaction name="qmDebug"/>
    <addaction name="qmWindow"/>
    <addaction name="qmHelp"/>
   </widget>
@@ -112,7 +121,7 @@
   </widget>
   <action name="qaConnect">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../irrerrc.qrc">
      <normaloff>:/icons/connect</normaloff>:/icons/connect</iconset>
    </property>
    <property name="text">
@@ -121,7 +130,7 @@
   </action>
   <action name="qaSettings">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../irrerrc.qrc">
      <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
    </property>
    <property name="text">
@@ -143,7 +152,7 @@
   </action>
   <action name="qaChannelList">
    <property name="icon">
-    <iconset>
+    <iconset resource="../../irrerrc.qrc">
      <normaloff>:/icons/chanlist</normaloff>:/icons/chanlist</iconset>
    </property>
    <property name="text">
@@ -167,8 +176,25 @@
     <string>&amp;Scripts...</string>
    </property>
   </action>
+  <action name="qaLoadScripts">
+   <property name="text">
+    <string>Load scripts</string>
+   </property>
+  </action>
+  <action name="qaReloadScripts">
+   <property name="text">
+    <string>Reload scripts</string>
+   </property>
+  </action>
+  <action name="qaUnloadScripts">
+   <property name="text">
+    <string>Unload scripts</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../../irrerrc.qrc"/>
+ </resources>
  <connections/>
 </ui>
