@@ -22,6 +22,7 @@ ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
             _ui->qlScriptName->setText("");
             _ui->qlAuthor->setText("");
             _ui->qlDescription->setText(tr("You currently don't have any scripts installed."));
+            _qpbEdit->setEnabled(false);
             if (_currentScript) {
                 _currentScript->deleteLater();
                 _currentScript = 0;
@@ -29,12 +30,14 @@ ScriptListingDialog::ScriptListingDialog(QWidget *parent) :
         } else {
             if (!_currentScript) {
                 _ui->qlDescription->setText(tr("Select a script from the list on the left."));
+                _qpbEdit->setEnabled(false);
             }
         }
     });
 
     _ui->setupUi(this);
-    _ui->qdbbButtons->addButton(tr("&Edit"), QDialogButtonBox::ActionRole);
+    _qpbEdit = _ui->qdbbButtons->addButton(tr("&Edit"), QDialogButtonBox::ActionRole);
+    _qpbEdit->setEnabled(false);
     _ui->qlScriptName->setText("");
     _ui->qlAuthor->setText("");
     _ui->qlDescription->setText("");
@@ -92,4 +95,5 @@ void ScriptListingDialog::on_qlvScriptList_clicked(const QModelIndex &index)
     _ui->qlScriptName->setText(_currentScript->scriptName().toHtmlEscaped());
     _ui->qlAuthor->setText(tr("Author: <b>%1</b>").arg(_currentScript->author().toHtmlEscaped()));
     _ui->qlDescription->setText(_currentScript->description());
+    _qpbEdit->setEnabled(true);
 }

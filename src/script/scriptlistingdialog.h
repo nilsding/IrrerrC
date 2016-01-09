@@ -8,6 +8,7 @@
 #include <QDir>
 #include <QUrl>
 #include <QFileSystemModel>
+#include <QPushButton>
 #include "settings/nsettings.h"
 #include "nscript.h"
 
@@ -40,6 +41,8 @@ private:
     NScript *_currentScript;
 
     QString _scriptDir;
+
+    QPushButton *_qpbEdit;
 };
 
 #endif // SCRIPTLISTING_H
