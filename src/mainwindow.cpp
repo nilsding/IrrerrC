@@ -411,7 +411,7 @@ void MainWindow::loadSettings()
 
     _SETTINGS.beginGroup("Developer");
         _debug = _SETTINGS.value("debugMenusEnabled", false).toBool();
-        _ui->qmDebug->setVisible(_debug);
+        _ui->qmDebug->menuAction()->setVisible(_debug);
     _SETTINGS.endGroup();
 }
 
