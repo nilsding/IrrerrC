@@ -3,7 +3,11 @@
 
 #include <QObject>
 #include <QMessageBox>
+#include <QJSEngine>
+#include <QJSValue>
 #include "aboutdialog.h"
+#include "njsengine.h"
+#include "nscriptutils.h"
 
 class NScriptBindings : public QObject
 {
@@ -11,7 +15,9 @@ class NScriptBindings : public QObject
 public:
     explicit NScriptBindings(QObject *parent = 0);
 
-    Q_INVOKABLE int alert(const QString& message, const QString& type = "information");
+    Q_INVOKABLE bool init(QJSValue function);
+    Q_INVOKABLE bool deinit(QJSValue function = QJSValue(QJSValue::NullValue));
+    Q_INVOKABLE int alert(const QString &message, const QString &type = "information");
     Q_INVOKABLE void showAboutDialog();
 
 signals:
