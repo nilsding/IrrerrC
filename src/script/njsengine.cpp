@@ -6,7 +6,7 @@ QJSEngine *NJSEngine::_engine = new QJSEngine();
 bool NJSEngine::_initialized = false;
 QList<NScript *> *NJSEngine::_scripts = new QList<NScript *>();
 QList<QJSValue> *NJSEngine::_deinitFunctions = new QList<QJSValue>();
-NScriptBindings *NJSEngine::_bindings = new NScriptBindings();
+NScriptBindings *NJSEngine::_bindings = 0;
 
 NJSEngine::NJSEngine(QObject *parent) : QObject(parent)
 {
@@ -19,6 +19,7 @@ void NJSEngine::init()
         return;
     }
     _njsengine = new NJSEngine();
+    _bindings = new NScriptBindings();
     qDebug() << "Initialized NJSEngine";
 
     QJSValue scriptObj = _engine->newQObject(_bindings);
