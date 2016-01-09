@@ -5,7 +5,7 @@ NJSEngine *NJSEngine::_njsengine = 0;
 QJSEngine *NJSEngine::_engine = new QJSEngine();
 bool NJSEngine::_initialized = false;
 QList<NScript *> *NJSEngine::_scripts = new QList<NScript *>();
-QList<QJSValue *> *NJSEngine::_deinitFunctions = new QList<QJSValue *>();
+QList<QJSValue> *NJSEngine::_deinitFunctions = new QList<QJSValue>();
 NScriptBindings *NJSEngine::_bindings = new NScriptBindings();
 
 NJSEngine::NJSEngine(QObject *parent) : QObject(parent)
@@ -63,8 +63,8 @@ void NJSEngine::reloadScripts()
 
 void NJSEngine::unloadScripts()
 {
-    for (QJSValue *deinitFn : *_deinitFunctions) {
-        QJSValue retval = deinitFn->call();
+    for (QJSValue deinitFn : *_deinitFunctions) {
+        QJSValue retval = deinitFn.call();
         _NSCRIPT_IF_ERRORS_PRINT_MESSAGE(retval, true);
     }
     _deinitFunctions->clear();
@@ -78,5 +78,5 @@ void NJSEngine::unloadScripts()
 void NJSEngine::registerDeinitFunction(QJSValue fn)
 {
     qDebug() << "Registered deinit function:" << fn.toString();
-    _deinitFunctions->append(&fn);
+    _deinitFunctions->append(fn);
 }

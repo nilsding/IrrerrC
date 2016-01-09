@@ -42,7 +42,7 @@ private:
     static QJSEngine *_engine;
     static bool _initialized;
     static QList<NScript *> *_scripts;
-    static QList<QJSValue *> *_deinitFunctions;
+    static QList<QJSValue> *_deinitFunctions;
     static NScriptBindings *_bindings;
 
     Q_DISABLE_COPY(NJSEngine)
