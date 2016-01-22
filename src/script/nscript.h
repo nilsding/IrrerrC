@@ -5,7 +5,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
-#include <QRegexp>
+#include <QRegExp>
 #include <QJSEngine>
 #include <QJSValue>
 #include <QMessageBox>
