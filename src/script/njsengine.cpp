@@ -24,6 +24,7 @@ void NJSEngine::init()
 
     QJSValue scriptObj = _engine->newQObject(_bindings);
     _engine->globalObject().setProperty("IrrerrC", scriptObj);
+    _engine->installExtensions(QJSEngine::AllExtensions);
 
     _initialized = true;
 }
