@@ -4,6 +4,8 @@
 #
 #-------------------------------------------------
 
+lessThan(QT_MAJOR_VERSION, 5) lessThan(QT_MINOR_VERSION, 6): error("IrrerrC requires Qt 5.6")
+
 QT       += core gui network qml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
