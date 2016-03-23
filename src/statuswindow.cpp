@@ -1,7 +1,7 @@
 #include "statuswindow.h"
 
 StatusWindow::StatusWindow(NWindowType windowType, QWidget *parent) : QSplitter(parent), _windowType(windowType),
-    _currentIdentity(0), _formatter(new IrcTextFormatter)
+    _formatter(new IrcTextFormatter), _currentIdentity(0)
 {
     this->setAttribute(Qt::WA_DeleteOnClose);
     createUserList();
