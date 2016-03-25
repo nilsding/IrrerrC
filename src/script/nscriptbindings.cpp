@@ -5,6 +5,12 @@ NScriptBindings::NScriptBindings(QObject *parent) : QObject(parent)
 
 }
 
+//!
+//! \brief NScriptBindings::init calls the init function for this script.  It is called
+//!     upon a clean (re)load of this script.
+//! \param function a JavaScript function
+//! \return true, if `function` is a callable function and the call was successful; false otherwise
+//!
 bool NScriptBindings::init(QJSValue function)
 {
     if (!function.isCallable()) {
@@ -33,6 +39,12 @@ bool NScriptBindings::deinit(QJSValue function)
     return true;
 }
 
+//!
+//! \brief NScriptBindings::alert shows a message box.
+//! \param message
+//! \param type One of: "error", "information", "question".
+//! \return for "error" and "information" types: -1; for "question" type: return value of QMessageBox::Question
+//!
 int NScriptBindings::alert(const QString &message, const QString &type)
 {
     if (type == "error") {
@@ -45,6 +57,9 @@ int NScriptBindings::alert(const QString &message, const QString &type)
     return -1;
 }
 
+//!
+//! \brief NScriptBindings::showAboutDialog shows the about dialog.
+//!
 void NScriptBindings::showAboutDialog()
 {
     AboutDialog().exec();

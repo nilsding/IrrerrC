@@ -26,9 +26,12 @@ QString IrcTextFormatter::sanitize(QString str)
 //!
 //! \brief IrcTextFormatter::parseColor processes `str` for the first color pair match.
 //!     `str` must not include the color format character `0x03`, and it has to start with the color pair.
-//! \param text
-//! \example parseColor("3,4");  // returns QPair<int, int> with 3 and 4 as values
-//! \return first: foreground color, second: background color.  If one of the values is -1, it is not set.
+//!
+//!     Example usage:
+//!
+//!         parseColor("3,4");  // returns QPair<int, int> with 3 and 4 as values
+//!
+//! \return `first`: foreground color, `second`: background color.  If one of the values is -1, it is not set.
 //!
 QPair<int, int> IrcTextFormatter::parseColor(const QString &str, int *len) const
 {

@@ -1,5 +1,12 @@
 #include "nscriptutils.h"
 
+//!
+//! \brief NScriptUtils::handleErrors checks whether a value is a JavaScript error object.
+//! \param value a JavaScript value
+//! \param showMessageBox `true`, if a message box should be shown, `false` if the exception should
+//!     be printed to the console instead
+//! \return `true` if the value is a JavaScript error object, `false` otherwise
+//!
 bool NScriptUtils::handleErrors(QJSValue *value, bool showMessageBox)
 {
     if (value->isError()) {
