@@ -8,7 +8,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     _ui->setupUi(this);
     this->setWindowTitle(tr("About %1").arg(APP_NAME));
     _ui->qlLine01AppNameVersion->setText(QString("%1 %2").arg(APP_NAME).arg(APP_VERSION));
-    _ui->qlLine04Copyright->setText(_ui->qlLine04Copyright->text().arg("2015-2016").arg("FreeBSD"));
+    _ui->qlLine04Copyright->setText(_ui->qlLine04Copyright->text().arg("2015, 2016").arg("FreeBSD"));
     _ui->qlLine06BuildDate->setText(_ui->qlLine06BuildDate->text().arg(QString("%1 %2").arg(__DATE__).arg(__TIME__)));
     _ui->qlLine07Commit->setText(_ui->qlLine07Commit->text().arg(COMMIT));
 }
