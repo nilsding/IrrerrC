@@ -1,4 +1,5 @@
 #include "njsengine.h"
+#include "nscriptaction.h"
 #include <QDebug>
 
 NJSEngine *NJSEngine::_njsengine = 0;
@@ -6,7 +7,10 @@ QJSEngine *NJSEngine::_engine = new QJSEngine();
 bool NJSEngine::_initialized = false;
 QList<NScript *> *NJSEngine::_scripts = new QList<NScript *>();
 QList<QJSValue> *NJSEngine::_deinitFunctions = new QList<QJSValue>();
+QList<NScriptAction *> *NJSEngine::_actions = new QList<NScriptAction *>();
 NScriptBindings *NJSEngine::_bindings = 0;
+IrcConnection *NJSEngine::_connection = 0;
+IrcIdentity *NJSEngine::_id = 0;
 
 NJSEngine::NJSEngine(QObject *parent) : QObject(parent)
 {
@@ -71,6 +75,11 @@ void NJSEngine::unloadScripts()
     }
     _deinitFunctions->clear();
 
+    for (NScriptAction *action : *_actions) {
+        action->deleteLater();
+    }
+    _actions->clear();
+
     for (NScript *script : *_scripts) {
         script->deleteLater();
     }
@@ -80,4 +89,10 @@ void NJSEngine::unloadScripts()
 void NJSEngine::registerDeinitFunction(QJSValue fn)
 {
     _deinitFunctions->append(fn);
+}
+
+void NJSEngine::registerAction(ActionType type, const QString &text, QJSValue function)
+{
+    _actions->append(new NScriptAction(type, text, function));
+    emit(instance()->actionsChanged());
 }

@@ -26,6 +26,7 @@ SOURCES += src/main.cpp \
     src/core/ircmessage.cpp \
     src/script/njsengine.cpp \
     src/script/nscript.cpp \
+    src/script/nscriptaction.cpp \
     src/script/nscriptbindings.cpp \
     src/script/nscriptutils.cpp \
     src/script/scriptlistingdialog.cpp \
@@ -51,6 +52,7 @@ HEADERS  += src/mainwindow.h \
     src/core/irctypes.h \
     src/script/njsengine.h \
     src/script/nscript.h \
+    src/script/nscriptaction.h \
     src/script/nscriptbindings.h \
     src/script/nscriptutils.h \
     src/script/scriptlistingdialog.h \

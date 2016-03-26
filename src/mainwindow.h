@@ -17,6 +17,7 @@
 #include "settings/settingsdialog.h"
 #include "util/ircalias.h"
 #include "script/njsengine.h"
+#include "script/nscriptaction.h"
 #include "script/scriptlistingdialog.h"
 #include "aboutdialog.h"
 #include "statuswindow.h"
@@ -44,6 +45,7 @@ private slots:
     StatusWindow *createMdiChild(StatusWindow::NWindowType winType = StatusWindow::NWindowStatus);
     void updateWindowMenu();
     void selectActiveSubWindow(QWidget *);
+    void updateToolsMenu();
 
     void on_qaConnect_triggered();
     void onWindowTextEntered(QString);

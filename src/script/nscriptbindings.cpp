@@ -64,3 +64,61 @@ void NScriptBindings::showAboutDialog()
 {
     AboutDialog().exec();
 }
+
+//!
+//! \brief NScriptBindings::addUserMenuAction adds a new action to the user menu (i.e. the context menu in the userlist)
+//! \param text The text to display
+//! \param function The function to execute
+//!
+void NScriptBindings::addUserMenuAction(const QString &text, QJSValue function)
+{
+    _NSCRIPT_ENGINE_INSTANCE->registerAction(NJSEngine::ActionType::UserMenu, text, function);
+}
+
+//!
+//! \brief NScriptBindings::addUserMenuAction adds a new action to the Tools menu (in the menu bar)
+//! \param text The text to display
+//! \param function The function to execute
+//!
+void NScriptBindings::addToolsMenuAction(const QString &text, QJSValue function)
+{
+    _NSCRIPT_ENGINE_INSTANCE->registerAction(NJSEngine::ActionType::ToolsMenu, text, function);
+}
+
+//!
+//! \brief NScriptBindings::privmsg sends a `PRIVMSG` with the text `text` to `target`.
+//! \param target
+//! \param text
+//!
+void NScriptBindings::privmsg(const QString &target, const QString &text)
+{
+    auto conn = _NSCRIPT_ENGINE_INSTANCE->connection();
+    if (!conn->isConnected()) {
+        return;
+    }
+
+    auto identity = _NSCRIPT_ENGINE_INSTANCE->identity();
+
+    QString input = QString("PRIVMSG %1 :%2").arg(target).arg(text);
+
+    // TODO: echo back our own message
+    /*IrcMessage *m = 0;
+    if ((m = (new IrcParser)->parseLine(input))) {
+        if (identity) {
+            m->setPrefix(identity->nickname());
+        }
+        receiveMessage(m);
+    }*/
+
+    conn->raw(input);
+}
+
+//!
+//! \brief NScriptBindings::action sends a `/me` action with the text `text` to `target`.
+//! \param target
+//! \param text
+//!
+void NScriptBindings::action(const QString &target, const QString &text)
+{
+    privmsg(target, QString("\1ACTION %1\1").arg(text));
+}

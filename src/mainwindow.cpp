@@ -29,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _conn->setIdentity(_id);
 
     NJSEngine::init();
+    //connect(_NSCRIPT_ENGINE_INSTANCE, SIGNAL(actionsChanged()), this, SLOT(rebuildScriptActionMenus()));
+    _NSCRIPT_ENGINE_INSTANCE->setConnection(_conn);
+    _NSCRIPT_ENGINE_INSTANCE->setIdentity(_id);
     QTimer::singleShot(0, 0, [&]() {
         _NSCRIPT_ENGINE_INSTANCE->loadScripts();
     });
@@ -39,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     status->setWindowState(Qt::WindowMaximized);
 
     connect(_ui->qmWindow, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));
+    connect(_ui->qmTools, SIGNAL(aboutToShow()), this, SLOT(updateToolsMenu()));
     connect(_mapper, SIGNAL(mapped(QWidget *)), this, SLOT(selectActiveSubWindow(QWidget *)));
     connect(_conn, SIGNAL(newMessageReceived(IrcMessage *)), this, SLOT(onNewMessageReceived(IrcMessage *)));
     connect(_conn, &IrcConnection::connectionStateChanged, this, [=](QAbstractSocket::SocketState /*state*/) {
@@ -126,6 +130,29 @@ void MainWindow::selectActiveSubWindow(QWidget *w)
     }
     _ui->centralWidget->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(w));
     updateWindowMenu();
+}
+
+void MainWindow::updateToolsMenu()
+{
+    _ui->qmTools->clear();
+    auto actions = QList<QAction *>();
+    // XXX: add new default actions inside the Tools menu here:
+    actions << _ui->qaScripts;
+    _ui->qmTools->addActions(actions);
+
+    QList<NScriptAction *> *scriptActions = _NSCRIPT_ENGINE_INSTANCE->actions();
+    if (!scriptActions->isEmpty()) {
+        actions.clear();
+        _ui->qmTools->addSeparator();
+        for (NScriptAction *action : *scriptActions) {
+            if (action->type() != NJSEngine::ActionType::ToolsMenu) {
+                continue;
+            }
+            actions << action;
+        }
+        _ui->qmTools->addActions(actions);
+    }
+
 }
 
 void MainWindow::on_qaConnect_triggered()
