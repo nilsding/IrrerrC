@@ -7,6 +7,11 @@ EditAliasDialog::EditAliasDialog(QWidget *parent) :
 {
     _ui->setupUi(this);
     _ui->qrbSimple->setChecked(true);
+#ifdef SCRIPTING_ENABLED
+    _ui->qrbScript->setEnabled(true);
+#else
+    _ui->qrbScript->setEnabled(false);
+#endif
 }
 
 EditAliasDialog::~EditAliasDialog()
