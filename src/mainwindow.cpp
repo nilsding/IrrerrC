@@ -538,7 +538,7 @@ void MainWindow::on_qaScripts_triggered()
     dlg->show();
     // TODO: connect signals emitted by ScriptListingDialog
 #else
-    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+    QMessageBox::critical(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
 #endif
 }
 
@@ -547,7 +547,7 @@ void MainWindow::on_qaLoadScripts_triggered()
 #ifdef SCRIPTING_ENABLED
     _NSCRIPT_ENGINE_INSTANCE->loadScripts();
 #else
-    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+    QMessageBox::critical(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
 #endif
 }
 
@@ -556,7 +556,7 @@ void MainWindow::on_qaReloadScripts_triggered()
 #ifdef SCRIPTING_ENABLED
     _NSCRIPT_ENGINE_INSTANCE->reloadScripts();
 #else
-    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+    QMessageBox::critical(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
 #endif
 }
 
@@ -565,6 +565,6 @@ void MainWindow::on_qaUnloadScripts_triggered()
 #ifdef SCRIPTING_ENABLED
     _NSCRIPT_ENGINE_INSTANCE->unloadScripts();
 #else
-    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+    QMessageBox::critical(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
 #endif
 }
