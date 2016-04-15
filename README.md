@@ -27,8 +27,9 @@ build an installer, run the `./mknsis.ps1` script after building IrrerrC.
 
 ## TODO list
 
-- [ ] Scripting (Ruby? ChaiScript? Lisp? Tcl?)
-- [ ] Customizable popup menus (similar to KVIrc/mIRC)
+- [ ] Scripting (~~Ruby? ChaiScript? Lisp? Tcl?~~ QtScript.)
+- [ ] Customizable popup menus (similar to KVIrc/mIRC, might be implemented
+      through scripting)
 - [ ] Logging
 - [ ] favourite channels?
 - [ ] Document all methods.  (except for the getters and setters, maybe.)

@@ -28,12 +28,23 @@ MainWindow::MainWindow(QWidget *parent) :
     loadSettings();
     _conn->setIdentity(_id);
 
+#ifdef SCRIPTING_ENABLED
+    NJSEngine::init();
+    //connect(_NSCRIPT_ENGINE_INSTANCE, SIGNAL(actionsChanged()), this, SLOT(rebuildScriptActionMenus()));
+    _NSCRIPT_ENGINE_INSTANCE->setConnection(_conn);
+    _NSCRIPT_ENGINE_INSTANCE->setIdentity(_id);
+    QTimer::singleShot(0, 0, [&]() {
+        _NSCRIPT_ENGINE_INSTANCE->loadScripts();
+    });
+#endif
+
     StatusWindow *status = createMdiChild();
     status->show();
     status->setCurrentIdentity(_id);
     status->setWindowState(Qt::WindowMaximized);
 
     connect(_ui->qmWindow, SIGNAL(aboutToShow()), this, SLOT(updateWindowMenu()));
+    connect(_ui->qmTools, SIGNAL(aboutToShow()), this, SLOT(updateToolsMenu()));
     connect(_mapper, SIGNAL(mapped(QWidget *)), this, SLOT(selectActiveSubWindow(QWidget *)));
     connect(_conn, SIGNAL(newMessageReceived(IrcMessage *)), this, SLOT(onNewMessageReceived(IrcMessage *)));
     connect(_conn, &IrcConnection::connectionStateChanged, this, [=](QAbstractSocket::SocketState /*state*/) {
@@ -121,6 +132,30 @@ void MainWindow::selectActiveSubWindow(QWidget *w)
     }
     _ui->centralWidget->setActiveSubWindow(qobject_cast<QMdiSubWindow *>(w));
     updateWindowMenu();
+}
+
+void MainWindow::updateToolsMenu()
+{
+    _ui->qmTools->clear();
+    auto actions = QList<QAction *>();
+    // XXX: add new default actions inside the Tools menu here:
+    actions << _ui->qaScripts;
+    _ui->qmTools->addActions(actions);
+
+#ifdef SCRIPTING_ENABLED
+    QList<NScriptAction *> *scriptActions = _NSCRIPT_ENGINE_INSTANCE->actions();
+    if (!scriptActions->isEmpty()) {
+        actions.clear();
+        _ui->qmTools->addSeparator();
+        for (NScriptAction *action : *scriptActions) {
+            if (action->type() != NJSEngine::ActionType::ToolsMenu) {
+                continue;
+            }
+            actions << action;
+        }
+        _ui->qmTools->addActions(actions);
+    }
+#endif
 }
 
 void MainWindow::on_qaConnect_triggered()
@@ -403,6 +438,11 @@ void MainWindow::loadSettings()
     for (QMdiSubWindow *win : windows) {
         qobject_cast<StatusWindow *>(win->widget())->loadSettings();
     }
+
+    _SETTINGS.beginGroup("Developer");
+        _debug = _SETTINGS.value("debugMenusEnabled", false).toBool();
+        _ui->qmDebug->menuAction()->setVisible(_debug);
+    _SETTINGS.endGroup();
 }
 
 void MainWindow::storeSettings()
@@ -439,6 +479,10 @@ void MainWindow::storeSettings()
             _SETTINGS.setValue("action", _aliases.at(i)->action());
         }
     _SETTINGS.endArray();
+
+    _SETTINGS.beginGroup("Developer");
+        _SETTINGS.setValue("debugMenusEnabled", _debug);
+    _SETTINGS.endGroup();
 }
 
 void MainWindow::on_qaSettings_triggered()
@@ -485,4 +529,42 @@ void MainWindow::on_qaQuit_triggered()
         _conn->disconnect();
     }
     qApp->quit();
+}
+
+void MainWindow::on_qaScripts_triggered()
+{
+#ifdef SCRIPTING_ENABLED
+    ScriptListingDialog *dlg = new ScriptListingDialog(this);
+    dlg->show();
+    // TODO: connect signals emitted by ScriptListingDialog
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
+}
+
+void MainWindow::on_qaLoadScripts_triggered()
+{
+#ifdef SCRIPTING_ENABLED
+    _NSCRIPT_ENGINE_INSTANCE->loadScripts();
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
+}
+
+void MainWindow::on_qaReloadScripts_triggered()
+{
+#ifdef SCRIPTING_ENABLED
+    _NSCRIPT_ENGINE_INSTANCE->reloadScripts();
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
+}
+
+void MainWindow::on_qaUnloadScripts_triggered()
+{
+#ifdef SCRIPTING_ENABLED
+    _NSCRIPT_ENGINE_INSTANCE->unloadScripts();
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
 }

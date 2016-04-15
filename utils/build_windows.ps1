@@ -8,7 +8,7 @@ $dirs = @{
   repodir  = [System.IO.Path]::GetFullPath((Join-Path (pwd) "..\"));  # path to the repo
   builddir = [System.IO.Path]::GetFullPath((Join-Path (pwd) "..\build\"));  # path to the build directory
   outdir   = [System.IO.Path]::GetFullPath((Join-Path (pwd) "..\build\output"));  # path to the output directory
-  qtdir    = "C:\Qt\5.4\msvc2013\bin\";  # the Qt dir to use (must contain qtenv2.bat)
+  qtdir    = "C:\Qt\5.6\msvc2013\bin\";  # the Qt dir to use (must contain qtenv2.bat)
   vsdir    = [System.IO.Path]::GetFullPath((Join-Path $env:VS120COMNTOOLS "..\..\VC\"));  # path to Visual C++ (must contain vcvarsall.bat)
 };
 
@@ -19,9 +19,9 @@ $flags = @{
                   '--no-translations',
                   '"--no-bluetooth"', '--no-clucene', '--no-concurrent', '--no-declarative', '--no-designer', '--no-designercomponents',
                   '--no-enginio', '--no-qthelp', '--no-multimedia', '--no-multimediawidgets', '--no-multimediaquick', '"--no-nfc"', '--no-opengl',
-                  '--no-positioning', '--no-printsupport', '--no-qml', '--no-qmltooling', '--no-quick', '--no-quickparticles',
-                  '--no-quickwidgets', '--no-script', '--no-scripttools', '--no-sensors', '--no-serialport', '--no-sql', '--no-test',
-                  '--no-webkit', '--no-webkitwidgets', '--no-websockets', '--no-xml', '--no-xmlpatterns', '--no-webenginecore', '--no-webengine',
+                  '--no-positioning', '--no-printsupport', '--no-script', '--no-qmltooling', '--no-quick', '--no-quickparticles',
+                  '--no-quickwidgets', '--no-scripttools', '--no-sensors', '--no-serialport', '--no-sql', '--no-test', '--no-webkit',
+                  '--no-webkitwidgets', '--no-websockets', '--no-xml', '--no-xmlpatterns', '--no-webenginecore', '--no-webengine',
                   '--no-webenginewidgets');
 }
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>445</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
-     <height>21</height>
+     <width>445</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="qmFile">
@@ -57,7 +57,23 @@
     <addaction name="qaAbout"/>
     <addaction name="qaAboutQt"/>
    </widget>
+   <widget class="QMenu" name="qmTools">
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+    <addaction name="qaScripts"/>
+   </widget>
+   <widget class="QMenu" name="qmDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="qaLoadScripts"/>
+    <addaction name="qaReloadScripts"/>
+    <addaction name="qaUnloadScripts"/>
+   </widget>
    <addaction name="qmFile"/>
+   <addaction name="qmTools"/>
+   <addaction name="qmDebug"/>
    <addaction name="qmWindow"/>
    <addaction name="qmHelp"/>
   </widget>
@@ -146,14 +162,33 @@
   <action name="qaQuit">
    <property name="icon">
     <iconset theme="application-exit">
-     <normaloff/>
-    </iconset>
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="qaScripts">
+   <property name="text">
+    <string>&amp;Scripts...</string>
+   </property>
+  </action>
+  <action name="qaLoadScripts">
+   <property name="text">
+    <string>Load scripts</string>
+   </property>
+  </action>
+  <action name="qaReloadScripts">
+   <property name="text">
+    <string>Reload scripts</string>
+   </property>
+  </action>
+  <action name="qaUnloadScripts">
+   <property name="text">
+    <string>Unload scripts</string>
    </property>
   </action>
  </widget>

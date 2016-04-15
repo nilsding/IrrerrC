@@ -16,6 +16,11 @@
 #include "settings/nsettings.h"
 #include "settings/settingsdialog.h"
 #include "util/ircalias.h"
+#ifdef SCRIPTING_ENABLED
+#include "script/njsengine.h"
+#include "script/nscriptaction.h"
+#include "script/scriptlistingdialog.h"
+#endif
 #include "aboutdialog.h"
 #include "statuswindow.h"
 
@@ -42,6 +47,7 @@ private slots:
     StatusWindow *createMdiChild(StatusWindow::NWindowType winType = StatusWindow::NWindowStatus);
     void updateWindowMenu();
     void selectActiveSubWindow(QWidget *);
+    void updateToolsMenu();
 
     void on_qaConnect_triggered();
     void onWindowTextEntered(QString);
@@ -60,6 +66,14 @@ private slots:
 
     void on_qaQuit_triggered();
 
+    void on_qaScripts_triggered();
+
+    void on_qaLoadScripts_triggered();
+
+    void on_qaReloadScripts_triggered();
+
+    void on_qaUnloadScripts_triggered();
+
 private:
     Ui::MainWindow *_ui;
 
@@ -70,7 +84,10 @@ private:
 
     QSignalMapper *_mapper;
 
+    bool _debug;
+
     StatusWindow *activeMdiChild();
+
     void handleNumericResponseCode(IrcMessage *);
     void handleNonNumericResponse(IrcMessage *);
     void storeSettings();

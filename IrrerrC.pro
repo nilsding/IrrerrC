@@ -4,9 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network script
+CONFIG += scripting
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui widgets network svg
 
 TARGET = IrrerrC
 TEMPLATE = app
@@ -61,6 +61,25 @@ FORMS    += src/ui/mainwindow.ui \
     src/ui/settings/appearancesettingswidget.ui \
     src/ui/settings/aliasessettingswidget.ui \
     src/ui/settings/editaliasdialog.ui
+
+scripting {
+    lessThan(QT_MAJOR_VERSION, 5) lessThan(QT_MINOR_VERSION, 6): error("IrrerrC requires Qt 5.6 or newer for scripting")
+    QT += qml
+    SOURCES += src/script/njsengine.cpp \
+        src/script/nscript.cpp \
+        src/script/nscriptaction.cpp \
+        src/script/nscriptbindings.cpp \
+        src/script/nscriptutils.cpp \
+        src/script/scriptlistingdialog.cpp
+    HEADERS += src/script/njsengine.h \
+        src/script/nscript.h \
+        src/script/nscriptaction.h \
+        src/script/nscriptbindings.h \
+        src/script/nscriptutils.h \
+        src/script/scriptlistingdialog.h
+    FORMS += src/ui/script/scriptlistingdialog.ui
+    DEFINES += SCRIPTING_ENABLED
+}
 
 # C++11! \o/
 CONFIG += c++11
