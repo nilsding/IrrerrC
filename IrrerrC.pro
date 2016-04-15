@@ -4,11 +4,9 @@
 #
 #-------------------------------------------------
 
-lessThan(QT_MAJOR_VERSION, 5) lessThan(QT_MINOR_VERSION, 6): error("IrrerrC requires Qt 5.6")
+CONFIG += scripting
 
-QT       += core gui network qml
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui widgets network svg
 
 TARGET = IrrerrC
 TEMPLATE = app
@@ -24,12 +22,6 @@ SOURCES += src/main.cpp \
     src/core/ircidentity.cpp \
     src/core/ircparser.cpp \
     src/core/ircmessage.cpp \
-    src/script/njsengine.cpp \
-    src/script/nscript.cpp \
-    src/script/nscriptaction.cpp \
-    src/script/nscriptbindings.cpp \
-    src/script/nscriptutils.cpp \
-    src/script/scriptlistingdialog.cpp \
     src/settings/settingsdialog.cpp \
     src/settings/identitysettingswidget.cpp \
     src/settings/networksettingswidget.cpp \
@@ -50,12 +42,6 @@ HEADERS  += src/mainwindow.h \
     src/core/ircmessage.h \
     src/core/irccodes.h \
     src/core/irctypes.h \
-    src/script/njsengine.h \
-    src/script/nscript.h \
-    src/script/nscriptaction.h \
-    src/script/nscriptbindings.h \
-    src/script/nscriptutils.h \
-    src/script/scriptlistingdialog.h \
     src/settings/nsettings.h \
     src/settings/settingsdialog.h \
     src/settings/identitysettingswidget.h \
@@ -69,13 +55,31 @@ HEADERS  += src/mainwindow.h \
 
 FORMS    += src/ui/mainwindow.ui \
     src/ui/aboutdialog.ui \
-    src/ui/script/scriptlistingdialog.ui \
     src/ui/settings/settingsdialog.ui \
     src/ui/settings/identitysettingswidget.ui \
     src/ui/settings/networksettingswidget.ui \
     src/ui/settings/appearancesettingswidget.ui \
     src/ui/settings/aliasessettingswidget.ui \
     src/ui/settings/editaliasdialog.ui
+
+scripting {
+    lessThan(QT_MAJOR_VERSION, 5) lessThan(QT_MINOR_VERSION, 6): error("IrrerrC requires Qt 5.6 or newer for scripting")
+    QT += qml
+    SOURCES += src/script/njsengine.cpp \
+        src/script/nscript.cpp \
+        src/script/nscriptaction.cpp \
+        src/script/nscriptbindings.cpp \
+        src/script/nscriptutils.cpp \
+        src/script/scriptlistingdialog.cpp
+    HEADERS += src/script/njsengine.h \
+        src/script/nscript.h \
+        src/script/nscriptaction.h \
+        src/script/nscriptbindings.h \
+        src/script/nscriptutils.h \
+        src/script/scriptlistingdialog.h
+    FORMS += src/ui/script/scriptlistingdialog.ui
+    DEFINES += SCRIPTING_ENABLED
+}
 
 # C++11! \o/
 CONFIG += c++11

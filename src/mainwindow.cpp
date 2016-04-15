@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     loadSettings();
     _conn->setIdentity(_id);
 
+#ifdef SCRIPTING_ENABLED
     NJSEngine::init();
     //connect(_NSCRIPT_ENGINE_INSTANCE, SIGNAL(actionsChanged()), this, SLOT(rebuildScriptActionMenus()));
     _NSCRIPT_ENGINE_INSTANCE->setConnection(_conn);
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer::singleShot(0, 0, [&]() {
         _NSCRIPT_ENGINE_INSTANCE->loadScripts();
     });
+#endif
 
     StatusWindow *status = createMdiChild();
     status->show();
@@ -140,6 +142,7 @@ void MainWindow::updateToolsMenu()
     actions << _ui->qaScripts;
     _ui->qmTools->addActions(actions);
 
+#ifdef SCRIPTING_ENABLED
     QList<NScriptAction *> *scriptActions = _NSCRIPT_ENGINE_INSTANCE->actions();
     if (!scriptActions->isEmpty()) {
         actions.clear();
@@ -152,7 +155,7 @@ void MainWindow::updateToolsMenu()
         }
         _ui->qmTools->addActions(actions);
     }
-
+#endif
 }
 
 void MainWindow::on_qaConnect_triggered()
@@ -531,22 +534,38 @@ void MainWindow::on_qaQuit_triggered()
 
 void MainWindow::on_qaScripts_triggered()
 {
+#ifdef SCRIPTING_ENABLED
     ScriptListingDialog *dlg = new ScriptListingDialog(this);
     dlg->show();
     // TODO: connect signals emitted by ScriptListingDialog
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
 }
 
 void MainWindow::on_qaLoadScripts_triggered()
 {
+#ifdef SCRIPTING_ENABLED
     _NSCRIPT_ENGINE_INSTANCE->loadScripts();
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
 }
 
 void MainWindow::on_qaReloadScripts_triggered()
 {
+#ifdef SCRIPTING_ENABLED
     _NSCRIPT_ENGINE_INSTANCE->reloadScripts();
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
 }
 
 void MainWindow::on_qaUnloadScripts_triggered()
 {
+#ifdef SCRIPTING_ENABLED
     _NSCRIPT_ENGINE_INSTANCE->unloadScripts();
+#else
+    QMessageBox::warning(this, tr("Error"), tr("%1 was built without scripting support.").arg(APP_NAME));
+#endif
 }

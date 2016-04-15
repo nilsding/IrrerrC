@@ -16,9 +16,11 @@
 #include "settings/nsettings.h"
 #include "settings/settingsdialog.h"
 #include "util/ircalias.h"
+#ifdef SCRIPTING_ENABLED
 #include "script/njsengine.h"
 #include "script/nscriptaction.h"
 #include "script/scriptlistingdialog.h"
+#endif
 #include "aboutdialog.h"
 #include "statuswindow.h"
 
