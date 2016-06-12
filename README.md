@@ -25,6 +25,11 @@ After installing the build requirements, start PowerShell, navigate to the
 the directories in the `$dirs` dictionary of that file first).  If you want to
 build an installer, run the `./mknsis.ps1` script after building IrrerrC.
 
+## License
+
+This project is licensed under the FreeBSD license. See ./LICENSE file in
+this repo's root.
+
 ## TODO list
 
 - [x] Scripting
