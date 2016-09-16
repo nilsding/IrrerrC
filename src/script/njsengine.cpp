@@ -3,7 +3,7 @@
 #include <QDebug>
 
 NJSEngine *NJSEngine::_njsengine = 0;
-QJSEngine *NJSEngine::_engine = new QJSEngine();
+QJSEngine *NJSEngine::_engine = 0;
 bool NJSEngine::_initialized = false;
 QList<NScript *> *NJSEngine::_scripts = new QList<NScript *>();
 QList<QJSValue> *NJSEngine::_deinitFunctions = new QList<QJSValue>();
@@ -14,7 +14,9 @@ IrcIdentity *NJSEngine::_id = 0;
 
 NJSEngine::NJSEngine(QObject *parent) : QObject(parent)
 {
-
+    if (_engine == 0) {
+        _engine = new QJSEngine();
+    }
 }
 
 void NJSEngine::init()
@@ -22,6 +24,11 @@ void NJSEngine::init()
     if (_initialized) {
         return;
     }
+
+    if (_engine == 0) {
+        _engine = new QJSEngine();
+    }
+
     _njsengine = new NJSEngine();
     _bindings = new NScriptBindings();
     qDebug() << "Initialized NJSEngine";
